@@ -345,6 +345,7 @@ def buscar_y_clickear_salir_puerta(ruta_imagen):
 
 def verificacion_pistas():
     recorte_verificacion_pistas(ruta_imagen_captura)
+    time.sleep(1)
     cantidad_pistas(ruta_imagen_recortada)
     cantidad = cantidad_pistas(ruta_imagen_recortada)
     # Realizar acciones según la cantidad de símbolos "?"
@@ -528,14 +529,16 @@ def comenzar_etapas():
     while primer_numero < segundo_numero:  # Mientras la condición sea verdadera
         verificacion_pistas()
         primer_numero += 1  # Actualiza la condición para evitar un bucle infinito
+        time.sleep(1)
     time.sleep(1)
     lucha('lucha.png')
     time.sleep(1)
 
 
 def pelea():
+    time.sleep(2)
     pyautogui.press('space')
-    time.sleep(1)
+    time.sleep(2)
     pyautogui.press('space')
     time.sleep(3)
     contador = 0
@@ -543,25 +546,27 @@ def pelea():
         time.sleep(5)
         time.sleep(2)
         pyautogui.press('3')
-        time.sleep(0.5)
+        time.sleep(1)
         buscar_y_clickear_monstruo('monstruo.png')
         time.sleep(2)
         pyautogui.press('3')
-        time.sleep(0.5)
+        time.sleep(1)
         buscar_y_clickear_monstruo('monstruo.png')
         time.sleep(2)
         pyautogui.press('2')
-        time.sleep(0.5)
+        time.sleep(1)
+        buscar_y_clickear_monstruo('monstruo.png')
+        time.sleep(1)
         buscar_y_clickear_monstruo('monstruo.png')
         time.sleep(2)
         pyautogui.press('3')
-        time.sleep(0.5)
+        time.sleep(1)
         buscar_y_clickear_monstruo('monstruo.png')
         time.sleep(2)
         pyautogui.press('3')
-        time.sleep(0.5)
+        time.sleep(1)
         buscar_y_clickear_monstruo('monstruo.png')
-        time.sleep(2)
+        time.sleep(3)
         pyautogui.press('space')  # Haz algo
         contador += 1  # Actualiza la condición para evitar un bucle infinito
 
@@ -625,7 +630,7 @@ def OCR(ruta_imagen):
     texto = texto.replace("]", "")
     texto = texto.replace("|", "")
     texto = texto.replace("_", "")
-    print(texto)
+    texto = texto.replace(".", "")
     if "Afiche" in texto:
         texto = texto
         return texto
@@ -633,7 +638,7 @@ def OCR(ruta_imagen):
         texto = texto.replace("fi", "n")
         return texto
     elif "Champifion rayadoee" in texto:
-        texto= texto.replace("Champifion rayadoee", "champinion rayado")
+        texto= texto.replace("Champifion rayadoee", "Champinon rayado")
         return texto
     elif "misién" in texto:
         texto = texto.replace("misién", "mision")
@@ -1735,6 +1740,7 @@ def etapa_finalizada(ruta_imagen):
         centro_y = max_loc[1] + altura // 2
         # Haz clic en el centro de la imagen encontrada
         pyautogui.click(centro_x, centro_y)
+        time.sleep(1)
     else:
         etapa_finalizada('etapa_finalizada.png')
 
