@@ -400,7 +400,6 @@ def verificacion_pistas():
         OCR(ruta_imagen_recortada)
         pista(texto_hasta_coma)
         etapa_finalizada('etapa_finalizada.png')
-
     elif cantidad == 3:
         print("Tres '?'")
         print("Pista1")
@@ -631,29 +630,22 @@ def OCR(ruta_imagen):
     texto = texto.replace("|", "")
     texto = texto.replace("_", "")
     texto = texto.replace(".", "")
+    texto = texto.replace("eee", "")
+    print(texto)
     if "Afiche" in texto:
         texto = texto
         return texto
-    elif "fi" in texto:
-        texto = texto.replace("fi", "n")
+    elif "Champifién" in texto:
+        texto = texto.replace("Champifién", "Champinon")
         return texto
     elif "Champifion rayadoee" in texto:
         texto= texto.replace("Champifion rayadoee", "Champinon rayado")
         return texto
-    elif "misién" in texto:
-        texto = texto.replace("misién", "mision")
-        return texto
-    elif "Cinturén" in texto:
-        texto = texto.replace("Cinturén", "Cinturon")
+    elif "Créneo" in texto:
+        texto = texto.replace("Créneo", "Craneo")
         return texto
     elif "rosade" in texto:
         texto = texto.replace("rosade", "rosa de")
-        return texto
-    elif "Botén" in texto:
-        texto = texto.replace("Botén", "Boton")
-        return texto
-    elif "Champifién" in texto:
-        texto = texto.replace("Champifién", "Champinon")
         return texto
     elif "See" in texto:
         texto = "Rosa negra"
@@ -669,6 +661,15 @@ def OCR(ruta_imagen):
         return texto
     elif "Dirigete hacia el Sur" in texto:
         texto = "Dirigete hacia el Sur"
+        return texto
+    elif "é" in texto:
+        texto = texto.replace("é", "o")
+        return texto
+    elif "fi" in texto:
+        if "firefux" in texto:
+            texto = texto
+        else:
+            texto = texto.replace("fi", "n")
         return texto
     else:
         return texto
@@ -1776,16 +1777,17 @@ def lucha(ruta_imagen):
 
 
 buscar_y_clickear_dofus(ruta_imagen_dofus)
-moverse()
-moverse()
-buscar_y_clickear_puerta(ruta_imagen_puerta)
-buscar_y_clickear_moverse(ruta_imagen_moverse)
-buscar_y_clickear_tesoro(ruta_imagen_tesoro)
-buscar_y_clickear_200(ruta_imagen_200)
-buscar_y_clickear_salir(ruta_imagen_salir)
-buscar_y_clickear_salir_puerta(ruta_imagen_salir_puerta)
+# moverse()
+# moverse()
+# buscar_y_clickear_puerta(ruta_imagen_puerta)
+# buscar_y_clickear_moverse(ruta_imagen_moverse)
+# buscar_y_clickear_tesoro(ruta_imagen_tesoro)
+# buscar_y_clickear_200(ruta_imagen_200)
+# buscar_y_clickear_salir(ruta_imagen_salir)
+# buscar_y_clickear_salir_puerta(ruta_imagen_salir_puerta)
 comenzar_etapas()
 pelea()
+
 
 
 
