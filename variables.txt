@@ -1,0 +1,5 @@
+area_game_coord: (461, 77, 545, 108)
+area_etapa_actual: (474, 578, 565, 607)
+area_salida: (502, 618, 614, 642)
+area_pistas: (474, 619, 565, 785)
+area_pista1: (493, 658, 493, 658)

@@ -1,0 +1,531 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.4" author="PygubuDesigner 0.39.3">
+  <project>
+    <settings />
+    <customwidgets />
+  </project>
+  <object class="tk.Toplevel" id="main" named="True">
+    <property name="height">200</property>
+    <property name="title" translatable="yes">DBOT</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Frame" id="frame2">
+        <property name="height">200</property>
+        <property name="highlightthickness">6</property>
+        <property name="width">200</property>
+        <layout manager="pack">
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="ttk.Labelframe" id="lblFrameConfig" named="True">
+            <property name="height">200</property>
+            <property name="text" translatable="yes">Config. Áreas</property>
+            <property name="width">300</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">0</property>
+              <property name="sticky">n</property>
+            </layout>
+            <child>
+              <object class="ttk.Label" id="label19">
+                <property name="text" translatable="yes">Coord. actuales:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblCoordActual" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label21">
+                <property name="text" translatable="yes">Etapa actual:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">1</property>
+                  <property name="sticky">w</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblEtapaActual" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="btnSetEtapaActual" named="True">
+                <property name="command" type="command" cbtype="simple">configEtapaActual</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="btnSetCoordActual" named="True">
+                <property name="command" type="command" cbtype="simple">configCoordActual</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label1">
+                <property name="text" translatable="yes">Pistas:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">2</property>
+                  <property name="sticky">w</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblPistas" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="btnSetPistas" named="True">
+                <property name="command" type="command" cbtype="simple">configPistas</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label15">
+                <property name="text" translatable="yes">Salida:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">3</property>
+                  <property name="sticky">w</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblSalida" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button10" named="True">
+                <property name="command" type="command" cbtype="simple">configSalida</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label17">
+                <property name="text" translatable="yes">Otro:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">4</property>
+                  <property name="sticky">w</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label18" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button11" named="True">
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Labelframe" id="lblFrameActions" named="True">
+            <property name="text" translatable="yes">Actions</property>
+            <property name="width">300</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="ipady">6</property>
+              <property name="row">1</property>
+            </layout>
+            <child>
+              <object class="ttk.Button" id="btnStartTask" named="True">
+                <property name="command" type="command" cbtype="simple">starTask</property>
+                <property name="text" translatable="yes">Start</property>
+                <layout manager="pack">
+                  <property name="fill">x</property>
+                  <property name="padx">6</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button23" named="True">
+                <property name="text" translatable="yes">Stop</property>
+                <layout manager="pack">
+                  <property name="fill">x</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="btnCheck" named="True">
+                <property name="command" type="command" cbtype="simple">checkGameCoord</property>
+                <property name="text" translatable="yes">Check</property>
+                <layout manager="pack">
+                  <property name="fill">x</property>
+                  <property name="padx">5</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="pygubu.forms.ttkwidget.LabelWidgetInfo" id="lblWInfo" named="True">
+            <property name="justify">left</property>
+            <property name="relief">flat</property>
+            <property name="state">normal</property>
+            <property name="takefocus">false</property>
+            <property name="text" translatable="yes">Ready</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="row">2</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Labelframe" id="lblFramePistas" named="True">
+            <property name="text" translatable="yes">Área Pistas</property>
+            <property name="width">200</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="padx">3</property>
+              <property name="row">0</property>
+              <property name="sticky">ne</property>
+            </layout>
+            <child>
+              <object class="ttk.Label" id="label5">
+                <property name="text" translatable="yes">Pista 1:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblPista1" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button5" named="True">
+                <property name="command" type="command" cbtype="simple">configPista1</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label7">
+                <property name="text" translatable="yes">Pista 2:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblPista2" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button6" named="True">
+                <property name="command" type="command" cbtype="simple">configPistas</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label9">
+                <property name="text" translatable="yes">Pista 3:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblPista3" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button7" named="True">
+                <property name="command" type="command" cbtype="simple">configPistas</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label11">
+                <property name="text" translatable="yes">Pista 4:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblPista4" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button8" named="True">
+                <property name="command" type="command" cbtype="simple">configPistas</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label13">
+                <property name="text" translatable="yes">Pista 5:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblPista5" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button9" named="True">
+                <property name="command" type="command" cbtype="simple">configPistas</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="pygubu.builder.widgets.toplevelmenu" id="toplevelmenu1">
+        <child>
+          <object class="tk.Menu" id="menu1">
+            <property name="tearoff">false</property>
+            <child>
+              <object class="tk.Menuitem.Submenu" id="submenu3">
+                <property name="label" translatable="yes">Data</property>
+                <property name="tearoff">false</property>
+                <child>
+                  <object class="tk.Menuitem.Command" id="command4">
+                    <property name="command" type="command" cbtype="simple">save_to_text_file</property>
+                    <property name="label" translatable="yes">Save</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Menuitem.Command" id="command5">
+                    <property name="command" type="command" cbtype="simple">load_from_text_file</property>
+                    <property name="label" translatable="yes">Load</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
