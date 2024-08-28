@@ -19,7 +19,7 @@
         <child>
           <object class="ttk.Labelframe" id="lblFrameConfig" named="True">
             <property name="height">200</property>
-            <property name="text" translatable="yes">Config. Áreas</property>
+            <property name="text" translatable="yes">Área General</property>
             <property name="width">300</property>
             <layout manager="grid">
               <property name="column">0</property>
@@ -178,7 +178,7 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Button" id="button10" named="True">
+              <object class="ttk.Button" id="btnSetSalida" named="True">
                 <property name="command" type="command" cbtype="simple">configSalida</property>
                 <property name="text" translatable="yes">Select</property>
                 <layout manager="grid">
@@ -191,7 +191,7 @@
             </child>
             <child>
               <object class="ttk.Label" id="label17">
-                <property name="text" translatable="yes">Otro:</property>
+                <property name="text" translatable="yes">Chat:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="padx">3</property>
@@ -201,7 +201,7 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Label" id="label18" named="True">
+              <object class="ttk.Label" id="lblChat" named="True">
                 <property name="anchor">n</property>
                 <property name="compound">top</property>
                 <property name="cursor">arrow</property>
@@ -219,7 +219,8 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Button" id="button11" named="True">
+              <object class="ttk.Button" id="btnSetChat" named="True">
+                <property name="command" type="command" cbtype="simple">configChat</property>
                 <property name="text" translatable="yes">Select</property>
                 <layout manager="grid">
                   <property name="column">2</property>
@@ -238,7 +239,7 @@
             <layout manager="grid">
               <property name="column">0</property>
               <property name="ipady">6</property>
-              <property name="row">1</property>
+              <property name="row">2</property>
             </layout>
             <child>
               <object class="ttk.Button" id="btnStartTask" named="True">
@@ -282,18 +283,20 @@
             <property name="text" translatable="yes">Ready</property>
             <layout manager="grid">
               <property name="column">0</property>
-              <property name="row">2</property>
+              <property name="row">3</property>
+              <property name="sticky">w</property>
             </layout>
           </object>
         </child>
         <child>
           <object class="ttk.Labelframe" id="lblFramePistas" named="True">
-            <property name="text" translatable="yes">Área Pistas</property>
+            <property name="text" translatable="yes">Área Pistas (Dirección)</property>
             <property name="width">200</property>
             <layout manager="grid">
               <property name="column">1</property>
               <property name="padx">3</property>
-              <property name="row">0</property>
+              <property name="pady">3</property>
+              <property name="row">1</property>
               <property name="sticky">ne</property>
             </layout>
             <child>
@@ -307,7 +310,7 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Label" id="lblPista1" named="True">
+              <object class="ttk.Label" id="lblPistaD1" named="True">
                 <property name="anchor">n</property>
                 <property name="compound">top</property>
                 <property name="cursor">arrow</property>
@@ -326,7 +329,7 @@
             </child>
             <child>
               <object class="ttk.Button" id="button5" named="True">
-                <property name="command" type="command" cbtype="simple">configPista1</property>
+                <property name="command" type="command" cbtype="simple">configDireccionPista1</property>
                 <property name="text" translatable="yes">Select</property>
                 <layout manager="grid">
                   <property name="column">2</property>
@@ -338,6 +341,511 @@
             </child>
             <child>
               <object class="ttk.Label" id="label7">
+                <property name="text" translatable="yes">Pista 2:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblPistaD2" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button6" named="True">
+                <property name="command" type="command" cbtype="simple">configDireccionPista2</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label9">
+                <property name="text" translatable="yes">Pista 3:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblPistaD3" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button7" named="True">
+                <property name="command" type="command" cbtype="simple">configDireccionPista3</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label11">
+                <property name="text" translatable="yes">Pista 4:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblPistaD4" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button8" named="True">
+                <property name="command" type="command" cbtype="simple">configDireccionPista4</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label13">
+                <property name="text" translatable="yes">Pista 5:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblPistaD5" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button9" named="True">
+                <property name="command" type="command" cbtype="simple">configDireccionPista5</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label32" named="True">
+                <property name="text" translatable="yes">Pista 6:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">5</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblPistaD6" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">5</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button11" named="True">
+                <property name="command" type="command" cbtype="simple">configDireccionPista6</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">5</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Labelframe" id="lblFrameFlechas" named="True">
+            <property name="text" translatable="yes">Área Flechas</property>
+            <property name="width">200</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="padx">3</property>
+              <property name="row">0</property>
+              <property name="sticky">nw</property>
+            </layout>
+            <child>
+              <object class="ttk.Label" id="label2">
+                <property name="text" translatable="yes">Pista 1:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblFlecha1" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button1" named="True">
+                <property name="command" type="command" cbtype="simple">configFlecha1</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label4">
+                <property name="text" translatable="yes">Pista 2:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblFlecha2" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button2" named="True">
+                <property name="command" type="command" cbtype="simple">configFlecha2</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label8">
+                <property name="text" translatable="yes">Pista 3:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblFlecha3" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button3" named="True">
+                <property name="command" type="command" cbtype="simple">configFlecha3</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label12">
+                <property name="text" translatable="yes">Pista 4:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblFlecha4" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button4" named="True">
+                <property name="command" type="command" cbtype="simple">configFlecha4</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label16">
+                <property name="text" translatable="yes">Pista 5:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblFlecha5" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button12" named="True">
+                <property name="command" type="command" cbtype="simple">configFlecha5</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label6">
+                <property name="text" translatable="yes">Pista 6:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">5</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblFlecha6" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">5</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button10" named="True">
+                <property name="command" type="command" cbtype="simple">configFlecha6</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">5</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Labelframe" id="labelframe2" named="True">
+            <property name="text" translatable="yes">Área Pistas</property>
+            <property name="width">200</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="padx">3</property>
+              <property name="pady">3</property>
+              <property name="row">1</property>
+            </layout>
+            <child>
+              <object class="ttk.Label" id="label22">
+                <property name="text" translatable="yes">Pista 1:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblPista1" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <property name="width">13</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">9</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button13" named="True">
+                <property name="command" type="command" cbtype="simple">configPista1</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label24">
                 <property name="text" translatable="yes">Pista 2:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
@@ -365,8 +873,8 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Button" id="button6" named="True">
-                <property name="command" type="command" cbtype="simple">configPistas</property>
+              <object class="ttk.Button" id="button14" named="True">
+                <property name="command" type="command" cbtype="simple">configPista2</property>
                 <property name="text" translatable="yes">Select</property>
                 <layout manager="grid">
                   <property name="column">2</property>
@@ -377,7 +885,7 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Label" id="label9">
+              <object class="ttk.Label" id="label26">
                 <property name="text" translatable="yes">Pista 3:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
@@ -405,8 +913,8 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Button" id="button7" named="True">
-                <property name="command" type="command" cbtype="simple">configPistas</property>
+              <object class="ttk.Button" id="button15" named="True">
+                <property name="command" type="command" cbtype="simple">configPista3</property>
                 <property name="text" translatable="yes">Select</property>
                 <layout manager="grid">
                   <property name="column">2</property>
@@ -417,7 +925,7 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Label" id="label11">
+              <object class="ttk.Label" id="label28">
                 <property name="text" translatable="yes">Pista 4:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
@@ -445,8 +953,8 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Button" id="button8" named="True">
-                <property name="command" type="command" cbtype="simple">configPistas</property>
+              <object class="ttk.Button" id="button16" named="True">
+                <property name="command" type="command" cbtype="simple">configPista4</property>
                 <property name="text" translatable="yes">Select</property>
                 <layout manager="grid">
                   <property name="column">2</property>
@@ -457,7 +965,7 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Label" id="label13">
+              <object class="ttk.Label" id="label30">
                 <property name="text" translatable="yes">Pista 5:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
@@ -485,14 +993,54 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Button" id="button9" named="True">
-                <property name="command" type="command" cbtype="simple">configPistas</property>
+              <object class="ttk.Button" id="button17" named="True">
+                <property name="command" type="command" cbtype="simple">configPista5</property>
                 <property name="text" translatable="yes">Select</property>
                 <layout manager="grid">
                   <property name="column">2</property>
                   <property name="padx">3</property>
                   <property name="pady">3</property>
                   <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label20">
+                <property name="text" translatable="yes">Pista 6:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">5</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblPista6" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">5</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button18" named="True">
+                <property name="command" type="command" cbtype="simple">configPista6</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">5</property>
                 </layout>
               </object>
             </child>

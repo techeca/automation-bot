@@ -1,5 +1,23 @@
 area_game_coord: (461, 77, 545, 108)
 area_etapa_actual: (474, 578, 565, 607)
 area_salida: (502, 618, 614, 642)
-area_pistas: (474, 619, 565, 785)
-area_pista1: (493, 658, 493, 658)
+area_chat: None
+area_pistas: (484, 674, 544, 813)
+area_pista1: (505, 644, 746, 669)
+area_pista2: (504, 672, 744, 697)
+area_pista3: (506, 702, 745, 725)
+area_pista4: None
+area_pista5: None
+area_pista6: None
+area_flecha_1: (479, 645, 506, 670)
+area_flecha_2: (475, 674, 506, 696)
+area_flecha_3: (474, 704, 505, 726)
+area_flecha_4: None
+area_flecha_5: None
+area_flecha_6: None
+area_pistaD1: (482, 596, 828, 634)
+area_pistaD2: (480, 605, 830, 638)
+area_pistaD3: (482, 655, 885, 691)
+area_pistaD4: None
+area_pistaD5: None
+area_pistaD6: None

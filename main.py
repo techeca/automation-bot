@@ -48,6 +48,9 @@ intentos_realizados = 0
 ### Game data
 game_coords = None
 etapa_actual = None
+salida_actual = None
+pistas_actual = None
+
 
 
 all_portal = ["", "", "", ""]
@@ -762,7 +765,7 @@ def OCR(ruta_imagen):
     else:
         return texto
 
-
+# limpia coord de salida
 def manipulacion_cordenada():
     texto = OCR(ruta_imagen_recortada)
     texto = texto.replace("Salida", "")
@@ -808,7 +811,7 @@ def manipulacion_cordenada_juego():
 
 
 def cordenadas():
-    #buscar_y_clickear_chrome(ruta_imagen_chrome)
+    buscar_y_clickear_chrome(ruta_imagen_chrome)
     c1, c2 = manipulacion_cordenada()
     time.sleep(1)
     #pyautogui.tripleClick(731, 360)
@@ -887,10 +890,10 @@ def pista(texto_hasta_coma):
     texto_hasta_coma = texto_hasta_coma
     texto = OCR(ruta_imagen_recortada)
     time.sleep(0.5)
-    print(texto)
-    print(texto_hasta_coma)
+    #print(texto)
+    #print(texto_hasta_coma)
     if "Perforatroz" in texto:
-        buscar_y_clickear_dofus(ruta_imagen_dofus)
+        #buscar_y_clickear_dofus(ruta_imagen_dofus)
         condicion_perforatroz(texto_hasta_coma)
     else:
         #pyautogui.tripleClick(755, 727)
@@ -904,7 +907,7 @@ def pista(texto_hasta_coma):
         pyautogui.press('down')
         pyautogui.press('enter')
         time.sleep(1)
-        pyautogui.tripleClick(657, 766)
+        #pyautogui.tripleClick(657, 766)
         time.sleep(0.5)
         travel()
 
@@ -1408,10 +1411,10 @@ def comparacion_flechas_6pista():
     else:
         comparacion_flechas_6pista()
 
-
+#selecciona flecha dirección en navegador
 def navegacion_flechas(ruta_imagen):
     global intentos_realizados
-    buscar_y_clickear_chrome(ruta_imagen_chrome)
+    #buscar_y_clickear_chrome(ruta_imagen_chrome)
     # Se hace un seguimiento de los intentos realizados
     intentos_realizados += 1
     # Límite de intentos alcanzado
@@ -1587,7 +1590,7 @@ def direction(ruta_imagen):
 
 
 def travel():
-    buscar_y_clickear_dofus(ruta_imagen_dofus)
+    #buscar_y_clickear_dofus(ruta_imagen_dofus)
     #pyautogui.press('w')
     chatBox(ruta_imagen_chat_box)
     pyautogui.hotkey('ctrl', 'v')
@@ -1642,7 +1645,7 @@ def banderita(ruta_imagen):
         eliminar_chat()
         time.sleep(0.5)
         imagen = pyautogui.screenshot()
-        imagen.save('captura.png')
+        imagen.save(ruta_imagen_captura)
         time.sleep(1)
 
     else:
@@ -1673,7 +1676,7 @@ def ha_llegado_destino(ruta_imagen):
 
     if max_val >= umbral_confianza:
         # banderita(ruta_imagen_banderita)
-        banderita('banderita_final.png')
+        banderita(ruta_imagen_banderita)
 
     else:
         # Agregar una pausa entre intentos para reducir la carga de CPU
@@ -2061,13 +2064,28 @@ class ImageFinderApp:
         self.coordActual = self.builder.get_object('lblCoordActual')
         self.etapaActual = self.builder.get_object('lblEtapaActual')
         self.cantidadPistas = self.builder.get_object('lblPistas')
+        self.chat = self.builder.get_object('lblChat')
         self.salida = self.builder.get_object('lblSalida')
         self.pista1 = self.builder.get_object('lblPista1')
         self.pista2 = self.builder.get_object('lblPista2')
         self.pista3 = self.builder.get_object('lblPista3')
         self.pista4 = self.builder.get_object('lblPista4')
         self.pista5 = self.builder.get_object('lblPista5')
+        self.pista6 = self.builder.get_object('lblPista6')
+        self.flecha1 = self.builder.get_object('lblFlecha1')
+        self.flecha2 = self.builder.get_object('lblFlecha2')
+        self.flecha3 = self.builder.get_object('lblFlecha3')
+        self.flecha4 = self.builder.get_object('lblFlecha4')
+        self.flecha5 = self.builder.get_object('lblFlecha5')
+        self.flecha6 = self.builder.get_object('lblFlecha6')
+        self.pistaD1 = self.builder.get_object('lblPistaD1')
+        self.pistaD2 = self.builder.get_object('lblPistaD2')
+        self.pistaD3 = self.builder.get_object('lblPistaD3')
+        self.pistaD4 = self.builder.get_object('lblPistaD4')
+        self.pistaD5 = self.builder.get_object('lblPistaD5')
+        self.pistaD6 = self.builder.get_object('lblPistaD6')
 
+        #Para resources
         self.image_offset = 25
         self.image_path = None
         self.running = False
@@ -2078,48 +2096,37 @@ class ImageFinderApp:
         self.area_game_coord = None
         self.area_etapa_actual = None
         self.area_salida = None
-        self.area_pistas = None
+        self.area_pistas = None ## cantidad símbolos de '?'
+        self.area_chat = None
 
-        ## pistas areas
+        ## pistas - areas
         self.area_pista_1 = None
         self.area_pista_2 = None
         self.area_pista_3 = None
         self.area_pista_4 = None
         self.area_pista_5 = None 
+        self.area_pista_6 = None 
+
+        ## pistas - areas (dirección)
+        self.area_pistaD_1 = None
+        self.area_pistaD_2 = None
+        self.area_pistaD_3 = None
+        self.area_pistaD_4 = None
+        self.area_pistaD_5 = None 
+        self.area_pistaD_6 = None
+
+        ## flechas - areas
+        self.area_flecha_1 = None
+        self.area_flecha_2 = None
+        self.area_flecha_3 = None
+        self.area_flecha_4 = None
+        self.area_flecha_5 = None
+        self.area_flecha_6 = None
 
         ## bot data
 
     def run(self):
         self.mainwindow.mainloop()
-        
-        # self.label = Label(root, text="Select an image to search for:")
-        # self.label.pack()
-
-        # self.image_listbox = Listbox(root, height=10)
-        # self.image_listbox.pack()
-
-        # scrollbar = Scrollbar(root)
-        # scrollbar.pack(side="right", fill="y")
-
-        # self.image_listbox.config(yscrollcommand=scrollbar.set)
-        # scrollbar.config(command=self.image_listbox.yview)
-
-        # self.load_images()
-
-        # self.select_area_button = Button(root, text="Select Search Area", command=self.select_area)
-        # self.select_area_button.pack()
-
-        # self.check_button = Button(root, text="Check values", command=self.checkGameCoord)
-        # self.check_button.pack()
-
-        # self.start_button = Button(root, text="Start Searching", command=self.start_search)
-        # self.start_button.pack()
-
-        # self.stop_button = Button(root, text="Stop Searching", command=self.stop_search)
-        # self.stop_button.pack()
-
-        # self.status_label = Label(root, text="Status: Waiting to start")
-        # self.status_label.pack()
 
     def load_images(self):
         image_folder = "./resources"
@@ -2127,6 +2134,7 @@ class ImageFinderApp:
         for image in images:
             self.image_listbox.insert("end", image)
 
+    # seleccion de area y obtención de area
     def select_area(self):
         #self.root.withdraw()
         self.mainwindow.withdraw()
@@ -2173,25 +2181,11 @@ class ImageFinderApp:
         self.area_selector_window.destroy()
         self.status_label.config(text=f"Status: Area selected {self.search_area}")
 
-
-    def start_search(self):
-        if self.image_listbox.curselection():
-            self.image_path = os.path.join("./resources", self.image_listbox.get(self.image_listbox.curselection()))
-            self.running = True
-            self.status_label.config(text="Status: Searching for image...")
-            self.search_thread = threading.Thread(target=self.check_image)
-            self.search_thread.start()
-        else:
-            self.status_label.config(text="Status: Please select an image first")
-
-    def stop_search(self):
-        self.running = False
-        self.status_label.config(text="Status: Stopped searching")
-
+    # busca imagen, posiciona el cursor sobre el y le da click
     def check_image(self):
         while self.running:
             try:
-                pos = pyautogui.locateOnScreen(self.image_path, region=self.search_area, confidence=0.8) if self.search_area else pg.locateOnScreen(self.image_path, confidence=0.8)
+                pos = pyautogui.locateOnScreen(self.image_path, region=self.search_area, confidence=0.8) if self.search_area else pyautogui.locateOnScreen(self.image_path, confidence=0.8)
                 if pos:
                     pyautogui.moveTo(pos[0] + self.image_offset, pos[1] + self.image_offset)
                     pyautogui.click()
@@ -2204,7 +2198,6 @@ class ImageFinderApp:
                 self.stop_search()
 
     # Funciones para configurar areas
-
     def configCoordActual(self):
         self.select_area()
         self.area_game_coord = self.search_area
@@ -2230,34 +2223,123 @@ class ImageFinderApp:
         self.area_pista_1 = self.search_area
         self.pista1.config(text=f"{self.area_pista_1}")
 
-    # Chequeo de datos
+    def configPista2(self):
+        self.select_area()
+        self.area_pista_2 = self.search_area
+        self.pista2.config(text=f"{self.area_pista_2}")
+    
+    def configPista3(self):
+        self.select_area()
+        self.area_pista_3 = self.search_area
+        self.pista3.config(text=f"{self.area_pista_3}")
 
+    def configPista4(self):
+        self.select_area()
+        self.area_pista_4 = self.search_area
+        self.pista4.config(text=f"{self.area_pista_4}")
+
+    def configPista5(self):
+        self.select_area()
+        self.area_pista_5 = self.search_area
+        self.pista5.config(text=f"{self.area_pista_5}")
+    
+    def configPista6(self):
+        self.select_area()
+        self.area_pista_6 = self.search_area
+        self.pista6.config(text=f"{self.area_pista_6}")
+
+    def configFlecha1(self):
+        self.select_area()
+        self.area_flecha_1 = self.search_area
+        self.flecha1.config(text=f"{self.area_flecha_1}")
+
+    def configFlecha2(self):
+        self.select_area()
+        self.area_flecha_2 = self.search_area
+        self.flecha2.config(text=f"{self.area_flecha_2}")
+    
+    def configFlecha3(self):
+        self.select_area()
+        self.area_flecha_3 = self.search_area
+        self.flecha3.config(text=f"{self.area_flecha_3}")
+
+    def configFlecha4(self):
+        self.select_area()
+        self.area_flecha_4 = self.search_area
+        self.flecha4.config(text=f"{self.area_flecha_4}")
+
+    def configFlecha5(self):
+        self.select_area()
+        self.area_flecha_5 = self.search_area
+        self.flecha5.config(text=f"{self.area_flecha_5}")
+
+    def configFlecha6(self):
+        self.select_area()
+        self.area_flecha_6 = self.search_area
+        self.flecha6.config(text=f"{self.area_flecha_6}")
+
+    def configDireccionPista1(self):
+        self.select_area()
+        self.area_pistaD_1 = self.search_area
+        self.pistaD1.config(text=f"{self.area_pistaD_1}")
+    
+    def configDireccionPista2(self):
+        self.select_area()
+        self.area_pistaD_2 = self.search_area
+        self.pistaD2.config(text=f"{self.area_pistaD_2}")
+    
+    def configDireccionPista3(self):
+        self.select_area()
+        self.area_pistaD_3 = self.search_area
+        self.pistaD3.config(text=f"{self.area_pistaD_3}")
+
+    def configDireccionPista4(self):
+        self.select_area()
+        self.area_pistaD_4 = self.search_area
+        self.pistaD4.config(text=f"{self.area_pistaD_4}")
+
+    def configDireccionPista5(self):
+        self.select_area()
+        self.area_pistaD_5 = self.search_area
+        self.pistaD5.config(text=f"{self.area_pistaD_5}")
+
+    def configDireccionPista6(self):
+        self.select_area()
+        self.area_pistaD_6 = self.search_area
+        self.pistaD6.config(text=f"{self.area_pistaD_6}")
+
+    def configChat(self):
+        self.select_area()
+        self.area_chat = self.search_area
+        self.chat.config(text=f"{self.area_chat}")
+
+
+    # Chequeo de datos
     def checkGameCoord(self):
         self.recorte_Imagen(ruta_imagen_captura, self.area_game_coord)
         c1, c2 = manipulacion_cordenada_juego()
         game_coords = (c1, c2)
-        self.status_label.config(text=f"Coordenadas guardadas {c1, c2}")
         self.coordActual.config(text=f"{game_coords}")
     
     def checkEtapa(self):
         self.recorte_Imagen(ruta_imagen_captura, self.area_etapa_actual)
         primer_numero, segundo_numero = verificacion_etapas(ruta_imagen_captura)
         etapa_actual = (primer_numero, segundo_numero)
-        self.status_label.config(text=f"Etapa guardada {primer_numero, segundo_numero}")
         self.etapaActual.config(text=f"{etapa_actual}")
 
     def checkPistas(self):
         self.recorte_Imagen(ruta_imagen_captura, self.area_pistas)
         cantidad = cantidad_pistas(ruta_imagen_recortada)
-        self.status_label.config(text=f"Pistas encontradas: {cantidad}")
-        self.cantidadPistas.config(text=f"{cantidad}")
+        pistas_actual = cantidad
+        self.cantidadPistas.config(text=f"{pistas_actual}")
 
     def checkSalida(self):
         self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
         c1, c2 = manipulacion_cordenada()
-        self.salida.config(text=f"{c1, c2}")
-    #otros
+        salida_actual = (c1, c2) 
+        self.salida.config(text=f"{salida_actual}")
 
+    #otros
     def recorte_Imagen(self, ruta_imagen, coords):
         imagen = pyautogui.screenshot()
         imagen.save('./treasureHunt/captura.png')
@@ -2291,37 +2373,244 @@ class ImageFinderApp:
         texto = texto.replace("'", "") 
         return texto
 
-    #save/load
+    def coordEnNav(self, inicio):
+        #escribe coord en navegador
+        #buscar_y_clickear_chrome(ruta_imagen_chrome)
+        #salida_actual_texto = self.coordActual['text']
+        salida_actual_texto = self.cleanText(inicio)
+        c1, c2 = salida_actual_texto.split(',')
+        c1 = c1.strip()
+        c2 = c2.strip()
+        #time.sleep(1)
+        #pyautogui.tripleClick(731, 360)
+        reloadNavegador(ruta_imagen_reload_navegador)
+        time.sleep(1)
+        buscarXenNavegador(ruta_imagen_X_navegador)
+        pyautogui.write(c1)
+        time.sleep(1)
+        #pyautogui.press('tab')
+        buscarYenNavegador(ruta_imagen_Y_navegador)
+        pyautogui.write(c2)
+        time.sleep(1)
 
+    def obtenerDireccion(self, coord):
+        global intentos_realizados
+        # Se hace un seguimiento de los intentos realizados
+        intentos_realizados += 1
+        # Límite de intentos alcanzado
+        if intentos_realizados > limite_intentos:
+            print("Límite de intentos alcanzado. La imagen no se encontró.")
+            return
+        #buscar_y_clickear_dofus(ruta_imagen_dofus)
+        # Lista de rutas alternativas de imágenes
+        rutas_alternativas = [ruta_imagen_recortada]
+
+        for ruta_alternativa in rutas_alternativas:
+            imagen_referencia = cv2.imread(ruta_alternativa)
+            if imagen_referencia is not None:
+                # Se encontró una imagen alternativa, procede con la búsqueda y acción
+                # Tu lógica actual para buscar y hacer clic en la imagen
+                altura, ancho, _ = imagen_referencia.shape
+                captura_pantalla = pyautogui.screenshot()
+                captura_pantalla_np = np.array(captura_pantalla)
+                captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
+                resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+                min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+                umbral_confianza = 0.8
+
+                if max_val >= umbral_confianza:
+                    centro_x = max_loc[0] + ancho // 2
+                    centro_y = max_loc[1] + altura // 2
+                    pyautogui.click(centro_x, centro_y)
+                    imagen = pyautogui.screenshot()
+                    imagen.save('./treasureHunt/captura.png')
+                    #recorte_captura_mesaje_flecha1(ruta_imagen_captura)
+                    self.recorte_Imagen(ruta_imagen_captura, coord)
+
+                    texto = OCR(ruta_imagen_recortada)
+                    partes = texto.split(",")  # Divide el texto en partes usando la coma como separador
+                    texto_hasta_coma = partes[0] + ","  # Toma la primera parte antes de la coma
+                    if texto_hasta_coma == "Dirigete hacia el Sur,":
+                        navegacion_flechas(ruta_imagen_flecha_abajo2)
+                        time.sleep(0.5)
+                        return texto_hasta_coma
+                    elif texto_hasta_coma == "Dirigete hacia el Norte,":
+                        navegacion_flechas(ruta_imagen_flecha_arriba2)
+                        time.sleep(0.5)
+                        return texto_hasta_coma
+                    elif texto_hasta_coma == "Dirigete hacia el Oeste,":
+                        navegacion_flechas(ruta_imagen_flecha_izquierda2)
+                        time.sleep(0.5)
+                        return texto_hasta_coma
+                    elif texto_hasta_coma == "Dirigete hacia el Este,":
+                        navegacion_flechas(ruta_imagen_flecha_derecha2)
+                        time.sleep(0.5)
+                        return texto_hasta_coma
+                    else:
+                        recorte_captura_mesajelargo_flecha1(ruta_imagen_captura)
+                        texto = OCR(ruta_imagen_recortada)
+                        partes = texto.split(",")  # Divide el texto en partes usando la coma como separador
+                        texto_hasta_coma = partes[0] + ","  # Toma la primera parte antes de la coma
+                        if texto_hasta_coma == "Dirigete hacia el Sur,":
+                            navegacion_flechas(ruta_imagen_flecha_abajo2)
+                            time.sleep(0.5)
+                            return texto_hasta_coma
+                        elif texto_hasta_coma == "Dirigete hacia el Norte,":
+                            navegacion_flechas(ruta_imagen_flecha_arriba2)
+                            time.sleep(0.5)
+                            return texto_hasta_coma
+                        elif texto_hasta_coma == "Dirigete hacia el Oeste,":
+                            navegacion_flechas(ruta_imagen_flecha_izquierda2)
+                            time.sleep(0.5)
+                            return texto_hasta_coma
+                        elif texto_hasta_coma == "Dirigete hacia el Este,":
+                            navegacion_flechas(ruta_imagen_flecha_derecha2)
+                            time.sleep(0.5)
+                            return texto_hasta_coma
+                        break
+
+                break  # Termina el bucle ya que se encontró y clickeó una imagen
+            else:
+                print(f"No se encontró la imagen en la ruta: {ruta_alternativa}")
+
+        # Si ninguna de las imágenes alternativas fue encontrada
+        else:
+            comparacion_flechas()
+
+    #save/load
     def save_to_text_file(self):
         with open('variables.txt', 'w') as file:
+
+            # Áreas de recorte
             file.write(f"area_game_coord: {self.area_game_coord}\n")
             file.write(f"area_etapa_actual: {self.area_etapa_actual}\n")
             file.write(f"area_salida: {self.area_salida}\n")
+            file.write(f"area_chat: {self.area_chat}\n")
+
+            #'?'
             file.write(f"area_pistas: {self.area_pistas}\n")
+            
+            #pistas (texto) (flecha - pista - banderita)
             file.write(f"area_pista1: {self.area_pista_1}\n")
+            file.write(f"area_pista2: {self.area_pista_2}\n")
+            file.write(f"area_pista3: {self.area_pista_3}\n")
+            file.write(f"area_pista4: {self.area_pista_4}\n")
+            file.write(f"area_pista5: {self.area_pista_5}\n")
+            file.write(f"area_pista6: {self.area_pista_6}\n")
+
+            #flechas
+            file.write(f"area_flecha_1: {self.area_flecha_1}\n")
+            file.write(f"area_flecha_2: {self.area_flecha_2}\n")
+            file.write(f"area_flecha_3: {self.area_flecha_3}\n")
+            file.write(f"area_flecha_4: {self.area_flecha_4}\n")
+            file.write(f"area_flecha_5: {self.area_flecha_5}\n")
+            file.write(f"area_flecha_6: {self.area_flecha_6}\n")
+
+            #pista (direccion)
+            file.write(f"area_pistaD1: {self.area_pistaD_1}\n")
+            file.write(f"area_pistaD2: {self.area_pistaD_2}\n")
+            file.write(f"area_pistaD3: {self.area_pistaD_3}\n")
+            file.write(f"area_pistaD4: {self.area_pistaD_4}\n")
+            file.write(f"area_pistaD5: {self.area_pistaD_5}\n")
+            file.write(f"area_pistaD6: {self.area_pistaD_6}\n")
         
         self.status_label.config(text=f"Datos guardados")
 
     def load_from_text_file(self):
         with open('variables.txt', 'r') as file:
             lines = file.readlines()
-            # search_area = eval(lines[0].split(': ')[1].strip())
-            self.area_game_coord = eval(lines[0].split(': ')[1].strip())
-            self.checkGameCoord()
 
-            # other_variable = lines[1].split(': ')[1].strip()
-            self.area_etapa_actual = eval(lines[1].split(': ')[1].strip())
-            self.checkEtapa()
-            # return search_area #, other_variable
+            if len(lines) > 0 and lines[0].strip():
+                self.area_game_coord = eval(lines[0].split(': ')[1].strip())
+                self.checkGameCoord()
 
-            self.area_salida = eval(lines[2].split(': ')[1].strip())
-            self.checkSalida()
+            if len(lines) > 1 and lines[1].strip():
+                self.area_etapa_actual = eval(lines[1].split(': ')[1].strip())
+                self.checkEtapa()
 
-            self.area_pistas = eval(lines[3].split(': ')[1].strip())
-            self.checkPistas()
+            if len(lines) > 2 and lines[2].strip():
+                self.area_salida = eval(lines[2].split(': ')[1].strip())
+                self.checkSalida()
 
-            self.area_pistas = eval(lines[4].split(': ')[1].strip())
+            if len(lines) > 3 and lines[3].strip():
+                self.area_chat = eval(lines[3].split(': ')[1].strip())   
+
+            if len(lines) > 4 and lines[4].strip():
+                self.area_pistas = eval(lines[4].split(': ')[1].strip())
+                self.checkPistas()
+
+            if len(lines) > 5 and lines[5].strip():
+                self.area_pista_1 = eval(lines[5].split(': ')[1].strip())
+                self.pista1.config(text=f"{self.area_pista_1}")
+
+            if len(lines) > 6 and lines[6].strip():
+                self.area_pista_2 = eval(lines[6].split(': ')[1].strip())
+                self.pista2.config(text=f"{self.area_pista_2}")
+
+            if len(lines) > 7 and lines[7].strip():
+                self.area_pista_3 = eval(lines[7].split(': ')[1].strip())
+                self.pista3.config(text=f"{self.area_pista_3}")
+
+            if len(lines) > 8 and lines[8].strip():
+                self.area_pista_4 = eval(lines[8].split(': ')[1].strip())
+                self.pista4.config(text=f"{self.area_pista_4}")
+
+            if len(lines) > 9 and lines[9].strip():
+                self.area_pista_5 = eval(lines[9].split(': ')[1].strip())
+                self.pista5.config(text=f"{self.area_pista_5}")
+
+            if len(lines) > 10 and lines[10].strip():
+                self.area_pista_6 = eval(lines[10].split(': ')[1].strip())
+                self.pista6.config(text=f"{self.area_pista_6}")
+
+            if len(lines) > 11 and lines[11].strip():
+                self.area_flecha_1 = eval(lines[11].split(': ')[1].strip())
+                self.flecha1.config(text=f"{self.area_flecha_1}")
+
+            if len(lines) > 12 and lines[12].strip():
+                self.area_flecha_2 = eval(lines[12].split(': ')[1].strip())
+                self.flecha2.config(text=f"{self.area_flecha_2}")
+
+            if len(lines) > 13 and lines[13].strip():
+                self.area_flecha_3 = eval(lines[13].split(': ')[1].strip())
+                self.flecha3.config(text=f"{self.area_flecha_3}")
+
+            if len(lines) > 14 and lines[14].strip():
+                self.area_flecha_4 = eval(lines[14].split(': ')[1].strip())
+                self.flecha4.config(text=f"{self.area_flecha_4}")
+
+            if len(lines) > 15 and lines[15].strip():
+                self.area_flecha_5 = eval(lines[15].split(': ')[1].strip())
+                self.flecha5.config(text=f"{self.area_flecha_5}")
+
+            if len(lines) > 16 and lines[16].strip():
+                self.area_flecha_6 = eval(lines[16].split(': ')[1].strip())
+                self.flecha6.config(text=f"{self.area_flecha_6}")
+
+            if len(lines) > 17 and lines[17].strip():
+                self.area_pistaD_1 = eval(lines[17].split(': ')[1].strip())
+                self.pistaD1.config(text=f"{self.area_pistaD_1}")
+
+            if len(lines) > 18 and lines[18].strip():
+                self.area_pistaD_2 = eval(lines[18].split(': ')[1].strip())
+                self.pistaD2.config(text=f"{self.area_pistaD_2}")
+
+            if len(lines) > 19 and lines[19].strip():
+                self.area_pistaD_3 = eval(lines[19].split(': ')[1].strip())
+                self.pistaD3.config(text=f"{self.area_pistaD_3}")
+
+            if len(lines) > 20 and lines[20].strip():
+                self.area_pistaD_4 = eval(lines[20].split(': ')[1].strip())
+                self.pistaD4.config(text=f"{self.area_pistaD_4}")
+
+            if len(lines) > 21 and lines[21].strip():
+                self.area_pistaD_5 = eval(lines[21].split(': ')[1].strip())
+                self.pistaD5.config(text=f"{self.area_pistaD_5}")
+
+            if len(lines) > 22 and lines[22].strip():
+                self.area_pistaD_6 = eval(lines[22].split(': ')[1].strip())
+                self.pistaD6.config(text=f"{self.area_pistaD_6}")
+
         
         self.status_label.config(text=f"Datos cargados")
 
@@ -2332,6 +2621,9 @@ class ImageFinderApp:
         #cantidad_pistas(ruta_imagen_recortada)
         #self.cantidadPistas = cantidad_pistas(ruta_imagen_recortada)
         # Realizar acciones según la cantidad de símbolos "?"
+        cantPistasTexto = self.cantidadPistas['text']
+        self.cantidadPistas = int(cantPistasTexto)
+
         if self.cantidadPistas == 0:
             print("Cero '?'")
             print("Pista1")
@@ -2421,43 +2713,10 @@ class ImageFinderApp:
             etapa_finalizada('etapa_finalizada.png')
         elif self.cantidadPistas == 4:
             print("Cuatro '?'")
+
             print("Pista1")
+            #self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
             recorte(ruta_imagen_captura)
-            cordenadas()
-            recorte_primerapista_flecha(ruta_imagen_captura)
-            texto_hasta_coma = comparacion_flechas()
-            recorte_primerapista(ruta_imagen_captura)
-            OCR(ruta_imagen_recortada)
-            pista(texto_hasta_coma)
-            print("Pista2")
-            recorte_segundapista_flecha(ruta_imagen_captura)
-            texto_hasta_coma = comparacion_flechas_2pista()
-            recorte_segundapista(ruta_imagen_captura)
-            OCR(ruta_imagen_recortada)
-            pista(texto_hasta_coma)
-            print("Pista3")
-            recorte_tercerapista_flecha(ruta_imagen_captura)
-            texto_hasta_coma = comparacion_flechas_3pista()
-            recorte_tercerapista(ruta_imagen_captura)
-            OCR(ruta_imagen_recortada)
-            pista(texto_hasta_coma)
-            print("Pista4")
-            recorte_cuartapista_flecha(ruta_imagen_captura)
-            texto_hasta_coma = comparacion_flechas_4pista()
-            recorte_cuartapista(ruta_imagen_captura)
-            OCR(ruta_imagen_recortada)
-            pista(texto_hasta_coma)
-            print("Pista5")
-            recorte_quintapista_flecha(ruta_imagen_captura)
-            texto_hasta_coma = comparacion_flechas_5pista()
-            recorte_quintapista(ruta_imagen_captura)
-            OCR(ruta_imagen_recortada)
-            pista(texto_hasta_coma)
-            etapa_finalizada('etapa_finalizada.png')
-        elif self.cantidadPistas == 5:
-            print("Cinco '?'")
-            print("Pista1")
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_1)
             cordenadas()
             recorte_primerapista_flecha(ruta_imagen_captura)
             texto_hasta_coma = comparacion_flechas()
@@ -2470,6 +2729,59 @@ class ImageFinderApp:
             texto_hasta_coma = comparacion_flechas_2pista()
             recorte_segundapista(ruta_imagen_captura)
             OCR(ruta_imagen_recortada)
+            pista(texto_hasta_coma)
+
+            print("Pista3")
+            recorte_tercerapista_flecha(ruta_imagen_captura)
+            texto_hasta_coma = comparacion_flechas_3pista()
+            recorte_tercerapista(ruta_imagen_captura)
+            OCR(ruta_imagen_recortada)
+            pista(texto_hasta_coma)
+
+            print("Pista4")
+            recorte_cuartapista_flecha(ruta_imagen_captura)
+            texto_hasta_coma = comparacion_flechas_4pista()
+            recorte_cuartapista(ruta_imagen_captura)
+            OCR(ruta_imagen_recortada)
+            pista(texto_hasta_coma)
+
+            print("Pista5")
+            recorte_quintapista_flecha(ruta_imagen_captura)
+            texto_hasta_coma = comparacion_flechas_5pista()
+            recorte_quintapista(ruta_imagen_captura)
+            OCR(ruta_imagen_recortada)
+            pista(texto_hasta_coma)
+            etapa_finalizada('etapa_finalizada.png')
+        elif self.cantidadPistas == 5:
+            print("Cinco '?'")
+
+            print("Pista1")
+            #obtiene coord de salida
+            self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
+            #escribe coord de salida en navegador
+            #cordenadas()
+            inicio = self.salida['text']
+            self.coordEnNav(inicio)
+            #recorta flecha de primera pista
+            #recorte_primerapista_flecha(ruta_imagen_captura)
+            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_1)
+            #obtiene la direccion segun la flecha
+            texto_hasta_coma = self.obtenerDireccion(self.area_pistaD_1) #comparacion_flechas()
+            # obtiene recorte de pista
+            #recorte_primerapista(ruta_imagen_captura)
+            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_1)
+            #obtiene texto de pista de recorte
+            #OCR(ruta_imagen_recortada)
+            #mueve el personaje según la pista obtenida
+            pista(texto_hasta_coma)
+
+            print("Pista2")
+            self.checkGameCoord()
+            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_2)
+            inicio = self.coordActual['text']
+            self.coordEnNav(inicio)
+            texto_hasta_coma = self.obtenerDireccion(self.area_pistaD_2)
+            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_2)
             pista(texto_hasta_coma)
 
             print("Pista3")
@@ -2501,6 +2813,7 @@ class ImageFinderApp:
             pista(texto_hasta_coma)
             etapa_finalizada('etapa_finalizada.png')    
 
+    # start/stop th
     def starTask(self):
         self.status_label.config(text=f"Iniciando búsqueda")
         try:
@@ -2509,6 +2822,10 @@ class ImageFinderApp:
             primer_numero, segundo_numero = etapa_actual_texto.split(',')
             primer_numero = int(primer_numero)
             segundo_numero = int(segundo_numero)
+
+            print(primer_numero)
+            print(segundo_numero)
+            print(primer_numero < segundo_numero)
             
             while primer_numero < segundo_numero:  # Mientras la condición sea verdadera
                 self.verificacionPistas()
@@ -2516,15 +2833,13 @@ class ImageFinderApp:
                 time.sleep(1)
             
             time.sleep(1)
-            lucha('lucha.png')
+            lucha('./treasureHunt/lucha.png')
             time.sleep(2)
             pelea()
             time.sleep(2)
             pyautogui.press('0')
         except ValueError as e:
             print(f"Error: {e}")
-
-
 
 #buscar_y_clickear_dofus(ruta_imagen_dofus)
 # moverse()
