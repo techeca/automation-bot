@@ -1,23 +1,29 @@
-area_game_coord: (461, 77, 545, 108)
-area_etapa_actual: (474, 578, 565, 607)
-area_salida: (502, 618, 614, 642)
+area_game_coord: (461, 76, 553, 108)
+area_etapa_actual: (476, 578, 566, 609)
+area_salida: (505, 618, 620, 644)
 area_chat: None
-area_pistas: (484, 674, 544, 813)
-area_pista1: (505, 644, 746, 669)
-area_pista2: (504, 672, 744, 697)
-area_pista3: (506, 702, 745, 725)
-area_pista4: None
-area_pista5: None
-area_pista6: None
-area_flecha_1: (479, 645, 506, 670)
-area_flecha_2: (475, 674, 506, 696)
-area_flecha_3: (474, 704, 505, 726)
-area_flecha_4: None
-area_flecha_5: None
-area_flecha_6: None
-area_pistaD1: (482, 596, 828, 634)
-area_pistaD2: (480, 605, 830, 638)
-area_pistaD3: (482, 655, 885, 691)
-area_pistaD4: None
+area_pistas: (495, 674, 526, 814)
+area_pista1: (502, 646, 744, 672)
+area_pista2: (504, 673, 745, 701)
+area_pista3: (503, 701, 745, 731)
+area_pista4: (501, 728, 743, 759)
+area_pista5: (504, 759, 737, 785)
+area_pista6: (497, 788, 738, 811)
+area_flecha_1: (477, 645, 505, 671)
+area_flecha_2: (470, 674, 506, 699)
+area_flecha_3: (474, 702, 506, 732)
+area_flecha_4: (472, 729, 506, 756)
+area_flecha_5: (475, 762, 506, 782)
+area_flecha_6: (477, 791, 506, 810)
+area_moverArriba: (1170, 32, 1304, 44)
+area_moverAbajo: (1154, 905, 1286, 916)
+area_moverIzquierda: (552, 415, 564, 525)
+area_moverDerecha: (1810, 393, 1821, 460)
 area_pistaD5: None
 area_pistaD6: None
+area_pistaDL1: (479, 582, 810, 635)
+area_pistaDL2: None
+area_pistaDL3: None
+area_pistaDL4: None
+area_pistaDL5: None
+area_pistaDL6: None
