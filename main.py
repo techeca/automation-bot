@@ -3274,8 +3274,8 @@ class ImageFinderApp:
                 clickEnImagen(ruta_imagen_teleport_btn)
                 time.sleep(1)
                 ##teleport a inicio de busqueda 
-                self.checkGameCoord()
-                if(self.salida == self.coordActual):
+                #self.checkGameCoord()
+                if(self.salida != self.coordActual):
                     clickEnImagen(ruta_imagen_chat_box)
                     time.sleep(1)
                     pyautogui.write(f"/travel {primer_coord} {segundo_coord}")
