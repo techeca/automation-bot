@@ -595,29 +595,7 @@ def verificacion_pistas():
         pista(texto_hasta_coma)
         etapa_finalizada('etapa_finalizada.png')
 
-def verificacion_etapas(ruta_imagen):
-    recorte_etapas(ruta_imagen)
-    texto = OCR(ruta_imagen_recortada)
-    texto = texto.strip()
-    
-    print(f"Texto extraído por OCR: '{texto}'")  # Agregar impresión de depuración
-    
-    # Separar la información usando el método split(' ')
-    separado = texto.split(' ')
-    
-    if len(separado) < 2:
-        raise ValueError(f"El texto extraído no tiene el formato esperado: '{texto}'")
-    
-    # Buscar los números en la última parte de la cadena
-    numeros = separado[-1].split('/')
-    
-    if len(numeros) < 2:
-        raise ValueError(f"No se encontraron dos números separados por '/'. Texto procesado: '{separado[-1]}'")
-    
-    # Guardar los números en variables separadas
-    primer_numero = numeros[0]
-    segundo_numero = numeros[1]
-    return primer_numero, segundo_numero
+
 
 def comenzar_etapas():
     try:
@@ -2305,7 +2283,7 @@ class ImageFinderApp:
     
     def checkEtapa(self):
         self.recorte_Imagen(ruta_imagen_captura, self.area_etapa_actual)
-        primer_numero, segundo_numero = verificacion_etapas(ruta_imagen_captura)
+        primer_numero, segundo_numero = self.verificacion_etapas(ruta_imagen_captura)
         etapa_actual = (primer_numero, segundo_numero)
         self.etapaActual.config(text=f"{etapa_actual}")
 
@@ -2587,6 +2565,30 @@ class ImageFinderApp:
             return texto
         else:
             return texto
+
+    def verificacion_etapas(self, ruta_imagen):
+        recorte_etapas(ruta_imagen)
+        texto = self.OCR(ruta_imagen_recortada)
+        texto = texto.strip()
+        
+        print(f"Texto extraído por OCR: '{texto}'")  # Agregar impresión de depuración
+        
+        # Separar la información usando el método split(' ')
+        separado = texto.split(' ')
+        
+        if len(separado) < 2:
+            raise ValueError(f"El texto extraído no tiene el formato esperado: '{texto}'")
+        
+        # Buscar los números en la última parte de la cadena
+        numeros = separado[-1].split('/')
+        
+        if len(numeros) < 2:
+            raise ValueError(f"No se encontraron dos números separados por '/'. Texto procesado: '{separado[-1]}'")
+        
+        # Guardar los números en variables separadas
+        primer_numero = numeros[0]
+        segundo_numero = numeros[1]
+        return primer_numero, segundo_numero
 
     #save/load
     def save_to_text_file(self):
