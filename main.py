@@ -69,7 +69,7 @@ comienzo_perfo_actual = None
 
 
 coordenadas_zaap = [
-    (-25, -36, "Llanura de los puerkazos"),
+    (-5, -23, "Llanura de los puerkazos"),
     (-46, 18, "Pueblo costero"),
     (15, -58, "Dunas de los Huesos"),
     (10, 22, "Ribera del golfo sufokeno"),
@@ -91,7 +91,8 @@ coordenadas_zaap = [
     (-46, 18, "Pueblo costero"),
     (-25, 12, "Camino de las caravanas"),
     (-26, 37, "Coraza"),
-    (-16, 1, "Pueblo de los ganaderos")
+    (-16, 1, "Pueblo de los ganaderos"),
+    (-27, 36, "Campos de cania")
 ]
 
 # Calcular la distancia Euclidiana
@@ -2446,6 +2447,7 @@ class ImageFinderApp:
         salida_actual_texto = pytesseract.image_to_string(imagen)
         #print(salida_actual_texto)
         #salida_actual_texto = OCR(ruta_imagen_recortada)
+        print(salida_actual_texto)
         salida_actual_texto = re.findall(r'-?\d+', salida_actual_texto)
         c1 = salida_actual_texto[0]
         c2 = salida_actual_texto[1]
@@ -3275,7 +3277,9 @@ class ImageFinderApp:
                 time.sleep(1)
                 ##teleport a inicio de busqueda 
                 #self.checkGameCoord()
-                if(self.salida != self.coordActual):
+                print(f"Salida {self.salida['text']}")
+                print(f"Coordenada actual {self.coordActual['text']}")
+                if(self.salida['text'] != self.coordActual['text']):
                     clickEnImagen(ruta_imagen_chat_box)
                     time.sleep(1)
                     pyautogui.write(f"/travel {primer_coord} {segundo_coord}")
