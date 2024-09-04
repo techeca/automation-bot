@@ -1835,10 +1835,10 @@ class ImageFinderApp:
         self.moverDerecha = self.builder.get_object('lblDerecha')
         self.pistaD5 = self.builder.get_object('lblPistaD5')
         self.chat = self.builder.get_object('lblChat')
-        self.pistaDL1 = self.builder.get_object('lblPistaDL1')
-        self.pistaDL2 = self.builder.get_object('lblPistaDL2')
-        self.pistaDL3 = self.builder.get_object('lblPistaDL3')
-        self.pistaDL4 = self.builder.get_object('lblPistaDL4')
+        self.btnMerkasako = self.builder.get_object('lblMerkasako')
+        self.zaapMerkasako = self.builder.get_object('lblZaapMerkasako')
+        self.buscarZaap = self.builder.get_object('lblBuscarZaap')
+        self.teleportMerka = self.builder.get_object('lblTeleportMerka')
         self.pistaDL5 = self.builder.get_object('lblPistaDL5')
         self.pistaDL6 = self.builder.get_object('lblPistaDL6')
 
@@ -1872,14 +1872,6 @@ class ImageFinderApp:
         self.area_derecha = None
         self.etapa_iniciada = False 
         self.area_pistaD_6 = None
-
-        ## pistas - areas (dirección Larga)
-        self.area_pistaDL_1 = None
-        self.area_pistaDL_2 = None
-        self.area_pistaDL_3 = None
-        self.area_pistaDL_4 = None
-        self.area_pistaDL_5 = None 
-        self.area_pistaDL_6 = None
 
         ## flechas - areas
         self.area_flecha_1 = None
@@ -2092,28 +2084,28 @@ class ImageFinderApp:
 
     def configDireccionPista6(self):
         self.select_area()
-        self.area_pistaD_6 = self.search_area
-        self.pistaD6.config(text=f"{self.area_pistaD_6}")
+        self.area_chat = self.search_area
+        self.chat.config(text=f"{self.area_chat}")
     
     def configDireccionLPista1(self):
         self.select_area()
-        self.area_pistaDL_1 = self.search_area
-        self.pistaDL1.config(text=f"{self.area_pistaDL_1}")
+        area_btnMerkasako = self.search_area
+        self.btnMerkasako.config(text=f"{area_btnMerkasako}")
 
     def configDireccionLPista2(self):
         self.select_area()
-        self.area_pistaDL_2 = self.search_area
-        self.pistaDL2.config(text=f"{self.area_pistaDL_2}")
+        area_zaap_merkasako = self.search_area
+        self.zaapMerkasako.config(text=f"{area_zaap_merkasako}")
 
     def configDireccionLPista3(self):
         self.select_area()
-        self.area_pistaDL_3 = self.search_area
-        self.pistaDL3.config(text=f"{self.area_pistaDL_3}")
+        area_buscar_zaap = self.search_area
+        self.buscarZaap.config(text=f"{area_buscar_zaap}")
 
     def configDireccionLPista4(self):
         self.select_area()
-        self.area_pistaDL_4 = self.search_area
-        self.pistaDL4.config(text=f"{self.area_pistaDL_4}")
+        area_teleport_merka = self.search_area
+        self.teleportMerka.config(text=f"{area_teleport_merka}")
 
     def configDireccionLPista5(self):
         self.select_area()
@@ -2429,7 +2421,7 @@ class ImageFinderApp:
         # Define un umbral de confianza (puedes ajustar según tus necesidades)
         #print(f"max umbral {float(self.umbral.get())} max value {max_val}")
         umbral_confianza = float(self.umbral.get())
-        #print(max_val)
+        print(max_val)
         if max_val >= umbral_confianza:
             # Obtiene las coordenadas del centro de la imagen de referencia
             centro_x = max_loc[0] + ancho // 2
@@ -2627,12 +2619,12 @@ class ImageFinderApp:
             file.write(f"area_moverIzquierda: {self.area_izquierda}\n")
             file.write(f"area_moverDerecha: {self.area_derecha}\n")
             file.write(f"etapa_iniciada: {self.etapa_iniciada}\n")
-            file.write(f"area_pistaD6: {self.area_pistaD_6}\n")
+            file.write(f"area_chat: {self.area_chat}\n")
 
-            file.write(f"area_pistaDL1: {self.area_pistaDL_1}\n")
-            file.write(f"area_pistaDL2: {self.area_pistaDL_2}\n")
-            file.write(f"area_pistaDL3: {self.area_pistaDL_3}\n")
-            file.write(f"area_pistaDL4: {self.area_pistaDL_4}\n")
+            file.write(f"area_merkasako: {self.btnMerkasako['text']}\n")
+            file.write(f"area_zaap_merka: {self.zaapMerkasako['text']}\n")
+            file.write(f"area_buscar_zaap: {self.buscarZaap['text']}\n")
+            file.write(f"area_teleport_merka: {self.teleportMerka['text']}\n")
             file.write(f"area_pistaDL5: {self.area_pistaDL_5}\n")
             file.write(f"area_pistaDL6: {self.area_pistaDL_6}\n")
 
@@ -2658,7 +2650,8 @@ class ImageFinderApp:
                 #self.checkSalida()
 
             if len(lines) > 3 and lines[3].strip():
-                self.area_chat = eval(lines[3].split(': ')[1].strip())   
+                texto_area_chat = eval(lines[3].split(': ')[1].strip())   
+                self.chat.config(text=f"{texto_area_chat}")
 
             if len(lines) > 4 and lines[4].strip():
                 self.area_pistas = eval(lines[4].split(': ')[1].strip())
@@ -2737,20 +2730,20 @@ class ImageFinderApp:
                 self.chat.config(text=f"{texto_chat}")
 
             if len(lines) > 23 and lines[23].strip():
-                self.area_pistaDL_1 = eval(lines[23].split(': ')[1].strip())
-                self.pistaDL1.config(text=f"{self.area_pistaDL_1}")
+                texto_area_merkasako = eval(lines[23].split(': ')[1].strip())
+                self.btnMerkasako.config(text=f"{texto_area_merkasako}")
 
             if len(lines) > 24 and lines[24].strip():
-                self.area_pistaDL_2 = eval(lines[24].split(': ')[1].strip())
-                self.pistaDL2.config(text=f"{self.area_pistaDL_2}")
+                area_zaap_merka = eval(lines[24].split(': ')[1].strip())
+                self.zaapMerkasako.config(text=f"{area_zaap_merka}")
 
             if len(lines) > 25 and lines[25].strip():
-                self.area_pistaDL_3 = eval(lines[25].split(': ')[1].strip())
-                self.pistaDL3.config(text=f"{self.area_pistaDL_3}")
+                area_buscar_merka = eval(lines[25].split(': ')[1].strip())
+                self.buscarZaap.config(text=f"{area_buscar_merka}")
 
             if len(lines) > 26 and lines[26].strip():
-                self.area_pistaDL_4 = eval(lines[26].split(': ')[1].strip())
-                self.pistaDL4.config(text=f"{self.area_pistaDL_4}")
+                area_teleport_merka = eval(lines[26].split(': ')[1].strip())
+                self.teleportMerka.config(text=f"{area_teleport_merka}")
 
             if len(lines) > 27 and lines[27].strip():
                 self.area_pistaDL_5 = eval(lines[27].split(': ')[1].strip())
@@ -3128,13 +3121,16 @@ class ImageFinderApp:
     def travel(self):
         #buscar_y_clickear_dofus(ruta_imagen_dofus)
         #pyautogui.press('w')
-        chatBox(ruta_imagen_chat_box)
+        #chatBox(ruta_imagen_chat_box)
+        chatX, chatY = self.get4CoordFromText(self.chat['text'])
+        #self.clickEnImagen(ruta_imagen_chat_box)
+        pyautogui.tripleClick(chatX, chatY)
+        time.sleep(2)
         pyautogui.hotkey('ctrl', 'v')
         pyautogui.press('enter')
         time.sleep(0.5)
         pyautogui.press('enter')
         time.sleep(0.5)
-        pyautogui.press('enter')
         self.ha_llegado_destino(ruta_imagen_llegado_destino)
 
     def eliminar_chat(self):
@@ -3285,40 +3281,63 @@ class ImageFinderApp:
             primer_coord = int(primer_coord)
             segundo_coord = int(segundo_coord)
 
-            gamecoord_actual_texto = self.coordActual['text']
-            gamecoord_actual_texto = self.cleanText(gamecoord_actual_texto)
-            primer_gamecoord, segundo_gamecoord = gamecoord_actual_texto.split(',')
-            primer_gamecoord = int(primer_gamecoord)
-            segundo_gamecoord = int(segundo_gamecoord)
+            
 
             print(f"coordenada salida: {primer_coord}, {segundo_coord}")
             print(f"etapa actual: {primer_numero}, {segundo_numero}")
-            print(f"numero de pista, {self.numero_pista}")
+            print(f"numero de pista: {self.numero_pista}")
 
             if (primer_numero == 1 and self.numero_pista == 0):
                 coordenada_cercana, nombre_cercano = coordenada_mas_cercana(primer_coord, segundo_coord, coordenadas_zaap)
                 print(f"El zaap más cercano a la Salida es: {nombre_cercano}, {coordenada_cercana}")
             
+                gamecoord_actual_texto = self.coordActual['text']
+                gamecoord_actual_texto = self.cleanText(gamecoord_actual_texto)
+                primer_gamecoord, segundo_gamecoord = gamecoord_actual_texto.split(',')
+                primer_gamecoord = int(primer_gamecoord)
+                segundo_gamecoord = int(segundo_gamecoord)
+
                 ##ir a coordenadas más cercanas
                 ##entrar al merkasako, buscar el teleport mas cercano e ir
-                self.clickEnImagen(ruta_imagen_merkasako)
-                self.clickEnImagen(ruta_imagen_zaap_merka)
-                self.clickEnImagen(ruta_imagen_buscar_zaap)
+                #self.clickEnImagen(ruta_imagen_merkasako)
+                #self.clickEnImagen(ruta_imagen_zaap_merka)
+                #self.clickEnImagen(ruta_imagen_buscar_zaap)
+                merkaX, merkaY = self.get4CoordFromText(self.btnMerkasako['text'])
+                zaapMerkaX, zaapMerkaY = self.get4CoordFromText(self.zaapMerkasako['text'])
+                buscarZaapX, buscarZaapY = self.get4CoordFromText(self.buscarZaap['text'])
+                teleport_zaapX, teleport_zaapY = self.get4CoordFromText(self.teleportMerka['text'])
+                pyautogui.click(merkaX, merkaY)
+                time.sleep(3)
+                pyautogui.click(zaapMerkaX, zaapMerkaY)
+                time.sleep(1)
+                pyautogui.click(buscarZaapX, buscarZaapY)
+                time.sleep(1)
                 ##escribir coord
                 pyautogui.write(nombre_cercano)
-                time.sleep(0.5)
-                self.clickEnImagen(ruta_imagen_teleport_btn)
+                time.sleep(1)
+                pyautogui.click(teleport_zaapX, teleport_zaapY)
+                #self.clickEnImagen(ruta_imagen_teleport_btn)
                 time.sleep(1)
                 #self.checkGameCoord()
-                #c1, c2 = coordenada_cercana
-                #game_coords = (c1, c2)
+                c1, c2 = coordenada_cercana
+                game_coords = (c1, c2)
+                self.coordActual.config(text=f"{game_coords}")
+                self.coordActual.update_idletasks()
+
+                gamecoord_actual_texto = self.coordActual['text']
+                gamecoord_actual_texto = self.cleanText(gamecoord_actual_texto)
+                primer_gamecoord, segundo_gamecoord = gamecoord_actual_texto.split(',')
+                primer_gamecoord = int(primer_gamecoord)
+                segundo_gamecoord = int(segundo_gamecoord)
                 #self.coordActual.config(text=f"{game_coords}")
-                time.sleep(1)
+                #time.sleep(1)
                 ##teleport a inicio de busqueda 
                 print(f"Salida {primer_coord}, {segundo_coord}")
                 print(f"Coordenada actual {primer_gamecoord}, {segundo_gamecoord}")
                 if(f"{primer_coord}, {segundo_coord}" != f"{primer_gamecoord}, {segundo_gamecoord}"):
-                    self.clickEnImagen(ruta_imagen_chat_box)
+                    chatX, chatY = self.get4CoordFromText(self.chat['text'])
+                    #self.clickEnImagen(ruta_imagen_chat_box)
+                    pyautogui.click(chatX, chatY)
                     time.sleep(1)
                     pyautogui.write(f"/travel {primer_coord} {segundo_coord}")
                     time.sleep(1)
