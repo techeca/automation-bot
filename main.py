@@ -744,132 +744,7 @@ def recorte_cordenada_juego(ruta_imagen):
     # Guardar el recorte en un archivo (opcional)
     cv2.imwrite('captura_recorte.png', recorte)
 
-def OCR(ruta_imagen):
-    # Configura la ruta al ejecutable de Tesseract (puede variar según tu instalación)
-    pytesseract.pytesseract.tesseract_cmd = r'C:\Users\jpvas\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
-    imagen = cv2.imread(ruta_imagen)
-    gray = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
-    # Realizar OCR en la región recortada
-    texto = pytesseract.image_to_string(gray)
-    #print(texto)
-    texto = texto.replace("\n", "")
-    #texto = texto.replace("6", "o")
-    texto = texto.replace("‘", "'")
-    texto = texto.replace("’", "'")
-    texto = texto.replace("}", "")
-    texto = texto.replace("]", "")
-    texto = texto.replace("|", "")
-    texto = texto.replace("_", "")
-    texto = texto.replace(".", "")
-    texto = texto.replace("eee", "")
 
-    if "Afiche" in texto:
-        texto = texto
-        return texto
-    elif "Champifién" in texto:
-        texto = texto.replace("Champifién", "Champinon")
-        return texto
-    elif "vinturén" in texto:
-        texto = texto.replace("vinturén", "Cinturon")
-        return texto
-    elif "Cintur6n" in texto:
-        texto = texto.replace("Cintur6n", "Cinturon")
-        return texto
-    elif ")jo de fab'huritu pintado" in texto:
-        texto = texto.replace(")jo", "Ojo")
-        return texto
-    elif "Seeneaidadvaadan" in texto:
-        texto = texto.replace("Seeneaidadvaadan", "Craneo de tymador")
-        return texto
-    elif "Cajia para kebab" in texto:
-        texto = texto.replace("Cajia para kebab", "Cana para kebab")
-        return texto
-    elif "aquiero" in texto:
-        texto = texto.replace("aquiero", "agujero")
-        return texto
-    elif "Craneo det urikornio" in texto:
-        texto = texto.replace("Craneo det urikornio", "Craneo de urikornio")
-        return texto
-    elif "- Craneo" in texto:
-        texto = texto.replace("- Craneo", "Craneo")
-        return texto
-    elif "sedimentacién" in texto:
-        texto = texto.replace("sedimentacién", "sedimentacion")
-        return texto
-    elif "Roca tallada en espinas de" in texto:
-        texto = "Roca tallada en espinas de pescado"
-        return texto
-    elif "Bot6n" in texto:
-        texto = texto.replace("Bot6n", "Boton")
-        return texto
-    elif "Telade cuadros anudada" in texto:
-        texto = texto.replace("Telade cuadros anudada", "Tela de cuadros anudada")
-        return texto
-    elif "Espantapdjaros" in texto:
-        texto = texto.replace("Espantapdjaros", "Espantapajaros")
-        return texto
-    elif "pleaado" in texto:
-        texto = texto.replace("pleaado", "plegado")
-        return texto
-    elif "draaopavo" in texto:
-        texto = texto.replace("draaopavo", "Veleta de dragopavo")
-        return texto
-    elif "Triao blanco vy nearo" in texto:
-        texto = texto.replace("Triao blanco vy nearo", "Trigo blanco y negro")
-        return texto
-    elif "Crdneo" in texto:
-        texto = texto.replace("Crdneo", "Craneo")
-        return texto
-    elif "*ruz de piedra rota" in texto:
-        texto = texto.replace("*ruz", "Cruz")
-        return texto
-    elif "Seamed nicatee" in texto:
-        texto = texto.replace("Seamed nicatee", "Tetera con rayas")
-        return texto
-    elif "ensanarentada" in texto:
-        texto = texto.replace("ensanarentada", "ensangrentada")
-        return texto
-    elif "Champifion rayadoee" in texto:
-        texto= texto.replace("Champifion rayadoee", "Champinon rayado")
-        return texto
-    elif "Créneo" in texto:
-        texto = texto.replace("Créneo", "Craneo")
-        return texto
-    elif "Craneo de « ocra" in texto:
-        texto = texto.replace("Craneo de « ocra", "Craneo de ocra")
-        return texto
-    elif "rosade" in texto:
-        texto = texto.replace("rosade", "rosa de")
-        return texto
-    elif "See" in texto:
-        texto = "Rosa negra"
-        return texto
-    elif "Este" in texto:
-        texto = "Dirigete hacia el Este"
-        return texto
-    elif "Norte" in texto:
-        texto = "Dirigete hacia el Norte"
-        return texto
-    elif "Oeste" in texto:
-        texto = "Dirigete hacia el Oeste"
-        return texto
-    elif "el Sur" in texto:
-        texto = "Dirigete hacia el Sur"
-        return texto
-    elif "é" in texto:
-        texto = texto.replace("é", "o")
-        return texto
-    elif "ó" in texto:
-        texto = texto.replace("ó", "o")
-        return texto
-    elif "fi" in texto:
-        if "firefux" in texto:
-            texto = texto
-        else:
-            texto = texto.replace("fi", "n")
-        return texto
-    else:
-        return texto
 
 # limpia coord de salida
 def manipulacion_cordenada():
@@ -1943,36 +1818,6 @@ def chatBox(ruta_imagen):
     else:
         chatBox(ruta_imagen)  
 
-def clickEnImagen(ruta_imagen):
-    global intentos_realizados
-    # Se hace un seguimiento de los intentos realizados
-    intentos_realizados += 1
-    # Límite de intentos alcanzado
-    if intentos_realizados > limite_intentos:
-        print("Límite de intentos alcanzado. La imagen no se encontró.")
-        return
-    # Carga la imagen de referencia y la captura de pantalla
-    imagen_referencia = cv2.imread(ruta_imagen)
-    captura_pantalla = pyautogui.screenshot()
-    captura_pantalla_np = np.array(captura_pantalla)
-    captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-    # Obtén las dimensiones de la imagen de referencia
-    altura, ancho, _ = imagen_referencia.shape
-    # Encuentra la posición de la imagen de referencia en la captura de pantalla
-    resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-    # Define un umbral de confianza (puedes ajustar según tus necesidades)
-    umbral_confianza = 0.8
-    print(umbral_confianza)
-    if max_val >= umbral_confianza:
-        # Obtiene las coordenadas del centro de la imagen de referencia
-        centro_x = max_loc[0] + ancho // 2
-        centro_y = max_loc[1] + altura // 2
-        # Haz clic en el centro de la imagen encontrada
-        pyautogui.click(centro_x, centro_y)
-        time.sleep(1)
-    else:
-        clickEnImagen(ruta_imagen)     
 
 class ImageFinderApp:
     def __init__(self, master=None):
@@ -1991,7 +1836,8 @@ class ImageFinderApp:
         self.coordActual = self.builder.get_object('lblCoordActual')
         self.etapaActual = self.builder.get_object('lblEtapaActual')
         self.cantidadPistas = self.builder.get_object('lblPistas')
-        self.chat = self.builder.get_object('lblChat')
+        self.umbral = self.builder.get_object('entryUmbral')
+        self.entryPytesseract = self.builder.get_object('entryPytesseract')
         self.salida = self.builder.get_object('lblSalida')
         self.pista1 = self.builder.get_object('lblPista1')
         self.pista2 = self.builder.get_object('lblPista2')
@@ -2023,6 +1869,7 @@ class ImageFinderApp:
         self.image_path = None
         self.running = False
         self.search_area = None
+        
 
         # Config data
         ## areas
@@ -2333,17 +2180,16 @@ class ImageFinderApp:
 
 
         self.mapas_avanzados = self.mapas_avanzados + 1
-        
+        print(f"mapas buscando perforatroz: {self.mapas_avanzados}")
 
         ##c1, c2 = comienzo_perfo_actual
-        if((primer_numero + 11) == primer_numero + self.mapas_avanzados or (primer_coord - 11) == primer_numero - self.mapas_avanzados or
-            (segundo_coord + 11) == segundo_numero + self.mapas_avanzados or (segundo_coord - 11) == segundo_numero - self.mapas_avanzados):
-            clickEnImagen(ruta_imagen_chat_box)
+        if(self.mapas_avanzados > 10):
+            self.clickEnImagen(ruta_imagen_chat_box)
             pyautogui.write(f"/travel {primer_numero} {segundo_numero}")
             time.sleep(1)
             pyautogui.press('enter')
             pyautogui.press('enter')
-            clickEnImagen(ruta_imagen_llegado_destino)
+            self.clickEnImagen(ruta_imagen_llegado_destino)
             chatBox(ruta_imagen_chat_box)
             pyautogui.write('/clear')
             time.sleep(1)
@@ -2425,7 +2271,7 @@ class ImageFinderApp:
                 print(max_val)
                 if max_val >= umbral_confianza:
                     print(f"se encontró la imagen en la ruta: {ruta_alternativa}")
-                    clickEnImagen(ruta_imagen_maxBusqueda)
+                    self.clickEnImagen(ruta_imagen_maxBusqueda)
                     time.sleep(2)
                     self.banderita(ruta_imagen_banderita)
                     #time.sleep(0.5)
@@ -2440,7 +2286,8 @@ class ImageFinderApp:
     def checkGameCoord(self):
         self.recorte_Imagen(ruta_imagen_captura, self.area_game_coord)
         time.sleep(0.5)
-        pytesseract.pytesseract.tesseract_cmd = r'C:\Users\jpvas\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
+        ruta_tesseract = self.entryPytesseract.get()
+        pytesseract.pytesseract.tesseract_cmd = fr'{ruta_tesseract}\tesseract.exe'
         imagen = cv2.imread(ruta_imagen_recortada)
         #gray = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
         # Realizar OCR en la región recortada
@@ -2471,7 +2318,8 @@ class ImageFinderApp:
     def checkSalida(self):
         self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
         time.sleep(0.5)
-        pytesseract.pytesseract.tesseract_cmd = r'C:\Users\jpvas\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
+        ruta_tesseract = self.entryPytesseract.get()
+        pytesseract.pytesseract.tesseract_cmd = fr'{ruta_tesseract}\tesseract.exe'
         imagen = cv2.imread(ruta_imagen_recortada)
         #c1, c2 = manipulacion_cordenada()
         salida_actual_texto = pytesseract.image_to_string(imagen)
@@ -2536,14 +2384,14 @@ class ImageFinderApp:
         #c2 = c2.strip()
         #time.sleep(1)
         #pyautogui.tripleClick(731, 360)
-        clickEnImagen(ruta_imagen_reload_navegador)
+        self.clickEnImagen(ruta_imagen_reload_navegador)
         time.sleep(2)
-        clickEnImagen(ruta_imagen_X_navegador)
+        self.clickEnImagen(ruta_imagen_X_navegador)
         print('click en X')
         pyautogui.write(c1)
         time.sleep(1)
         #pyautogui.press('tab')
-        clickEnImagen(ruta_imagen_Y_navegador)
+        self.clickEnImagen(ruta_imagen_Y_navegador)
         print('click en Y')
         pyautogui.write(c2)
         time.sleep(1)
@@ -2579,6 +2427,166 @@ class ImageFinderApp:
         # Si ninguna de las imágenes alternativas fue encontrada
         else:
             self.moverEnDireccion(texto_hasta_coma)
+
+    def clickEnImagen(self, ruta_imagen):
+        global intentos_realizados
+        # Se hace un seguimiento de los intentos realizados
+        intentos_realizados += 1
+        # Límite de intentos alcanzado
+        if intentos_realizados > limite_intentos:
+            print("Límite de intentos alcanzado. La imagen no se encontró.")
+            return
+        # Carga la imagen de referencia y la captura de pantalla
+        imagen_referencia = cv2.imread(ruta_imagen)
+        captura_pantalla = pyautogui.screenshot()
+        captura_pantalla_np = np.array(captura_pantalla)
+        captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
+        # Obtén las dimensiones de la imagen de referencia
+        altura, ancho, _ = imagen_referencia.shape
+        # Encuentra la posición de la imagen de referencia en la captura de pantalla
+        resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+        # Define un umbral de confianza (puedes ajustar según tus necesidades)
+        #print(f"max umbral {float(self.umbral.get())} max value {max_val}")
+        umbral_confianza = float(self.umbral.get())
+        #print(max_val)
+        if max_val >= umbral_confianza:
+            # Obtiene las coordenadas del centro de la imagen de referencia
+            centro_x = max_loc[0] + ancho // 2
+            centro_y = max_loc[1] + altura // 2
+            # Haz clic en el centro de la imagen encontrada
+            pyautogui.click(centro_x, centro_y)
+            time.sleep(1)
+        else:
+            self.clickEnImagen(ruta_imagen)     
+
+    def OCR(self, ruta_imagen):
+        # Configura la ruta al ejecutable de Tesseract (puede variar según tu instalación)
+        ruta_tesseract = self.entryPytesseract.get()
+        pytesseract.pytesseract.tesseract_cmd = fr'{ruta_tesseract}\tesseract.exe'
+        imagen = cv2.imread(ruta_imagen)
+        gray = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
+        # Realizar OCR en la región recortada
+        texto = pytesseract.image_to_string(gray)
+        #print(texto)
+        texto = texto.replace("\n", "")
+        #texto = texto.replace("6", "o")
+        texto = texto.replace("‘", "'")
+        texto = texto.replace("’", "'")
+        texto = texto.replace("}", "")
+        texto = texto.replace("]", "")
+        texto = texto.replace("|", "")
+        texto = texto.replace("_", "")
+        texto = texto.replace(".", "")
+        texto = texto.replace("eee", "")
+
+        if "Afiche" in texto:
+            texto = texto
+            return texto
+        elif "Champifién" in texto:
+            texto = texto.replace("Champifién", "Champinon")
+            return texto
+        elif "vinturén" in texto:
+            texto = texto.replace("vinturén", "Cinturon")
+            return texto
+        elif "Cintur6n" in texto:
+            texto = texto.replace("Cintur6n", "Cinturon")
+            return texto
+        elif ")jo de fab'huritu pintado" in texto:
+            texto = texto.replace(")jo", "Ojo")
+            return texto
+        elif "Seeneaidadvaadan" in texto:
+            texto = texto.replace("Seeneaidadvaadan", "Craneo de tymador")
+            return texto
+        elif "Cajia para kebab" in texto:
+            texto = texto.replace("Cajia para kebab", "Cana para kebab")
+            return texto
+        elif "aquiero" in texto:
+            texto = texto.replace("aquiero", "agujero")
+            return texto
+        elif "Craneo det urikornio" in texto:
+            texto = texto.replace("Craneo det urikornio", "Craneo de urikornio")
+            return texto
+        elif "- Craneo" in texto:
+            texto = texto.replace("- Craneo", "Craneo")
+            return texto
+        elif "sedimentacién" in texto:
+            texto = texto.replace("sedimentacién", "sedimentacion")
+            return texto
+        elif "Roca tallada en espinas de" in texto:
+            texto = "Roca tallada en espinas de pescado"
+            return texto
+        elif "Bot6n" in texto:
+            texto = texto.replace("Bot6n", "Boton")
+            return texto
+        elif "Telade cuadros anudada" in texto:
+            texto = texto.replace("Telade cuadros anudada", "Tela de cuadros anudada")
+            return texto
+        elif "Espantapdjaros" in texto:
+            texto = texto.replace("Espantapdjaros", "Espantapajaros")
+            return texto
+        elif "pleaado" in texto:
+            texto = texto.replace("pleaado", "plegado")
+            return texto
+        elif "draaopavo" in texto:
+            texto = texto.replace("draaopavo", "Veleta de dragopavo")
+            return texto
+        elif "Triao blanco vy nearo" in texto:
+            texto = texto.replace("Triao blanco vy nearo", "Trigo blanco y negro")
+            return texto
+        elif "Crdneo" in texto:
+            texto = texto.replace("Crdneo", "Craneo")
+            return texto
+        elif "*ruz de piedra rota" in texto:
+            texto = texto.replace("*ruz", "Cruz")
+            return texto
+        elif "Seamed nicatee" in texto:
+            texto = texto.replace("Seamed nicatee", "Tetera con rayas")
+            return texto
+        elif "ensanarentada" in texto:
+            texto = texto.replace("ensanarentada", "ensangrentada")
+            return texto
+        elif "Champifion rayadoee" in texto:
+            texto= texto.replace("Champifion rayadoee", "Champinon rayado")
+            return texto
+        elif "Créneo" in texto:
+            texto = texto.replace("Créneo", "Craneo")
+            return texto
+        elif "Craneo de « ocra" in texto:
+            texto = texto.replace("Craneo de « ocra", "Craneo de ocra")
+            return texto
+        elif "rosade" in texto:
+            texto = texto.replace("rosade", "rosa de")
+            return texto
+        elif "See" in texto:
+            texto = "Rosa negra"
+            return texto
+        elif "Este" in texto:
+            texto = "Dirigete hacia el Este"
+            return texto
+        elif "Norte" in texto:
+            texto = "Dirigete hacia el Norte"
+            return texto
+        elif "Oeste" in texto:
+            texto = "Dirigete hacia el Oeste"
+            return texto
+        elif "el Sur" in texto:
+            texto = "Dirigete hacia el Sur"
+            return texto
+        elif "é" in texto:
+            texto = texto.replace("é", "o")
+            return texto
+        elif "ó" in texto:
+            texto = texto.replace("ó", "o")
+            return texto
+        elif "fi" in texto:
+            if "firefux" in texto:
+                texto = texto
+            else:
+                texto = texto.replace("fi", "n")
+            return texto
+        else:
+            return texto
 
     #save/load
     def save_to_text_file(self):
@@ -2623,6 +2631,9 @@ class ImageFinderApp:
             file.write(f"area_pistaDL4: {self.area_pistaDL_4}\n")
             file.write(f"area_pistaDL5: {self.area_pistaDL_5}\n")
             file.write(f"area_pistaDL6: {self.area_pistaDL_6}\n")
+
+            file.write(f"ruta_tesseract: {self.entryPytesseract.get()}\n")
+            file.write(f"umbral: {self.umbral.get()}\n")
         
         self.status_label.config(text=f"Datos guardados")
 
@@ -2744,6 +2755,15 @@ class ImageFinderApp:
             if len(lines) > 28 and lines[28].strip():
                 self.area_pistaDL_6 = eval(lines[28].split(': ')[1].strip())
                 self.pistaDL6.config(text=f"{self.area_pistaDL_6}")
+
+            if len(lines) > 29 and lines[29].strip():
+                texto_entryPytesseract = lines[29].strip()
+                texto_entryPytesseract = texto_entryPytesseract.replace('ruta_tesseract: ', '')
+                self.entryPytesseract.insert(0, texto_entryPytesseract)
+
+            if len(lines) > 30 and lines[30].strip():
+                texto_umbral = eval(lines[30].split(': ')[1].strip())
+                self.umbral.insert(0, texto_umbral)     
         
         self.status_label.config(text=f"Datos cargados")
 
@@ -3080,23 +3100,23 @@ class ImageFinderApp:
             etapa_finalizada(ruta_imagen_etapa_finalizada)    
 
     def irACofreTesoros(self):
-        clickEnImagen(ruta_imagen_merkasako)
-        clickEnImagen(ruta_imagen_zaap_merka)
-        clickEnImagen(ruta_imagen_buscar_zaap)
+        self.clickEnImagen(ruta_imagen_merkasako)
+        self.clickEnImagen(ruta_imagen_zaap_merka)
+        self.clickEnImagen(ruta_imagen_buscar_zaap)
         ##escribir coord
         pyautogui.write('Campos de Cania')
-        clickEnImagen(ruta_imagen_teleport_btn)
+        self.clickEnImagen(ruta_imagen_teleport_btn)
         time.sleep(2)
-        clickEnImagen(ruta_imagen_chat_box)
+        self.clickEnImagen(ruta_imagen_chat_box)
         pyautogui.write('/travel -25 -36')
         time.sleep(0.5)
         pyautogui.press('enter')
         time.sleep(0.5)
         pyautogui.press('enter')
-        clickEnImagen(ruta_imagen_entreda_cofre)
+        self.clickEnImagen(ruta_imagen_entreda_cofre)
         pyautogui.click()
-        clickEnImagen(ruta_imagen_mover2)
-        clickEnImagen(ruta_imagen_chat_box)
+        self.clickEnImagen(ruta_imagen_mover2)
+        self.clickEnImagen(ruta_imagen_chat_box)
         pyautogui.write('/clear')
         time.sleep(0.5)
         pyautogui.press('enter')
@@ -3194,7 +3214,7 @@ class ImageFinderApp:
 
     def pista(self, texto_hasta_coma):
         texto_hasta_coma = texto_hasta_coma
-        texto = OCR(ruta_imagen_recortada)
+        texto = self.OCR(ruta_imagen_recortada)
         #texto = re.findall(r'[a-zA-Z ]', texto)
         #texto = ''.join(texto)
         print(texto)
@@ -3203,7 +3223,7 @@ class ImageFinderApp:
         #print(texto_hasta_coma)
         if "Perforatroz" in texto:
             #buscar_y_clickear_dofus(ruta_imagen_dofus)
-            clickEnImagen(ruta_imagen_minBusqueda)
+            self.clickEnImagen(ruta_imagen_minBusqueda)
             self.checkGameCoord()
             time.sleep(2)
             comienzo_perfo_actual = self.coordActual['text']
@@ -3267,27 +3287,28 @@ class ImageFinderApp:
             
                 ##ir a coordenadas más cercanas
                 ##entrar al merkasako, buscar el teleport mas cercano e ir
-                clickEnImagen(ruta_imagen_merkasako)
-                clickEnImagen(ruta_imagen_zaap_merka)
-                clickEnImagen(ruta_imagen_buscar_zaap)
+                self.clickEnImagen(ruta_imagen_merkasako)
+                self.clickEnImagen(ruta_imagen_zaap_merka)
+                self.clickEnImagen(ruta_imagen_buscar_zaap)
                 ##escribir coord
                 pyautogui.write(nombre_cercano)
                 time.sleep(0.5)
-                clickEnImagen(ruta_imagen_teleport_btn)
+                self.clickEnImagen(ruta_imagen_teleport_btn)
+                time.sleep(1)
+                self.checkGameCoord()
                 time.sleep(1)
                 ##teleport a inicio de busqueda 
-                #self.checkGameCoord()
                 print(f"Salida {self.salida['text']}")
                 print(f"Coordenada actual {self.coordActual['text']}")
                 if(self.salida['text'] != self.coordActual['text']):
-                    clickEnImagen(ruta_imagen_chat_box)
+                    self.clickEnImagen(ruta_imagen_chat_box)
                     time.sleep(1)
                     pyautogui.write(f"/travel {primer_coord} {segundo_coord}")
                     time.sleep(1)
                     pyautogui.press('enter')
                     time.sleep(0.5) 
                     pyautogui.press('enter')
-                    clickEnImagen(ruta_imagen_llegado_destino)
+                    self.clickEnImagen(ruta_imagen_llegado_destino)
                     time.sleep(1)   
                     self.eliminar_chat()
 
@@ -3304,7 +3325,7 @@ class ImageFinderApp:
             self.etapa_iniciada = False
             self.save_to_text_file()
             time.sleep(1)
-            clickEnImagen(ruta_imagen_cerrar_bat)
+            self.clickEnImagen(ruta_imagen_cerrar_bat)
             time.sleep(1)
             self.status_label.config(text=f"Búsqueda terminada")
             #pyautogui.press('0')
