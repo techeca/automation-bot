@@ -1834,7 +1834,7 @@ class ImageFinderApp:
         self.moverIzquierda = self.builder.get_object('lblIzquierda')
         self.moverDerecha = self.builder.get_object('lblDerecha')
         self.pistaD5 = self.builder.get_object('lblPistaD5')
-        self.pistaD6 = self.builder.get_object('lblPistaD6')
+        self.chat = self.builder.get_object('lblChat')
         self.pistaDL1 = self.builder.get_object('lblPistaDL1')
         self.pistaDL2 = self.builder.get_object('lblPistaDL2')
         self.pistaDL3 = self.builder.get_object('lblPistaDL3')
@@ -1891,6 +1891,7 @@ class ImageFinderApp:
 
         ## bot data
         self.mapas_avanzados = 0
+        self.numero_pista = 0
 
         self.load_from_text_file()
 
@@ -2308,6 +2309,7 @@ class ImageFinderApp:
         c2 = salida_actual_texto[1]
         salida_actual = (c1, c2) 
         self.salida.config(text=f"{salida_actual}")
+        self.salida.update_idletasks()
 
     def capturaPantalla(self):
         imagen = pyautogui.screenshot()
@@ -2731,8 +2733,8 @@ class ImageFinderApp:
                 self.pistaD5.config(text=f"{self.etapa_iniciada}")
 
             if len(lines) > 22 and lines[22].strip():
-                self.area_pistaD_6 = eval(lines[22].split(': ')[1].strip())
-                self.pistaD6.config(text=f"{self.area_pistaD_6}")
+                texto_chat = eval(lines[22].split(': ')[1].strip())
+                self.chat.config(text=f"{texto_chat}")
 
             if len(lines) > 23 and lines[23].strip():
                 self.area_pistaDL_1 = eval(lines[23].split(': ')[1].strip())
@@ -3283,7 +3285,17 @@ class ImageFinderApp:
             primer_coord = int(primer_coord)
             segundo_coord = int(segundo_coord)
 
-            if (primer_numero == 1):
+            gamecoord_actual_texto = self.coordActual['text']
+            gamecoord_actual_texto = self.cleanText(gamecoord_actual_texto)
+            primer_gamecoord, segundo_gamecoord = gamecoord_actual_texto.split(',')
+            primer_gamecoord = int(primer_gamecoord)
+            segundo_gamecoord = int(segundo_gamecoord)
+
+            print(f"coordenada salida: {primer_coord}, {segundo_coord}")
+            print(f"etapa actual: {primer_numero}, {segundo_numero}")
+            print(f"numero de pista, {self.numero_pista}")
+
+            if (primer_numero == 1 and self.numero_pista == 0):
                 coordenada_cercana, nombre_cercano = coordenada_mas_cercana(primer_coord, segundo_coord, coordenadas_zaap)
                 print(f"El zaap más cercano a la Salida es: {nombre_cercano}, {coordenada_cercana}")
             
@@ -3297,12 +3309,15 @@ class ImageFinderApp:
                 time.sleep(0.5)
                 self.clickEnImagen(ruta_imagen_teleport_btn)
                 time.sleep(1)
-                self.checkGameCoord()
+                #self.checkGameCoord()
+                #c1, c2 = coordenada_cercana
+                #game_coords = (c1, c2)
+                #self.coordActual.config(text=f"{game_coords}")
                 time.sleep(1)
                 ##teleport a inicio de busqueda 
-                print(f"Salida {self.salida['text']}")
-                print(f"Coordenada actual {self.coordActual['text']}")
-                if(self.salida['text'] != self.coordActual['text']):
+                print(f"Salida {primer_coord}, {segundo_coord}")
+                print(f"Coordenada actual {primer_gamecoord}, {segundo_gamecoord}")
+                if(f"{primer_coord}, {segundo_coord}" != f"{primer_gamecoord}, {segundo_gamecoord}"):
                     self.clickEnImagen(ruta_imagen_chat_box)
                     time.sleep(1)
                     pyautogui.write(f"/travel {primer_coord} {segundo_coord}")
