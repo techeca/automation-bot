@@ -471,7 +471,7 @@
             </child>
             <child>
               <object class="ttk.Label" id="label13">
-                <property name="text" translatable="yes">Pista 5:</property>
+                <property name="text" translatable="yes">Pista Tomada:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="padx">3</property>
@@ -511,16 +511,17 @@
             </child>
             <child>
               <object class="ttk.Label" id="label32" named="True">
-                <property name="text" translatable="yes">Pista 6:</property>
+                <property name="text" translatable="yes">Chat:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="padx">3</property>
                   <property name="row">5</property>
+                  <property name="sticky">w</property>
                 </layout>
               </object>
             </child>
             <child>
-              <object class="ttk.Label" id="lblPistaD6" named="True">
+              <object class="ttk.Label" id="lblChat" named="True">
                 <property name="anchor">n</property>
                 <property name="compound">top</property>
                 <property name="cursor">arrow</property>
