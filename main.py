@@ -625,9 +625,10 @@ def pelea():
     pyautogui.press('F1')
     time.sleep(1)
     pyautogui.press('F1')
+    time.sleep(6)
     contador = 1
     while contador < 2:  # Mientras la condición sea verdadera
-        time.sleep(8)
+        time.sleep(5)
         #2 atks
         pyautogui.press('1')
         time.sleep(1)
@@ -2215,13 +2216,9 @@ class ImageFinderApp:
             print("Límite de intentos alcanzado. La imagen no se encontró.")
             return
         # Lista de rutas alternativas de imágenes
-        rutas_alternativas = ["./treasureHunt/perforatroz.png", './treasureHunt/perforatroz2.png', 
+        rutas_alternativas = ["./treasureHunt/perforatroz.png", 
                             './treasureHunt/perforatroz3.png', './treasureHunt/perforatroz4.png',
-                            './treasureHunt/perforatroz5.png', './treasureHunt/perforatroz6.png', 
-                            './treasureHunt/perforatroz7.png', './treasureHunt/perforatroz8.png',
-                            './treasureHunt/perforatroz9.png', './treasureHunt/perforatroz10.png',
-                            './treasureHunt/perforatroz11.png', './treasureHunt/perforatroz12.png',
-                            './treasureHunt/perforatroz13.png', './treasureHunt/perforatroz14.png'
+                            './treasureHunt/perforatroz5.png', './treasureHunt/perforatroz15.png'
                             ]
 
         time.sleep(3)
@@ -2282,7 +2279,7 @@ class ImageFinderApp:
         pyautogui.press('enter')
         pyautogui.write('%pos%')
         pyautogui.press('enter')
-        time.sleep(1)
+        time.sleep(2)
         chatCoordX, chatCoordY = self.get4CoordFromText(self.coordChat['text'])
         pyautogui.tripleClick(chatCoordX, chatCoordY)
         pyautogui.hotkey('ctrl', 'c')
@@ -2495,6 +2492,9 @@ class ImageFinderApp:
             return texto
         elif "vinturén" in texto:
             texto = texto.replace("vinturén", "Cinturon")
+            return texto
+        elif "coraz6n" in texto:
+            texto = texto.replace("coraz6n", "corazon")
             return texto
         elif "Cintur6n" in texto:
             texto = texto.replace("Cintur6n", "Cinturon")
