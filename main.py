@@ -197,6 +197,7 @@ def buscar_y_clickear_monstruo(ruta_imagen):
     captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
     # Obtén las dimensiones de la imagen de referencia
     altura, ancho, _ = imagen_referencia.shape
+    altura2, ancho2, _ = imagen_referencia2.shape
     # Encuentra la posición de la imagen de referencia en la captura de pantalla
     resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
     resultado2 = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia2, cv2.TM_CCOEFF_NORMED)
@@ -206,12 +207,17 @@ def buscar_y_clickear_monstruo(ruta_imagen):
     umbral_confianza = 0.8
     if max_val >= umbral_confianza or max_val2 >= umbral_confianza:
         # Obtiene las coordenadas del centro de la imagen de referencia
-        centro_x = max_loc[0] + ancho // 2
-        centro_y = max_loc[1] + altura // 2
+        
         # Haz clic en el centro de la imagen encontrada
-        pyautogui.tripleClick(centro_x, centro_y)
+        if(max_val >= umbral_confianza):
+            centro_x = max_loc[0] + ancho // 2
+            centro_y = max_loc[1] + altura // 2
+            pyautogui.tripleClick(centro_x, centro_y)
         if(max_val2 >= umbral_confianza):
             inBattle = False
+            btX = max_loc2[0] + ancho2 // 2
+            btY = max_loc2[1] + altura2 // 2
+            pyautogui.tripleClick(btX, btY)
         time.sleep(1)
     else:
         buscar_y_clickear_monstruo(ruta_imagen_monstruo)
@@ -644,7 +650,7 @@ def pelea():
         buscar_y_clickear_monstruo(ruta_imagen_monstruo)
         time.sleep(1)
         pyautogui.press('F1')
-        time.sleep(5)
+        time.sleep(1)
 
         #pyautogui.press('1')
         #time.sleep(1)
@@ -2145,6 +2151,7 @@ class ImageFinderApp:
             time.sleep(1)
             pyautogui.press('enter')
             pyautogui.press('enter')
+            pyautogui.press('enter')
             self.clickEnImagen(ruta_imagen_llegado_destino)
             chatBox(ruta_imagen_chat_box)
             pyautogui.write('/clear')
@@ -3453,7 +3460,9 @@ class ImageFinderApp:
             self.etapa_iniciada = False
             self.save_to_text_file()
             time.sleep(2)
-            s#elf.clickEnImagen(ruta_imagen_cerrar_bat)
+            #pyautogui.press('enter')
+            pyautogui.press('enter')
+            #self.clickEnImagen(ruta_imagen_cerrar_bat)
             self.status_label.config(text=f"Búsqueda terminada")
             #pyautogui.press('0')
         except ValueError as e:
