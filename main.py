@@ -2661,7 +2661,7 @@ class ImageFinderApp:
             file.write(f"area_buscar_zaap: {self.buscarZaap['text']}\n")
             file.write(f"area_teleport_merka: {self.teleportMerka['text']}\n")
             file.write(f"area_coord_chat: {self.coordChat['text']}\n")
-            file.write(f"characterName: {self.characterName.get()}")
+            file.write(f"characterName: {self.characterName.get()}\n")
 
             file.write(f"ruta_tesseract: {self.entryPytesseract.get()}\n")
             file.write(f"umbral: {self.umbral.get()}\n")
