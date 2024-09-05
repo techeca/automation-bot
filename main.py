@@ -2157,6 +2157,7 @@ class ImageFinderApp:
             pyautogui.write('/clear')
             time.sleep(1)
             pyautogui.press('enter')
+            pyautogui.press('enter')
             self.mapas_avanzados = 0
 
         if texto_hasta_coma == "Dirigete hacia el Sur,":
