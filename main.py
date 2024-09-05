@@ -1570,24 +1570,34 @@ def recorte_verificacion_pistas(ruta_imagen):
     cv2.imwrite('captura_recorte.png', recorte)
 
 def cantidad_pistas(ruta_imagen):
-    # Capturar la pantalla
-    captura_pantalla = cv2.imread(ruta_imagen)
-    captura_pantalla = np.array(captura_pantalla)
-    #captura_pantalla = cv2.cvtColor(captura_pantalla, cv2.COLOR_RGB2BGR)
+    try:
+        # Cargar la imagen de la captura de pantalla
+        captura_pantalla = cv2.imread(ruta_imagen)
+        if captura_pantalla is None:
+            raise ValueError(f"No se pudo cargar la imagen de captura de pantalla desde {ruta_imagen}")
 
-    # Cargar la imagen de referencia
-    referencia = cv2.imread(ruta_imagen_interrogacion)
+        # Cargar la imagen de referencia
+        referencia = cv2.imread(ruta_imagen_interrogacion)
+        if referencia is None:
+            raise ValueError(f"No se pudo cargar la imagen de referencia desde {ruta_imagen_interrogacion}")
 
-    # Buscar la imagen de referencia en la captura de pantalla
-    resultado = cv2.matchTemplate(captura_pantalla, referencia, cv2.TM_CCOEFF_NORMED)
+        # Buscar la imagen de referencia en la captura de pantalla
+        resultado = cv2.matchTemplate(captura_pantalla, referencia, cv2.TM_CCOEFF_NORMED)
 
-    # Definir un umbral de confianza
-    umbral_confianza = 0.8
-    ubicaciones = np.where(resultado >= umbral_confianza)
+        # Definir un umbral de confianza
+        umbral_confianza = 0.8
+        ubicaciones = np.where(resultado >= umbral_confianza)
 
-    # Contar las ocurrencias encontradas
-    cantidad_ocurrencias = len(list(zip(*ubicaciones[::-1])))
-    return cantidad_ocurrencias
+        # Convertir ubicaciones a una lista de coordenadas
+        ubicaciones = list(zip(*ubicaciones[::-1]))
+
+        # Contar las ocurrencias encontradas
+        cantidad_ocurrencias = len(ubicaciones)
+        return cantidad_ocurrencias
+
+    except Exception as e:
+        print(f"Error al procesar las imágenes: {e}")
+        return 0
 
 def etapa_finalizada(ruta_imagen):
     global intentos_realizados
@@ -1809,6 +1819,8 @@ class ImageFinderApp:
         builder.add_from_file(PROJECT_UI)
         self.mainwindow = builder.get_object('main', master)
         builder.connect_callbacks(self)
+        self.boton_presionado = False
+
         
 
         # Obtener el Label definido en Pygubu
@@ -2311,27 +2323,46 @@ class ImageFinderApp:
         primer_numero, segundo_numero = self.verificacion_etapas(ruta_imagen_captura)
         etapa_actual = (primer_numero, segundo_numero)
         self.etapaActual.config(text=f"{etapa_actual}")
+        self.etapaActual.update_idletasks()
 
     def checkPistas(self):
         self.recorte_Imagen(ruta_imagen_captura, self.area_pistas)
         cantidad = cantidad_pistas(ruta_imagen_recortada)
+        print(cantidad)
         pistas_actual = cantidad
         self.cantidadPistas.config(text=f"{pistas_actual}")
+        self.cantidadPistas.update_idletasks()
 
     def checkSalida(self):
         self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
         time.sleep(0.5)
         ruta_tesseract = self.entryPytesseract.get()
         pytesseract.pytesseract.tesseract_cmd = fr'{ruta_tesseract}\tesseract.exe'
+
         imagen = cv2.imread(ruta_imagen_recortada)
-        #c1, c2 = manipulacion_cordenada()
-        salida_actual_texto = pytesseract.image_to_string(imagen)
+
+        # Convertir la imagen a escala de grises
+        imagen_gris = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
+
+        # Aumentar el contraste usando CLAHE (Contrast Limited Adaptive Histogram Equalization)
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+        imagen_contrastada = clahe.apply(imagen_gris)
+
+        # Aplicar umbralización para mejorar la definición del texto
+        _, imagen_umbral = cv2.threshold(imagen_contrastada, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+        # Realizar OCR en la imagen preprocesada
+        salida_actual_texto = pytesseract.image_to_string(imagen_umbral)
         print(salida_actual_texto)
+
+        # Extraer números de la salida
         salida_actual_texto = re.findall(r'-?\d+', salida_actual_texto)
 
+        # Procesar los números
         c1 = salida_actual_texto[0]
         c2 = salida_actual_texto[1]
         salida_actual = (c1, c2) 
+
         self.salida.config(text=f"{salida_actual}")
         self.salida.update_idletasks()
 
@@ -3283,6 +3314,40 @@ class ImageFinderApp:
             #pyautogui.tripleClick(657, 766)
             self.travel()
 
+    def cerrar_ventana(self, event=None):
+        """Función para cerrar la ventana al presionar Esc"""
+        self.area_selector_window.destroy()
+
+    def mostrar_area(self):
+        # Coordenadas del área (ejemplo)
+        #coords = game_coords
+        print(self.area_pistas)
+        
+    
+        # Crea una ventana flotante transparente para la selección de área
+        self.area_selector_window = Toplevel(self.mainwindow)
+        self.area_selector_window.attributes('-alpha', 0.3)  # Nivel de transparencia
+        self.area_selector_window.attributes('-topmost', True)  # Mantener siempre arriba
+        self.area_selector_window.overrideredirect(True)  # Sin bordes
+        self.area_selector_window.bind("<Escape>", self.cerrar_ventana)
+
+        # Establece la ventana para que cubra toda la pantalla
+        screen_width, screen_height = pyautogui.size()
+        self.area_selector_window.geometry(f"{screen_width}x{screen_height}+0+0")
+
+        # Crear un canvas donde se dibujará el área
+        self.canvas = Canvas(self.area_selector_window, cursor="cross", bg="black", highlightthickness=0)
+        self.canvas.pack(fill="both", expand=True)
+
+        # Dibujar el rectángulo basado en las coordenadas de game_coords
+        x1, y1, x2, y2 = self.area_pistas
+        self.rect = self.canvas.create_rectangle(x1, y1, x2, y2, outline='red', width=2)
+
+        # Mantener la ventana visible hasta que el usuario la cierre
+        self.area_selector_window.update()
+        #self.checkSalida()
+        self.checkPistas()
+
     # start/stop th
     def starTask(self):
         self.status_label.config(text=f"Iniciando búsqueda")
@@ -3392,6 +3457,7 @@ class ImageFinderApp:
                     self.coordActual.update_idletasks()
 
             while primer_numero < segundo_numero: # Mientras la condición sea verdadera
+                self.checkPistas()
                 self.verificacionPistas()
                 primer_numero += 1  # Actualiza la condición para evitar un bucle infinito
                 time.sleep(1)

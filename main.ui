@@ -292,7 +292,7 @@
             </child>
             <child>
               <object class="ttk.Button" id="btnCheck" named="True">
-                <property name="command" type="command" cbtype="simple">checkGameCoord</property>
+                <property name="command" type="command" cbtype="simple">mostrar_area</property>
                 <property name="text" translatable="yes">Check</property>
                 <layout manager="pack">
                   <property name="fill">x</property>
