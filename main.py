@@ -2785,8 +2785,8 @@ class ImageFinderApp:
                 self.coordChat.config(text=f"{texto_chat_coord}")
 
             if len(lines) > 28 and lines[28].strip():
-                texto_charcater_name = eval(lines[28].split(': ')[1].strip())
-                self.characterName.insert(0, texto_charcater_name)
+                texto_charcater_name = lines[28].split(': ')[1].strip()
+                self.characterName.insert(0, f"{texto_charcater_name}")
 
             if len(lines) > 29 and lines[29].strip():
                 texto_entryPytesseract = lines[29].strip()
