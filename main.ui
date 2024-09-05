@@ -236,6 +236,29 @@
                 </layout>
               </object>
             </child>
+            <child>
+              <object class="ttk.Label" id="label10">
+                <property name="text" translatable="yes">Character Name:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">6</property>
+                  <property name="sticky">w</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Entry" id="entryCharacter" named="True">
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="columnspan">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">6</property>
+                  <property name="sticky">e</property>
+                </layout>
+              </object>
+            </child>
           </object>
         </child>
         <child>

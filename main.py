@@ -1841,7 +1841,7 @@ class ImageFinderApp:
         self.buscarZaap = self.builder.get_object('lblBuscarZaap')
         self.teleportMerka = self.builder.get_object('lblTeleportMerka')
         self.coordChat = self.builder.get_object('lblCoordChat')
-        self.pistaDL6 = self.builder.get_object('lblPistaDL6')
+        self.characterName = self.builder.get_object('entryCharacter')
 
         #Para resources
         self.image_offset = 25
@@ -2287,7 +2287,8 @@ class ImageFinderApp:
         pyautogui.tripleClick(chatCoordX, chatCoordY)
         pyautogui.hotkey('ctrl', 'c')
         ruta_actual_copy = pyperclip.paste()
-        ruta_actual_copy = ruta_actual_copy.replace('Eltechecador:', '')
+        character_name = self.characterName.get()
+        ruta_actual_copy = ruta_actual_copy.replace(f'{character_name}:', '')
         ruta_actual_copy = ruta_actual_copy.replace('[', '')
         ruta_actual_copy = ruta_actual_copy.replace(']', '').strip()
         # Filtrar solo los números de la salida
@@ -2660,7 +2661,7 @@ class ImageFinderApp:
             file.write(f"area_buscar_zaap: {self.buscarZaap['text']}\n")
             file.write(f"area_teleport_merka: {self.teleportMerka['text']}\n")
             file.write(f"area_coord_chat: {self.coordChat['text']}\n")
-            file.write(f"area_pistaDL6: {self.area_pistaDL_6}\n")
+            file.write(f"characterName: {self.characterName.get()}")
 
             file.write(f"ruta_tesseract: {self.entryPytesseract.get()}\n")
             file.write(f"umbral: {self.umbral.get()}\n")
@@ -2784,8 +2785,8 @@ class ImageFinderApp:
                 self.coordChat.config(text=f"{texto_chat_coord}")
 
             if len(lines) > 28 and lines[28].strip():
-                self.area_pistaDL_6 = eval(lines[28].split(': ')[1].strip())
-                self.pistaDL6.config(text=f"{self.area_pistaDL_6}")
+                texto_charcater_name = eval(lines[28].split(': ')[1].strip())
+                self.characterName.insert(0, texto_charcater_name)
 
             if len(lines) > 29 and lines[29].strip():
                 texto_entryPytesseract = lines[29].strip()
