@@ -25,6 +25,7 @@ ruta_imagen_moverse = './treasureHunt/mover.png'
 ruta_imagen_tesoro = './treasureHunt/tesoro.png'
 ruta_imagen_200 = './treasureHunt/nivel200.png'
 ruta_imagen_160 = './treasureHunt/nivel160.png'
+ruta_imagen_120 = './treasureHunt/nivel120.png'
 ruta_imagen_salir = './treasureHunt/salir.png'
 ruta_imagen_salir_puerta = './treasureHunt/salir_puerta.png'
 ruta_imagen_captura = './treasureHunt/captura.png'
@@ -93,7 +94,7 @@ coordenadas_zaap = [
     (-25, 12, "Camino de las caravanas"),
     (-26, 37, "Coraza"),
     (-16, 1, "Pueblo de los ganaderos"),
-    (-27, 36, "Campos de cania")
+    (-27, -36, "Campos de cania")
 ]
 
 # Calcular la distancia Euclidiana
@@ -667,11 +668,11 @@ def pelea():
         pyautogui.press('2')
         time.sleep(1)
         buscar_y_clickear_monstruo(ruta_imagen_monstruo)
-        time.sleep(1)
-        pyautogui.press('3')
-        time.sleep(1)
-        buscar_y_clickear_monstruo(ruta_imagen_monstruo)
-        time.sleep(1)
+        #time.sleep(1)
+        #pyautogui.press('3')
+        #time.sleep(1)
+        #buscar_y_clickear_monstruo(ruta_imagen_monstruo)
+        #time.sleep(1)
         pyautogui.press('F1')  # termina el turno
         time.sleep(4)
 
@@ -2285,6 +2286,9 @@ class ImageFinderApp:
         #salida_actual_texto = pytesseract.image_to_string(imagen_bn)
         
         #print(f"salida de texto {salida_actual_texto}")
+        merkaX, merkaY = self.get4CoordFromText(self.btnMerkasako['text'])
+        pyautogui.click(merkaX, merkaY)
+        time.sleep(2)
         chatX, chatY = self.get4CoordFromText(self.chat['text'])
         pyautogui.click(chatX, chatY)
         pyautogui.write('/clear')
@@ -2316,6 +2320,8 @@ class ImageFinderApp:
         game_coords = (c1, c2)
         self.coordActual.config(text=f"{game_coords}")
         self.coordActual.update_idletasks()
+        pyautogui.click(merkaX, merkaY)
+        time.sleep(2)
 
     
     def checkEtapa(self):
@@ -3359,7 +3365,7 @@ class ImageFinderApp:
             #print(f"Valor: {etapa_actual}, Tipo: {type(etapa_actual)}")
             print('obtener busqueda')
             buscar_y_clickear_tesoro(ruta_imagen_tesoro)
-            buscar_y_clickear_200(ruta_imagen_160)
+            buscar_y_clickear_200(ruta_imagen_120)
             self.etapa_iniciada = True
             self.save_to_text_file()
             
