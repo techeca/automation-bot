@@ -1234,7 +1234,7 @@
             </child>
             <child>
               <object class="ttk.Label" id="label37">
-                <property name="text" translatable="yes">Pista 5:</property>
+                <property name="text" translatable="yes">Coord Chat:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="padx">3</property>
@@ -1244,7 +1244,7 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Label" id="lblPistaDL5" named="True">
+              <object class="ttk.Label" id="lblCoordChat" named="True">
                 <property name="anchor">n</property>
                 <property name="compound">top</property>
                 <property name="cursor">arrow</property>
@@ -1263,7 +1263,7 @@
             </child>
             <child>
               <object class="ttk.Button" id="button24" named="True">
-                <property name="command" type="command" cbtype="simple">configDireccionLPista5</property>
+                <property name="command" type="command" cbtype="simple">configSetCoordchat</property>
                 <property name="text" translatable="yes">Select</property>
                 <layout manager="grid">
                   <property name="column">2</property>
