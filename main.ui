@@ -248,7 +248,7 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Entry" id="entryCharacter" named="True">
+              <object class="ttk.Entry" id="levelHunt" named="True">
                 <layout manager="grid">
                   <property name="column">1</property>
                   <property name="columnspan">2</property>

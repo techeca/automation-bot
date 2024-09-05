@@ -68,7 +68,7 @@ etapa_actual = None
 salida_actual = None
 pistas_actual = None
 comienzo_perfo_actual = None
-
+inBattle = False
 
 coordenadas_zaap = [
     (-5, -23, "Llanura de los puerkazos"),
@@ -182,6 +182,7 @@ def buscar_y_clickear_dofus(ruta_imagen):
 
 def buscar_y_clickear_monstruo(ruta_imagen):
     global intentos_realizados
+    global inBattle
     # Se hace un seguimiento de los intentos realizados
     intentos_realizados += 1
     # Límite de intentos alcanzado
@@ -190,6 +191,7 @@ def buscar_y_clickear_monstruo(ruta_imagen):
         return
     # Carga la imagen de referencia y la captura de pantalla
     imagen_referencia = cv2.imread(ruta_imagen)
+    imagen_referencia2 = cv2.imread(ruta_imagen_cerrar_bat)
     captura_pantalla = pyautogui.screenshot()
     captura_pantalla_np = np.array(captura_pantalla)
     captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
@@ -197,15 +199,19 @@ def buscar_y_clickear_monstruo(ruta_imagen):
     altura, ancho, _ = imagen_referencia.shape
     # Encuentra la posición de la imagen de referencia en la captura de pantalla
     resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+    resultado2 = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia2, cv2.TM_CCOEFF_NORMED)
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+    min_val2, max_val2, min_loc2, max_loc2 = cv2.minMaxLoc(resultado2)
     # Define un umbral de confianza (puedes ajustar según tus necesidades)
     umbral_confianza = 0.8
-    if max_val >= umbral_confianza:
+    if max_val >= umbral_confianza or max_val2 >= umbral_confianza:
         # Obtiene las coordenadas del centro de la imagen de referencia
         centro_x = max_loc[0] + ancho // 2
         centro_y = max_loc[1] + altura // 2
         # Haz clic en el centro de la imagen encontrada
         pyautogui.tripleClick(centro_x, centro_y)
+        if(max_val2 >= umbral_confianza):
+            inBattle = False
         time.sleep(1)
     else:
         buscar_y_clickear_monstruo(ruta_imagen_monstruo)
@@ -620,6 +626,8 @@ def comenzar_etapas():
         print(f"Error: {e}")
 
 def pelea():
+    global inBattle
+    inBattle = True
     #time.sleep(2)
     #pyautogui.press('esc')
     #time.sleep(2)
@@ -628,53 +636,15 @@ def pelea():
     pyautogui.press('F1')
     time.sleep(6)
     contador = 1
-    while contador < 2:  # Mientras la condición sea verdadera
-        time.sleep(5)
+    while inBattle == True:  # Mientras la condición sea verdadera
+        time.sleep(6)
         #2 atks
         pyautogui.press('1')
         time.sleep(1)
         buscar_y_clickear_monstruo(ruta_imagen_monstruo)
         time.sleep(1)
-        pyautogui.press('2')
-        time.sleep(1)
-        buscar_y_clickear_monstruo(ruta_imagen_monstruo)
-        time.sleep(1)
-        pyautogui.press('3')
-        time.sleep(1)
-        buscar_y_clickear_monstruo(ruta_imagen_monstruo)
-        time.sleep(1)
         pyautogui.press('F1')
-        time.sleep(4)
-
-        pyautogui.press('1')
-        time.sleep(1)
-        buscar_y_clickear_monstruo(ruta_imagen_monstruo)
-        time.sleep(1)
-        pyautogui.press('2')
-        time.sleep(1)
-        buscar_y_clickear_monstruo(ruta_imagen_monstruo)
-        time.sleep(1)
-        pyautogui.press('3')
-        time.sleep(1)
-        buscar_y_clickear_monstruo(ruta_imagen_monstruo)
-        time.sleep(1)
-        pyautogui.press('F1')
-        time.sleep(4)
-
-        pyautogui.press('1')
-        time.sleep(1)
-        buscar_y_clickear_monstruo(ruta_imagen_monstruo)
-        time.sleep(1)
-        pyautogui.press('2')
-        time.sleep(1)
-        buscar_y_clickear_monstruo(ruta_imagen_monstruo)
-        #time.sleep(1)
-        #pyautogui.press('3')
-        #time.sleep(1)
-        #buscar_y_clickear_monstruo(ruta_imagen_monstruo)
-        #time.sleep(1)
-        pyautogui.press('F1')  # termina el turno
-        time.sleep(4)
+        time.sleep(5)
 
         #pyautogui.press('1')
         #time.sleep(1)
@@ -682,7 +652,7 @@ def pelea():
         #time.sleep(1)
         #pyautogui.press('F1')  # termina el turno
 
-        contador += 1  # Actualiza la condición para evitar un bucle infinito
+        # Actualiza la condición para evitar un bucle infinito
 
 def recorte_etapas(ruta_imagen):
     imagen = pyautogui.screenshot()
@@ -1855,7 +1825,7 @@ class ImageFinderApp:
         self.buscarZaap = self.builder.get_object('lblBuscarZaap')
         self.teleportMerka = self.builder.get_object('lblTeleportMerka')
         self.coordChat = self.builder.get_object('lblCoordChat')
-        self.characterName = self.builder.get_object('entryCharacter')
+        self.levelHunt = self.builder.get_object('levelHunt')
 
         #Para resources
         self.image_offset = 25
@@ -2134,8 +2104,8 @@ class ImageFinderApp:
 
     def configChat(self):
         self.select_area()
-        self.area_chat = self.search_area
-        self.chat.config(text=f"{self.area_chat}")
+        texto_area_chat = self.search_area
+        self.chat.config(text=f"{texto_area_chat}")
 
     def get4CoordFromText(self, texto):
         texto = texto.strip("()")
@@ -2300,10 +2270,10 @@ class ImageFinderApp:
         pyautogui.tripleClick(chatCoordX, chatCoordY)
         pyautogui.hotkey('ctrl', 'c')
         ruta_actual_copy = pyperclip.paste()
-        character_name = self.characterName.get()
-        ruta_actual_copy = ruta_actual_copy.replace(f'{character_name}:', '')
-        ruta_actual_copy = ruta_actual_copy.replace('[', '')
-        ruta_actual_copy = ruta_actual_copy.replace(']', '').strip()
+        #character_name = self.characterName.get()
+        #ruta_actual_copy = ruta_actual_copy.replace(f'{character_name}:', '')
+        #ruta_actual_copy = ruta_actual_copy.replace('[', '')
+        #ruta_actual_copy = ruta_actual_copy.replace(']', '').strip()
         # Filtrar solo los números de la salida
         salida_actual_texto = re.findall(r'-?\d+', ruta_actual_copy)
         print(f"salida de texto filtrada {salida_actual_texto}")
@@ -2539,6 +2509,9 @@ class ImageFinderApp:
         elif "Cintur6n" in texto:
             texto = texto.replace("Cintur6n", "Cinturon")
             return texto
+        elif "croneo" in texto:
+            texto = texto.replace("croneo", "craneo")
+            return texto
         elif ")jo de fab'huritu pintado" in texto:
             texto = texto.replace(")jo", "Ojo")
             return texto
@@ -2694,14 +2667,14 @@ class ImageFinderApp:
             file.write(f"area_moverIzquierda: {self.area_izquierda}\n")
             file.write(f"area_moverDerecha: {self.area_derecha}\n")
             file.write(f"etapa_iniciada: {self.etapa_iniciada}\n")
-            file.write(f"area_chat: {self.area_chat}\n")
+            file.write(f"area_chat: {self.chat['text']}\n")
 
             file.write(f"area_merkasako: {self.btnMerkasako['text']}\n")
             file.write(f"area_zaap_merka: {self.zaapMerkasako['text']}\n")
             file.write(f"area_buscar_zaap: {self.buscarZaap['text']}\n")
             file.write(f"area_teleport_merka: {self.teleportMerka['text']}\n")
             file.write(f"area_coord_chat: {self.coordChat['text']}\n")
-            file.write(f"characterName: {self.characterName.get()}\n")
+            file.write(f"levelHunt: {self.levelHunt.get()}\n")
 
             file.write(f"ruta_tesseract: {self.entryPytesseract.get()}\n")
             file.write(f"umbral: {self.umbral.get()}\n")
@@ -2826,7 +2799,8 @@ class ImageFinderApp:
 
             if len(lines) > 28 and lines[28].strip():
                 texto_charcater_name = lines[28].split(': ')[1].strip()
-                self.characterName.insert(0, f"{texto_charcater_name}")
+                self.levelHunt.insert(0, texto_charcater_name)
+                #self.characterName.insert(0, f"{texto_charcater_name}")
 
             if len(lines) > 29 and lines[29].strip():
                 texto_entryPytesseract = lines[29].strip()
@@ -3478,9 +3452,8 @@ class ImageFinderApp:
             #time.sleep(6)
             self.etapa_iniciada = False
             self.save_to_text_file()
-            time.sleep(1)
-            self.clickEnImagen(ruta_imagen_cerrar_bat)
-            time.sleep(1)
+            time.sleep(2)
+            s#elf.clickEnImagen(ruta_imagen_cerrar_bat)
             self.status_label.config(text=f"Búsqueda terminada")
             #pyautogui.press('0')
         except ValueError as e:
