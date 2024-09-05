@@ -13,6 +13,7 @@ import pygubu
 import re
 import math
 import ast
+import pyperclip
 
 PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "main.ui"
@@ -1839,7 +1840,7 @@ class ImageFinderApp:
         self.zaapMerkasako = self.builder.get_object('lblZaapMerkasako')
         self.buscarZaap = self.builder.get_object('lblBuscarZaap')
         self.teleportMerka = self.builder.get_object('lblTeleportMerka')
-        self.pistaDL5 = self.builder.get_object('lblPistaDL5')
+        self.coordChat = self.builder.get_object('lblCoordChat')
         self.pistaDL6 = self.builder.get_object('lblPistaDL6')
 
         #Para resources
@@ -2107,10 +2108,10 @@ class ImageFinderApp:
         area_teleport_merka = self.search_area
         self.teleportMerka.config(text=f"{area_teleport_merka}")
 
-    def configDireccionLPista5(self):
+    def configSetCoordchat(self):
         self.select_area()
-        self.area_pistaDL_5 = self.search_area
-        self.pistaDL5.config(text=f"{self.area_pistaDL_5}")
+        texto_coord_chat = self.search_area
+        self.coordChat.config(text=f"{texto_coord_chat}")
 
     def configDireccionLPista6(self):
         self.select_area()
@@ -2136,7 +2137,7 @@ class ImageFinderApp:
 
     def condicion_perforatroz(self, texto_hasta_coma, comienzo_perfo_actual):
         texto_hasta_coma = texto_hasta_coma
-        self.checkGameCoord()
+        #self.checkGameCoord()
         inicio_perfo_texto = comienzo_perfo_actual
         inicio_perfo_texto = self.cleanText(inicio_perfo_texto)
         primer_numero, segundo_numero = inicio_perfo_texto.split(',')
@@ -2165,6 +2166,7 @@ class ImageFinderApp:
             pyautogui.write('/clear')
             time.sleep(1)
             pyautogui.press('enter')
+            self.mapas_avanzados = 0
 
         if texto_hasta_coma == "Dirigete hacia el Sur,":
             # funcion para moverse abajo
@@ -2255,24 +2257,56 @@ class ImageFinderApp:
 
     # Chequeo de datos
     def checkGameCoord(self):
-        self.recorte_Imagen(ruta_imagen_captura, self.area_game_coord)
-        time.sleep(0.5)
-        ruta_tesseract = self.entryPytesseract.get()
-        pytesseract.pytesseract.tesseract_cmd = fr'{ruta_tesseract}\tesseract.exe'
-        imagen = cv2.imread(ruta_imagen_recortada)
-        #gray = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
-        # Realizar OCR en la región recortada
-        salida_actual_texto = pytesseract.image_to_string(imagen)
-        #print(salida_actual_texto)
-        #salida_actual_texto = OCR(ruta_imagen_recortada)
-        print(salida_actual_texto)
-        salida_actual_texto = re.findall(r'-?\d+', salida_actual_texto)
+        #self.recorte_Imagen(ruta_imagen_captura, self.area_game_coord)
+        #time.sleep(0.5)
+
+        #ruta_tesseract = self.entryPytesseract.get()
+        #pytesseract.pytesseract.tesseract_cmd = fr'{ruta_tesseract}\tesseract.exe'
+        
+        # Leer la imagen recortada
+        #imagen = cv2.imread(ruta_imagen_recortada)
+        
+        # Convertir la imagen a escala de grises
+        #imagen_gris = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
+        
+        # Aplicar un umbral binario para convertir la imagen a blanco y negro
+        #_, imagen_bn = cv2.threshold(imagen_gris, 150, 255, cv2.THRESH_BINARY)
+        
+        # Realizar OCR en la imagen en blanco y negro
+        #salida_actual_texto = pytesseract.image_to_string(imagen_bn)
+        
+        #print(f"salida de texto {salida_actual_texto}")
+        chatX, chatY = self.get4CoordFromText(self.chat['text'])
+        pyautogui.click(chatX, chatY)
+        pyautogui.write('/clear')
+        pyautogui.press('enter')
+        pyautogui.write('%pos%')
+        pyautogui.press('enter')
+        time.sleep(1)
+        chatCoordX, chatCoordY = self.get4CoordFromText(self.coordChat['text'])
+        pyautogui.tripleClick(chatCoordX, chatCoordY)
+        pyautogui.hotkey('ctrl', 'c')
+        ruta_actual_copy = pyperclip.paste()
+        ruta_actual_copy = ruta_actual_copy.replace('Eltechecador:', '')
+        ruta_actual_copy = ruta_actual_copy.replace('[', '')
+        ruta_actual_copy = ruta_actual_copy.replace(']', '').strip()
+        # Filtrar solo los números de la salida
+        salida_actual_texto = re.findall(r'-?\d+', ruta_actual_copy)
+        print(f"salida de texto filtrada {salida_actual_texto}")
+        pyautogui.click(chatX, chatY)
+        pyautogui.write('/clear')
+        pyautogui.press('enter')
+        
+        # Extraer coordenadas
+        #salida_actual_texto = salida_actual_texto.split(',')
         c1 = salida_actual_texto[0]
         c2 = salida_actual_texto[1]
-        #c1, c2 = manipulacion_cordenada()
+        
+        # Actualizar las coordenadas en la interfaz
         game_coords = (c1, c2)
         self.coordActual.config(text=f"{game_coords}")
         self.coordActual.update_idletasks()
+
     
     def checkEtapa(self):
         self.recorte_Imagen(ruta_imagen_captura, self.area_etapa_actual)
@@ -2625,7 +2659,7 @@ class ImageFinderApp:
             file.write(f"area_zaap_merka: {self.zaapMerkasako['text']}\n")
             file.write(f"area_buscar_zaap: {self.buscarZaap['text']}\n")
             file.write(f"area_teleport_merka: {self.teleportMerka['text']}\n")
-            file.write(f"area_pistaDL5: {self.area_pistaDL_5}\n")
+            file.write(f"area_coord_chat: {self.coordChat['text']}\n")
             file.write(f"area_pistaDL6: {self.area_pistaDL_6}\n")
 
             file.write(f"ruta_tesseract: {self.entryPytesseract.get()}\n")
@@ -2746,8 +2780,8 @@ class ImageFinderApp:
                 self.teleportMerka.config(text=f"{area_teleport_merka}")
 
             if len(lines) > 27 and lines[27].strip():
-                self.area_pistaDL_5 = eval(lines[27].split(': ')[1].strip())
-                self.pistaDL5.config(text=f"{self.area_pistaDL_5}")
+                texto_chat_coord = eval(lines[27].split(': ')[1].strip())
+                self.coordChat.config(text=f"{texto_chat_coord}")
 
             if len(lines) > 28 and lines[28].strip():
                 self.area_pistaDL_6 = eval(lines[28].split(': ')[1].strip())
@@ -2818,7 +2852,7 @@ class ImageFinderApp:
         #cantidad_pistas(ruta_imagen_recortada)
         #self.cantidadPistas = cantidad_pistas(ruta_imagen_recortada)
         # Realizar acciones según la cantidad de símbolos "?"
-        self.checkPistas()
+        #self.checkPistas()
         cantPistasTexto = self.cantidadPistas['text']
         #self.cantidadPistas = int(cantPistasTexto)
 
@@ -2967,6 +3001,7 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(ruta_imagen_captura, self.area_pista_1)
             self.pista(texto_hasta_coma)
+            
 
             print("Pista2")
             self.checkGameCoord()
@@ -3127,6 +3162,9 @@ class ImageFinderApp:
         pyautogui.tripleClick(chatX, chatY)
         time.sleep(2)
         pyautogui.hotkey('ctrl', 'v')
+        text_coordactual = pyperclip.paste()
+        pyautogui.press('enter')
+        time.sleep(0.5)
         pyautogui.press('enter')
         time.sleep(0.5)
         pyautogui.press('enter')
@@ -3206,6 +3244,7 @@ class ImageFinderApp:
         if max_val >= umbral_confianza:
             # banderita(ruta_imagen_banderita)
             self.banderita(ruta_imagen_banderita)
+            
 
         else:
             # Agregar una pausa entre intentos para reducir la carga de CPU
@@ -3224,7 +3263,7 @@ class ImageFinderApp:
         if "Perforatroz" in texto:
             #buscar_y_clickear_dofus(ruta_imagen_dofus)
             self.clickEnImagen(ruta_imagen_minBusqueda)
-            self.checkGameCoord()
+            #self.checkGameCoord()
             time.sleep(2)
             comienzo_perfo_actual = self.coordActual['text']
             self.condicion_perforatroz(texto_hasta_coma, comienzo_perfo_actual)
@@ -3318,7 +3357,7 @@ class ImageFinderApp:
                 pyautogui.click(teleport_zaapX, teleport_zaapY)
                 #self.clickEnImagen(ruta_imagen_teleport_btn)
                 time.sleep(1)
-                #self.checkGameCoord()
+                self.checkGameCoord()
                 c1, c2 = coordenada_cercana
                 game_coords = (c1, c2)
                 self.coordActual.config(text=f"{game_coords}")
@@ -3347,6 +3386,9 @@ class ImageFinderApp:
                     self.clickEnImagen(ruta_imagen_llegado_destino)
                     time.sleep(1)   
                     self.eliminar_chat()
+                    game_coords = (primer_coord, segundo_coord)
+                    self.coordActual.config(text=f"{game_coords}")
+                    self.coordActual.update_idletasks()
 
             while primer_numero < segundo_numero: # Mientras la condición sea verdadera
                 self.verificacionPistas()
