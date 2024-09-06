@@ -18,13 +18,11 @@
         </layout>
         <child>
           <object class="ttk.Labelframe" id="lblFrameConfig" named="True">
-            <property name="height">200</property>
             <property name="text" translatable="yes">Área General</property>
-            <property name="width">300</property>
             <layout manager="grid">
               <property name="column">0</property>
               <property name="row">0</property>
-              <property name="sticky">n</property>
+              <property name="sticky">nw</property>
             </layout>
             <child>
               <object class="ttk.Label" id="label19">
@@ -46,6 +44,7 @@
                 <property name="relief">flat</property>
                 <property name="takefocus">false</property>
                 <property name="text" translatable="yes">None</property>
+                <property name="width">15</property>
                 <layout manager="grid">
                   <property name="column">1</property>
                   <property name="ipadx">10</property>
@@ -238,7 +237,7 @@
             </child>
             <child>
               <object class="ttk.Label" id="label10">
-                <property name="text" translatable="yes">Character Name:</property>
+                <property name="text" translatable="yes">Treasure Level:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="padx">3</property>
@@ -292,7 +291,7 @@
             </child>
             <child>
               <object class="ttk.Button" id="btnCheck" named="True">
-                <property name="command" type="command" cbtype="simple">mostrar_area</property>
+                <property name="command" type="command" cbtype="simple">loadData</property>
                 <property name="text" translatable="yes">Check</property>
                 <layout manager="pack">
                   <property name="fill">x</property>
@@ -322,11 +321,9 @@
             <property name="text" translatable="yes">Área (Mover)</property>
             <property name="width">200</property>
             <layout manager="grid">
-              <property name="column">1</property>
-              <property name="padx">3</property>
-              <property name="pady">3</property>
-              <property name="row">0</property>
-              <property name="sticky">ne</property>
+              <property name="column">0</property>
+              <property name="row">1</property>
+              <property name="sticky">nw</property>
             </layout>
             <child>
               <object class="ttk.Label" id="label5">
@@ -349,6 +346,7 @@
                 <property name="relief">flat</property>
                 <property name="takefocus">false</property>
                 <property name="text" translatable="yes">None</property>
+                <property name="width">15</property>
                 <layout manager="grid">
                   <property name="column">1</property>
                   <property name="ipadx">10</property>
@@ -578,7 +576,6 @@
         <child>
           <object class="ttk.Labelframe" id="lblFrameFlechas" named="True">
             <property name="text" translatable="yes">Área Flechas</property>
-            <property name="width">200</property>
             <layout manager="grid">
               <property name="column">1</property>
               <property name="padx">3</property>
@@ -605,10 +602,11 @@
                 <property name="relief">flat</property>
                 <property name="takefocus">false</property>
                 <property name="text" translatable="yes">None</property>
+                <property name="width">15</property>
                 <layout manager="grid">
                   <property name="column">1</property>
                   <property name="ipadx">10</property>
-                  <property name="padx">10</property>
+                  <property name="padx">35</property>
                   <property name="row">0</property>
                 </layout>
               </object>
@@ -832,10 +830,10 @@
             <property name="text" translatable="yes">Área Pistas</property>
             <property name="width">200</property>
             <layout manager="grid">
-              <property name="column">0</property>
+              <property name="column">1</property>
               <property name="padx">3</property>
-              <property name="pady">3</property>
-              <property name="row">1</property>
+              <property name="row">0</property>
+              <property name="sticky">nw</property>
             </layout>
             <child>
               <object class="ttk.Label" id="label22">
@@ -857,11 +855,11 @@
                 <property name="relief">flat</property>
                 <property name="takefocus">false</property>
                 <property name="text" translatable="yes">None</property>
-                <property name="width">13</property>
+                <property name="width">15</property>
                 <layout manager="grid">
                   <property name="column">1</property>
                   <property name="ipadx">10</property>
-                  <property name="padx">9</property>
+                  <property name="padx">10</property>
                   <property name="row">0</property>
                 </layout>
               </object>
@@ -1082,14 +1080,12 @@
         </child>
         <child>
           <object class="ttk.Labelframe" id="labelframe1" named="True">
-            <property name="text" translatable="yes">Área Pistas (Dirección larga)</property>
+            <property name="text" translatable="yes">Área Merkasako</property>
             <property name="width">200</property>
             <layout manager="grid">
               <property name="column">3</property>
-              <property name="padx">3</property>
-              <property name="pady">3</property>
               <property name="row">0</property>
-              <property name="sticky">ne</property>
+              <property name="sticky">nw</property>
             </layout>
             <child>
               <object class="ttk.Label" id="label25">
@@ -1334,6 +1330,181 @@
                   <property name="padx">3</property>
                   <property name="pady">3</property>
                   <property name="row">5</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Labelframe" id="labelframe3">
+            <property name="height">200</property>
+            <property name="text" translatable="yes">Area Navegador</property>
+            <property name="width">200</property>
+            <layout manager="grid">
+              <property name="column">3</property>
+              <property name="row">1</property>
+              <property name="sticky">nw</property>
+            </layout>
+            <child>
+              <object class="ttk.Label" id="label23">
+                <property name="text" translatable="yes">Reload:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">0</property>
+                  <property name="sticky">w</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblReload" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="padx">32</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button26" named="True">
+                <property name="command" type="command" cbtype="simple">configNavReload</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label31">
+                <property name="text" translatable="yes">X:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">1</property>
+                  <property name="sticky">w</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblX" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button27" named="True">
+                <property name="command" type="command" cbtype="simple">configNavX</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label36">
+                <property name="text" translatable="yes">Y:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">2</property>
+                  <property name="sticky">w</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblY" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button28" named="True">
+                <property name="command" type="command" cbtype="simple">configNavY</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="label40">
+                <property name="text" translatable="yes">Hint:</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="padx">3</property>
+                  <property name="row">3</property>
+                  <property name="sticky">w</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Label" id="lblHint" named="True">
+                <property name="anchor">n</property>
+                <property name="compound">top</property>
+                <property name="cursor">arrow</property>
+                <property name="font">TkDefaultFont</property>
+                <property name="justify">left</property>
+                <property name="relief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">None</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="ipadx">10</property>
+                  <property name="padx">10</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button29" named="True">
+                <property name="command" type="command" cbtype="simple">configNavHint</property>
+                <property name="text" translatable="yes">Select</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="padx">3</property>
+                  <property name="pady">3</property>
+                  <property name="row">3</property>
                 </layout>
               </object>
             </child>
