@@ -1833,6 +1833,11 @@ class ImageFinderApp:
         self.coordChat = self.builder.get_object('lblCoordChat')
         self.levelHunt = self.builder.get_object('levelHunt')
 
+        self.reloadNav = self.builder.get_object('lblReload')
+        self.navX = self.builder.get_object('lblX')
+        self.navY = self.builder.get_object('lblY')
+        self.navHint = self.builder.get_object('lblHint')
+
         #Para resources
         self.image_offset = 25
         self.image_path = None
@@ -2113,6 +2118,32 @@ class ImageFinderApp:
         texto_area_chat = self.search_area
         self.chat.config(text=f"{texto_area_chat}")
 
+    def configNavReload(self):
+        self.select_area()
+        texto = self.search_area
+        self.reloadNav.config(text=f"{texto}")
+
+    def configNavX(self):
+        self.select_area()
+        texto = self.search_area
+        self.navX.config(text=f"{texto}")
+
+    def configNavY(self):
+        self.select_area()
+        texto = self.search_area
+        self.navY.config(text=f"{texto}")
+
+    def configNavHint(self):
+        self.select_area()
+        texto = self.search_area
+        self.navHint.config(text=f"{texto}")
+
+    ##probar
+    def configArea(self, container):
+        self.select_area()
+        texto = self.search_area
+        container.config(text=f"{texto}")
+
     def get4CoordFromText(self, texto):
         texto = texto.strip("()")
         coords = texto.split(", ")
@@ -2287,6 +2318,7 @@ class ImageFinderApp:
         print(f"salida de texto filtrada {salida_actual_texto}")
         pyautogui.click(chatX, chatY)
         pyautogui.write('/clear')
+        time.sleep(2)
         pyautogui.press('enter')
         
         # Extraer coordenadas
@@ -2319,7 +2351,7 @@ class ImageFinderApp:
 
     def checkSalida(self):
         self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
-        time.sleep(0.5)
+        time.sleep(2)
         ruta_tesseract = self.entryPytesseract.get()
         pytesseract.pytesseract.tesseract_cmd = fr'{ruta_tesseract}\tesseract.exe'
 
@@ -2329,7 +2361,7 @@ class ImageFinderApp:
         imagen_gris = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
 
         # Aumentar el contraste usando CLAHE (Contrast Limited Adaptive Histogram Equalization)
-        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(9, 8))
         imagen_contrastada = clahe.apply(imagen_gris)
 
         # Aplicar umbralización para mejorar la definición del texto
@@ -2337,6 +2369,7 @@ class ImageFinderApp:
 
         # Realizar OCR en la imagen preprocesada
         salida_actual_texto = pytesseract.image_to_string(imagen_umbral)
+        print('texto generado por pytesseract')
         print(salida_actual_texto)
 
         # Extraer números de la salida
@@ -2403,17 +2436,24 @@ class ImageFinderApp:
         #c2 = c2.strip()
         #time.sleep(1)
         #pyautogui.tripleClick(731, 360)
-        self.clickEnImagen(ruta_imagen_reload_navegador)
-        time.sleep(2)
-        self.clickEnImagen(ruta_imagen_X_navegador)
+        
+        #self.clickEnImagen(ruta_imagen_reload_navegador)
+        #time.sleep(2)
+        #self.clickEnImagen(ruta_imagen_X_navegador)
         print('click en X')
+        xnavX, xnavY = self.get4CoordFromText(self.navX['text'])
+        pyautogui.tripleClick(xnavX, xnavY)
+        time.sleep(2)
         pyautogui.write(c1)
-        time.sleep(1)
+        time.sleep(2)
         #pyautogui.press('tab')
-        self.clickEnImagen(ruta_imagen_Y_navegador)
+        #self.clickEnImagen(ruta_imagen_Y_navegador)
         print('click en Y')
+        ynavX, ynavY = self.get4CoordFromText(self.navY['text'])
+        pyautogui.tripleClick(ynavX, ynavY)
+        time.sleep(2)
         pyautogui.write(c2)
-        time.sleep(1)
+        time.sleep(2)
 
     def moverEnDireccion(self, direccion):
         global intentos_realizados
@@ -2686,6 +2726,11 @@ class ImageFinderApp:
 
             file.write(f"ruta_tesseract: {self.entryPytesseract.get()}\n")
             file.write(f"umbral: {self.umbral.get()}\n")
+
+            file.write(f"reloadNav: {self.reloadNav['text']}\n")
+            file.write(f"XNav: {self.navX['text']}\n")
+            file.write(f"YNav: {self.navY['text']}\n")
+            file.write(f"hintNav: {self.navHint['text']}\n")
         
         self.status_label.config(text=f"Datos guardados")
 
@@ -2818,6 +2863,22 @@ class ImageFinderApp:
             if len(lines) > 30 and lines[30].strip():
                 texto_umbral = eval(lines[30].split(': ')[1].strip())
                 self.umbral.insert(0, texto_umbral)     
+
+            if len(lines) > 31 and lines[31].strip():
+                texto = eval(lines[31].split(': ')[1].strip())
+                self.reloadNav.config(text=f"{texto}")
+
+            if len(lines) > 32 and lines[32].strip():
+                texto = eval(lines[32].split(': ')[1].strip())
+                self.navX.config(text=f"{texto}") 
+
+            if len(lines) > 33 and lines[33].strip():
+                texto = eval(lines[33].split(': ')[1].strip())
+                self.navY.config(text=f"{texto}") 
+
+            if len(lines) > 34 and lines[34].strip():
+                texto = eval(lines[34].split(': ')[1].strip())
+                self.navHint.config(text=f"{texto}") 
         
         self.status_label.config(text=f"Datos cargados")
 
@@ -2965,7 +3026,7 @@ class ImageFinderApp:
 
             print("Pista1")
             self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
-            self.checkSalida()
+            #self.checkSalida()
             inicio = self.salida['text']
             self.coordEnNav(inicio)
             self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_1)
@@ -3309,12 +3370,10 @@ class ImageFinderApp:
         """Función para cerrar la ventana al presionar Esc"""
         self.area_selector_window.destroy()
 
-    def mostrar_area(self):
+    def mostrar_area(self, fn, area):
         # Coordenadas del área (ejemplo)
         #coords = game_coords
-        print(self.area_pistas)
         
-    
         # Crea una ventana flotante transparente para la selección de área
         self.area_selector_window = Toplevel(self.mainwindow)
         self.area_selector_window.attributes('-alpha', 0.3)  # Nivel de transparencia
@@ -3337,7 +3396,8 @@ class ImageFinderApp:
         # Mantener la ventana visible hasta que el usuario la cierre
         self.area_selector_window.update()
         #self.checkSalida()
-        self.checkPistas()
+        fn()
+        self.cerrar_ventana()
 
     # start/stop th
     def starTask(self):
@@ -3372,6 +3432,7 @@ class ImageFinderApp:
             segundo_numero = int(segundo_numero)
 
             salida_actual_texto = self.salida['text']
+            print(salida_actual_texto)
             salida_actual_texto = self.cleanText(salida_actual_texto)
             primer_coord, segundo_coord = salida_actual_texto.split(',')
             primer_coord = int(primer_coord)
@@ -3386,12 +3447,6 @@ class ImageFinderApp:
             if (primer_numero == 1 and self.numero_pista == 0):
                 coordenada_cercana, nombre_cercano = coordenada_mas_cercana(primer_coord, segundo_coord, coordenadas_zaap)
                 print(f"El zaap más cercano a la Salida es: {nombre_cercano}, {coordenada_cercana}")
-            
-                gamecoord_actual_texto = self.coordActual['text']
-                gamecoord_actual_texto = self.cleanText(gamecoord_actual_texto)
-                primer_gamecoord, segundo_gamecoord = gamecoord_actual_texto.split(',')
-                primer_gamecoord = int(primer_gamecoord)
-                segundo_gamecoord = int(segundo_gamecoord)
 
                 ##ir a coordenadas más cercanas
                 ##entrar al merkasako, buscar el teleport mas cercano e ir
@@ -3405,32 +3460,22 @@ class ImageFinderApp:
                 pyautogui.click(merkaX, merkaY)
                 time.sleep(3)
                 pyautogui.click(zaapMerkaX, zaapMerkaY)
-                time.sleep(1)
+                time.sleep(2)
                 pyautogui.click(buscarZaapX, buscarZaapY)
-                time.sleep(1)
+                time.sleep(2)
                 ##escribir coord
                 pyautogui.write(nombre_cercano)
-                time.sleep(1)
+                time.sleep(2)
                 pyautogui.click(teleport_zaapX, teleport_zaapY)
                 #self.clickEnImagen(ruta_imagen_teleport_btn)
                 time.sleep(1)
-                self.checkGameCoord()
-                c1, c2 = coordenada_cercana
-                game_coords = (c1, c2)
-                self.coordActual.config(text=f"{game_coords}")
-                self.coordActual.update_idletasks()
-
-                gamecoord_actual_texto = self.coordActual['text']
-                gamecoord_actual_texto = self.cleanText(gamecoord_actual_texto)
-                primer_gamecoord, segundo_gamecoord = gamecoord_actual_texto.split(',')
-                primer_gamecoord = int(primer_gamecoord)
-                segundo_gamecoord = int(segundo_gamecoord)
+                #self.checkGameCoord()
                 #self.coordActual.config(text=f"{game_coords}")
                 #time.sleep(1)
                 ##teleport a inicio de busqueda 
-                print(f"Salida {primer_coord}, {segundo_coord}")
-                print(f"Coordenada actual {primer_gamecoord}, {segundo_gamecoord}")
-                if(f"{primer_coord}, {segundo_coord}" != f"{primer_gamecoord}, {segundo_gamecoord}"):
+                print(f"Salida {self.salida['text']}")
+                print(f"Coordenada actual {self.coordActual['text']}")
+                if(f"{self.salida['text']}" != f"{self.coordActual['text']}"):
                     chatX, chatY = self.get4CoordFromText(self.chat['text'])
                     #self.clickEnImagen(ruta_imagen_chat_box)
                     pyautogui.click(chatX, chatY)
