@@ -24,7 +24,9 @@ ruta_imagen_puerta = './treasureHunt/puerta.png'
 ruta_imagen_moverse = './treasureHunt/mover.png'
 ruta_imagen_tesoro = './treasureHunt/tesoro.png'
 ruta_imagen_200 = './treasureHunt/nivel200.png'
+ruta_imagen_180 = './treasureHunt/nivel180.png'
 ruta_imagen_160 = './treasureHunt/nivel160.png'
+ruta_imagen_140 = './treasureHunt/nivel140.png'
 ruta_imagen_120 = './treasureHunt/nivel120.png'
 ruta_imagen_salir = './treasureHunt/salir.png'
 ruta_imagen_salir_puerta = './treasureHunt/salir_puerta.png'
@@ -217,7 +219,7 @@ def buscar_y_clickear_monstruo(ruta_imagen):
             inBattle = False
             btX = max_loc2[0] + ancho2 // 2
             btY = max_loc2[1] + altura2 // 2
-            pyautogui.tripleClick(btX, btY)
+            pyautogui.click(btX, btY)
         time.sleep(1)
     else:
         buscar_y_clickear_monstruo(ruta_imagen_monstruo)
@@ -331,40 +333,7 @@ def buscar_y_clickear_tesoro(ruta_imagen):
     else:
         buscar_y_clickear_tesoro(ruta_imagen_moverse)
 
-def buscar_y_clickear_200(ruta_imagen):
-    global intentos_realizados
-    # Se hace un seguimiento de los intentos realizados
-    intentos_realizados += 1
-    # Límite de intentos alcanzado
-    if intentos_realizados > limite_intentos:
-        print("Límite de intentos alcanzado. La imagen no se encontró.")
-        return
-    # Carga la imagen de referencia y la captura de pantalla
-    imagen_referencia = cv2.imread(ruta_imagen)
-    captura_pantalla = pyautogui.screenshot()
-    captura_pantalla_np = np.array(captura_pantalla)
-    captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
 
-    # Obtén las dimensiones de la imagen de referencia
-    altura, ancho, _ = imagen_referencia.shape
-
-    # Encuentra la posición de la imagen de referencia en la captura de pantalla
-    resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-
-    # Define un umbral de confianza (puedes ajustar según tus necesidades)
-    umbral_confianza = 0.8
-
-    if max_val >= umbral_confianza:
-        # Obtiene las coordenadas del centro de la imagen de referencia
-        centro_x = max_loc[0] + ancho // 2
-        centro_y = max_loc[1] + altura // 2
-
-        # Haz clic en el centro de la imagen encontrada
-        pyautogui.tripleClick(centro_x, centro_y)
-        time.sleep(5)
-    else:
-        buscar_y_clickear_200(ruta_imagen_200)
 
 def buscar_y_clickear_salir(ruta_imagen):
     global intentos_realizados
@@ -646,7 +615,7 @@ def pelea():
         time.sleep(6)
         #2 atks
         pyautogui.press('1')
-        time.sleep(1)
+        time.sleep(2)
         buscar_y_clickear_monstruo(ruta_imagen_monstruo)
         time.sleep(1)
         pyautogui.press('F1')
@@ -1831,12 +1800,14 @@ class ImageFinderApp:
         self.buscarZaap = self.builder.get_object('lblBuscarZaap')
         self.teleportMerka = self.builder.get_object('lblTeleportMerka')
         self.coordChat = self.builder.get_object('lblCoordChat')
-        self.levelHunt = self.builder.get_object('levelHunt')
+        #self.levelHunt = self.builder.get_object('levelHunt')
 
         self.reloadNav = self.builder.get_object('lblReload')
         self.navX = self.builder.get_object('lblX')
         self.navY = self.builder.get_object('lblY')
         self.navHint = self.builder.get_object('lblHint')
+
+        self.cboxHuntlvl = self.builder.get_object('cboxHuntlvl')
 
         #Para resources
         self.image_offset = 25
@@ -2554,11 +2525,17 @@ class ImageFinderApp:
         elif "plstico" in texto:
             texto = texto.replace("plstico", "plastico")
             return texto
+        elif "Pescado ala plancha en brocheta" in texto:
+            texto = texto.replace("Pescado ala plancha en brocheta", "Pescado a la plancha en brocheta")
+            return texto
         elif "Cintur6n" in texto:
             texto = texto.replace("Cintur6n", "Cinturon")
             return texto
         elif "croneo" in texto:
             texto = texto.replace("croneo", "craneo")
+            return texto
+        elif "crneo" in texto:
+            texto = texto.replace("crneo", "craneo")
             return texto
         elif ")jo de fab'huritu pintado" in texto:
             texto = texto.replace(")jo", "Ojo")
@@ -2722,7 +2699,7 @@ class ImageFinderApp:
             file.write(f"area_buscar_zaap: {self.buscarZaap['text']}\n")
             file.write(f"area_teleport_merka: {self.teleportMerka['text']}\n")
             file.write(f"area_coord_chat: {self.coordChat['text']}\n")
-            file.write(f"levelHunt: {self.levelHunt.get()}\n")
+            file.write(f"levelHunt: {self.cboxHuntlvl.get()}\n")
 
             file.write(f"ruta_tesseract: {self.entryPytesseract.get()}\n")
             file.write(f"umbral: {self.umbral.get()}\n")
@@ -2852,7 +2829,7 @@ class ImageFinderApp:
 
             if len(lines) > 28 and lines[28].strip():
                 texto_charcater_name = lines[28].split(': ')[1].strip()
-                self.levelHunt.insert(0, texto_charcater_name)
+                self.cboxHuntlvl.set(texto_charcater_name)
                 #self.characterName.insert(0, f"{texto_charcater_name}")
 
             if len(lines) > 29 and lines[29].strip():
@@ -3026,7 +3003,7 @@ class ImageFinderApp:
 
             print("Pista1")
             self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
-            #self.checkSalida()
+            self.checkSalida()
             inicio = self.salida['text']
             self.coordEnNav(inicio)
             self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_1)
@@ -3399,6 +3376,43 @@ class ImageFinderApp:
         fn()
         self.cerrar_ventana()
 
+    def buscar_y_clickear_200(self, ruta_imagen):
+        global intentos_realizados
+        # Se hace un seguimiento de los intentos realizados
+        intentos_realizados += 1
+        # Límite de intentos alcanzado
+        if intentos_realizados > limite_intentos:
+            print("Límite de intentos alcanzado. La imagen no se encontró.")
+            return
+        # Carga la imagen de referencia y la captura de pantalla
+        imagen_referencia = cv2.imread(ruta_imagen)
+        captura_pantalla = pyautogui.screenshot()
+        captura_pantalla_np = np.array(captura_pantalla)
+        captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
+
+        # Obtén las dimensiones de la imagen de referencia
+        altura, ancho, _ = imagen_referencia.shape
+
+        # Encuentra la posición de la imagen de referencia en la captura de pantalla
+        resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+
+        # Define un umbral de confianza (puedes ajustar según tus necesidades)
+        umbral_confianza = 0.8
+
+        if max_val >= umbral_confianza:
+            # Obtiene las coordenadas del centro de la imagen de referencia
+            centro_x = max_loc[0] + ancho // 2
+            centro_y = max_loc[1] + altura // 2
+
+            # Haz clic en el centro de la imagen encontrada
+            pyautogui.tripleClick(centro_x, centro_y)
+            time.sleep(5)
+            self.etapa_iniciada = True
+            self.save_to_text_file()
+        else:
+            self.buscar_y_clickear_200(ruta_imagen_200)
+
     # start/stop th
     def starTask(self):
         self.status_label.config(text=f"Iniciando búsqueda")
@@ -3410,9 +3424,20 @@ class ImageFinderApp:
             #print(f"Valor: {etapa_actual}, Tipo: {type(etapa_actual)}")
             print('obtener busqueda')
             buscar_y_clickear_tesoro(ruta_imagen_tesoro)
-            buscar_y_clickear_200(ruta_imagen_120)
-            self.etapa_iniciada = True
-            self.save_to_text_file()
+            levelSeleccionado = self.cboxHuntlvl.get()
+            if levelSeleccionado:
+                valor_guardado = levelSeleccionado
+                print(f"Level de treasure hunt seleccionado: {valor_guardado}")
+                if valor_guardado == "140":
+                    self.buscar_y_clickear_200(ruta_imagen_140)
+                if valor_guardado == "160":
+                    self.buscar_y_clickear_200(ruta_imagen_160)
+                if valor_guardado == "180":
+                    self.buscar_y_clickear_200(ruta_imagen_180)
+                if valor_guardado == "200":
+                    self.buscar_y_clickear_200(ruta_imagen_200)
+            else:
+                print("No hay selección")
             
             buscar_y_clickear_salir(ruta_imagen_salir)
             buscar_y_clickear_salir_puerta(ruta_imagen_salir_puerta)
@@ -3469,7 +3494,7 @@ class ImageFinderApp:
                 pyautogui.click(teleport_zaapX, teleport_zaapY)
                 #self.clickEnImagen(ruta_imagen_teleport_btn)
                 time.sleep(1)
-                #self.checkGameCoord()
+                self.checkGameCoord()
                 #self.coordActual.config(text=f"{game_coords}")
                 #time.sleep(1)
                 ##teleport a inicio de busqueda 

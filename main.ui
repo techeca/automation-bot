@@ -247,7 +247,8 @@
               </object>
             </child>
             <child>
-              <object class="ttk.Entry" id="levelHunt" named="True">
+              <object class="ttk.Combobox" id="cboxHuntlvl" named="True">
+                <property name="values">140 160 180 200</property>
                 <layout manager="grid">
                   <property name="column">1</property>
                   <property name="columnspan">2</property>
@@ -266,8 +267,10 @@
             <property name="width">300</property>
             <layout manager="grid">
               <property name="column">0</property>
+              <property name="ipadx">12</property>
               <property name="ipady">6</property>
               <property name="row">2</property>
+              <property name="sticky">nw</property>
             </layout>
             <child>
               <object class="ttk.Button" id="btnStartTask" named="True">
@@ -859,7 +862,7 @@
                 <layout manager="grid">
                   <property name="column">1</property>
                   <property name="ipadx">10</property>
-                  <property name="padx">10</property>
+                  <property name="padx">35</property>
                   <property name="row">0</property>
                 </layout>
               </object>
