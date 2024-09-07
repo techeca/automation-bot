@@ -64,6 +64,8 @@ ruta_imagen_maxBusqueda = './treasureHunt/maximizar_busqueda.png'
 ruta_imagen_navegador1 = './treasureHunt/nav1.png'
 ruta_imagen_navegador2 = './treasureHunt/nav2.png'
 ruta_imagen_validar = './treasureHunt/validar.png'
+ruta_imagen_banderita_brillante = './treasureHunt/banderita_brillante.png'
+ruta_imagen_subirLvl = './treasureHunt/lvlok.png'
 
 #rutas recursos
 ruta_imagen_recurso_trigo = './resources/Trigo.png'
@@ -190,47 +192,6 @@ def buscar_y_clickear_dofus(ruta_imagen):
     else:
         buscar_y_clickear_dofus(ruta_imagen_dofus)
 
-def buscar_y_clickear_monstruo(ruta_imagen):
-    global intentos_realizados
-    global inBattle
-    # Se hace un seguimiento de los intentos realizados
-    intentos_realizados += 1
-    # Límite de intentos alcanzado
-    if intentos_realizados > limite_intentos:
-        print("Límite de intentos alcanzado. La imagen no se encontró.")
-        return
-    # Carga la imagen de referencia y la captura de pantalla
-    imagen_referencia = cv2.imread(ruta_imagen)
-    imagen_referencia2 = cv2.imread(ruta_imagen_cerrar_bat)
-    captura_pantalla = pyautogui.screenshot()
-    captura_pantalla_np = np.array(captura_pantalla)
-    captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-    # Obtén las dimensiones de la imagen de referencia
-    altura, ancho, _ = imagen_referencia.shape
-    altura2, ancho2, _ = imagen_referencia2.shape
-    # Encuentra la posición de la imagen de referencia en la captura de pantalla
-    resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-    resultado2 = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia2, cv2.TM_CCOEFF_NORMED)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-    min_val2, max_val2, min_loc2, max_loc2 = cv2.minMaxLoc(resultado2)
-    # Define un umbral de confianza (puedes ajustar según tus necesidades)
-    umbral_confianza = 0.8
-    if max_val >= umbral_confianza or max_val2 >= umbral_confianza:
-        # Obtiene las coordenadas del centro de la imagen de referencia
-        
-        # Haz clic en el centro de la imagen encontrada
-        if(max_val >= umbral_confianza):
-            centro_x = max_loc[0] + ancho // 2
-            centro_y = max_loc[1] + altura // 2
-            pyautogui.tripleClick(centro_x, centro_y)
-        if(max_val2 >= umbral_confianza):
-            inBattle = False
-            btX = max_loc2[0] + ancho2 // 2
-            btY = max_loc2[1] + altura2 // 2
-            pyautogui.click(btX, btY)
-        time.sleep(1)
-    else:
-        buscar_y_clickear_monstruo(ruta_imagen_monstruo)
 
 def moverse():
     pyautogui.tripleClick(1619, 646)
@@ -608,34 +569,7 @@ def comenzar_etapas():
     except ValueError as e:
         print(f"Error: {e}")
 
-def pelea():
-    global inBattle
-    inBattle = True
-    #time.sleep(2)
-    #pyautogui.press('esc')
-    #time.sleep(2)
-    pyautogui.press('F1')
-    time.sleep(1)
-    pyautogui.press('F1')
-    time.sleep(6)
-    contador = 1
-    while inBattle == True:  # Mientras la condición sea verdadera
-        time.sleep(6)
-        #2 atks
-        pyautogui.press('1')
-        time.sleep(2)
-        buscar_y_clickear_monstruo(ruta_imagen_monstruo)
-        time.sleep(1)
-        pyautogui.press('F1')
-        time.sleep(1)
 
-        #pyautogui.press('1')
-        #time.sleep(1)
-        #buscar_y_clickear_monstruo(ruta_imagen_monstruo)
-        #time.sleep(1)
-        #pyautogui.press('F1')  # termina el turno
-
-        # Actualiza la condición para evitar un bucle infinito
 
 def recorte_etapas(ruta_imagen):
     imagen = pyautogui.screenshot()
@@ -1553,65 +1487,6 @@ def cantidad_pistas(ruta_imagen):
         print(f"Error al procesar las imágenes: {e}")
         return 0
 
-def etapa_finalizada(ruta_imagen):
-    global intentos_realizados
-    # Se hace un seguimiento de los intentos realizados
-    intentos_realizados += 1
-    # Límite de intentos alcanzado
-    if intentos_realizados > limite_intentos:
-        print("Límite de intentos alcanzado. La imagen no se encontró.")
-        return
-    # Carga la imagen de referencia y la captura de pantalla
-    imagen_referencia = cv2.imread(ruta_imagen)
-    captura_pantalla = pyautogui.screenshot()
-    captura_pantalla_np = np.array(captura_pantalla)
-    captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-    # Obtén las dimensiones de la imagen de referencia
-    altura, ancho, _ = imagen_referencia.shape
-    # Encuentra la posición de la imagen de referencia en la captura de pantalla
-    resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-    # Define un umbral de confianza (puedes ajustar según tus necesidades)
-    umbral_confianza = 0.8
-    if max_val >= umbral_confianza:
-        # Obtiene las coordenadas del centro de la imagen de referencia
-        centro_x = max_loc[0] + ancho // 2
-        centro_y = max_loc[1] + altura // 2
-        # Haz clic en el centro de la imagen encontrada
-        pyautogui.click(centro_x, centro_y)
-        time.sleep(1)
-    else:
-        etapa_finalizada(ruta_imagen_etapa_finalizada)
-
-def lucha(ruta_imagen):
-    global intentos_realizados
-    # Se hace un seguimiento de los intentos realizados
-    intentos_realizados += 1
-    # Límite de intentos alcanzado
-    if intentos_realizados > limite_intentos:
-        print("Límite de intentos alcanzado. La imagen no se encontró.")
-        return
-    # Carga la imagen de referencia y la captura de pantalla
-    imagen_referencia = cv2.imread(ruta_imagen)
-    captura_pantalla = pyautogui.screenshot()
-    captura_pantalla_np = np.array(captura_pantalla)
-    captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-    # Obtén las dimensiones de la imagen de referencia
-    altura, ancho, _ = imagen_referencia.shape
-    # Encuentra la posición de la imagen de referencia en la captura de pantalla
-    resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-    # Define un umbral de confianza (puedes ajustar según tus necesidades)
-    umbral_confianza = 0.8
-    if max_val >= umbral_confianza:
-        # Obtiene las coordenadas del centro de la imagen de referencia
-        centro_x = max_loc[0] + ancho // 2
-        centro_y = max_loc[1] + altura // 2
-        # Haz clic en el centro de la imagen encontrada
-        pyautogui.click(centro_x, centro_y)
-    else:
-        etapa_finalizada(ruta_imagen_lucha)
-
 def buscarXenNavegador(ruta_imagen):
     global intentos_realizados
     # Se hace un seguimiento de los intentos realizados
@@ -2466,35 +2341,54 @@ class ImageFinderApp:
 
     def clickEnImagen(self, ruta_imagen):
         global intentos_realizados
+
         # Se hace un seguimiento de los intentos realizados
-        intentos_realizados += 1
-        # Límite de intentos alcanzado
-        if intentos_realizados > limite_intentos:
-            print("Límite de intentos alcanzado. La imagen no se encontró.")
-            return
-        # Carga la imagen de referencia y la captura de pantalla
-        imagen_referencia = cv2.imread(ruta_imagen)
-        captura_pantalla = pyautogui.screenshot()
-        captura_pantalla_np = np.array(captura_pantalla)
-        captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-        # Obtén las dimensiones de la imagen de referencia
-        altura, ancho, _ = imagen_referencia.shape
-        # Encuentra la posición de la imagen de referencia en la captura de pantalla
-        resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-        # Define un umbral de confianza (puedes ajustar según tus necesidades)
-        #print(f"max umbral {float(self.umbral.get())} max value {max_val}")
-        umbral_confianza = float(self.umbral.get())
-        print(max_val)
-        if max_val >= umbral_confianza:
-            # Obtiene las coordenadas del centro de la imagen de referencia
-            centro_x = max_loc[0] + ancho // 2
-            centro_y = max_loc[1] + altura // 2
-            # Haz clic en el centro de la imagen encontrada
-            pyautogui.click(centro_x, centro_y)
-            time.sleep(1)
-        else:
-            self.clickEnImagen(ruta_imagen)     
+        intentos_realizados = 0
+
+        while intentos_realizados < 10:
+            try:
+                # Se incrementan los intentos realizados
+                intentos_realizados += 1
+
+                # Carga la imagen de referencia y la captura de pantalla
+                imagen_referencia = cv2.imread(ruta_imagen)
+                captura_pantalla = pyautogui.screenshot()
+                captura_pantalla_np = np.array(captura_pantalla)
+                captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
+
+                # Obtén las dimensiones de la imagen de referencia
+                altura, ancho, _ = imagen_referencia.shape
+
+                # Encuentra la posición de la imagen de referencia en la captura de pantalla
+                resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+                min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+
+                # Define un umbral de confianza (ajusta según tus necesidades)
+                umbral_confianza = float(self.umbral.get())
+                print(f"Valor de coincidencia: {max_val}")
+
+                if max_val >= umbral_confianza:
+                    # Obtiene las coordenadas del centro de la imagen de referencia
+                    centro_x = max_loc[0] + ancho // 2
+                    centro_y = max_loc[1] + altura // 2
+
+                    # Haz clic en el centro de la imagen encontrada
+                    pyautogui.click(centro_x, centro_y)
+                    print(f"Clic realizado en ({centro_x}, {centro_y})")
+                    time.sleep(1)
+                    return  # Salir de la función después de hacer clic exitosamente
+
+                else:
+                    print("Imagen no encontrada, intentando de nuevo...")
+                    time.sleep(1)  # Añadir un pequeño retraso antes de reintentar
+
+            except Exception as e:
+                print(f"Error en clickEnImagen: {e}")
+                break  # Salir del bucle si hay un error crítico
+
+        print("Límite de intentos alcanzado o error crítico, no se encontró la imagen.")
+        return
+  
 
     def OCR(self, ruta_imagen):
         # Configura la ruta al ejecutable de Tesseract (puede variar según tu instalación)
@@ -2956,7 +2850,7 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(ruta_imagen_captura, self.area_pista_1)
             self.pista(texto_hasta_coma)
-            etapa_finalizada(ruta_imagen_etapa_finalizada)
+            self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         if cantPistasTexto == "1":
             print("Uno '?'")
 
@@ -2983,7 +2877,7 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(ruta_imagen_captura, self.area_pista_2)
             self.pista(texto_hasta_coma)
-            etapa_finalizada(ruta_imagen_etapa_finalizada)
+            self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == "2":
             print("Dos '?'")
             
@@ -3021,7 +2915,7 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(ruta_imagen_captura, self.area_pista_3)
             self.pista(texto_hasta_coma)
-            etapa_finalizada(ruta_imagen_etapa_finalizada)
+            self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == "3":
             print("Tres '?'")
 
@@ -3070,7 +2964,7 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(ruta_imagen_captura, self.area_pista_4)
             self.pista(texto_hasta_coma)
-            etapa_finalizada(ruta_imagen_etapa_finalizada)
+            self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == '4':
             print("Cuatro '?'")
 
@@ -3131,7 +3025,7 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(ruta_imagen_captura, self.area_pista_5)
             self.pista(texto_hasta_coma)
-            etapa_finalizada(ruta_imagen_etapa_finalizada)
+            self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == "5":
             print("Cinco '?'")
 
@@ -3214,7 +3108,7 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(ruta_imagen_captura, self.area_pista_6)
             self.pista(texto_hasta_coma)
-            etapa_finalizada(ruta_imagen_etapa_finalizada)    
+            self.etapa_finalizada(ruta_imagen_etapa_finalizada)    
 
     def irACofreTesoros(self):
         self.clickEnImagen(ruta_imagen_merkasako)
@@ -3249,6 +3143,18 @@ class ImageFinderApp:
         texto = pyperclip.paste()
         print(texto)
         if '19 -26' in texto:
+            pyautogui.write('/travel 24 -28')
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            self.clickEnImagen(ruta_imagen_llegado_destino)
+            time.sleep(1)
+            self.eliminar_chat()
+            time.sleep(1)
+        if '23 -26' in texto:
             pyautogui.write('/travel 24 -28')
             pyautogui.press('enter')
             time.sleep(0.5)
@@ -3307,13 +3213,13 @@ class ImageFinderApp:
 
             # Haz clic en el centro de la imagen encontrada
             pyautogui.tripleClick(centro_x, centro_y)
+            self.numero_pista = self.numero_pista + 1
             time.sleep(0.5)
             self.eliminar_chat()
             time.sleep(0.5)
             imagen = pyautogui.screenshot()
             imagen.save(ruta_imagen_captura)
             time.sleep(1)
-
         else:
             self.banderita(ruta_imagen_banderita)
 
@@ -3575,6 +3481,153 @@ class ImageFinderApp:
         pyautogui.click(bX, bY)
         time.sleep(2)
 
+    def etapa_finalizada(self, ruta_imagen):
+        global intentos_realizados
+        # Se hace un seguimiento de los intentos realizados
+        intentos_realizados += 1
+        # Límite de intentos alcanzado
+        if intentos_realizados > limite_intentos:
+            print("Límite de intentos alcanzado. La imagen no se encontró.")
+            return
+        # Carga la imagen de referencia y la captura de pantalla
+        imagen_referencia = cv2.imread(ruta_imagen)
+        captura_pantalla = pyautogui.screenshot()
+        captura_pantalla_np = np.array(captura_pantalla)
+        captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
+        # Obtén las dimensiones de la imagen de referencia
+        altura, ancho, _ = imagen_referencia.shape
+        # Encuentra la posición de la imagen de referencia en la captura de pantalla
+        resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+        # Define un umbral de confianza (puedes ajustar según tus necesidades)
+        umbral_confianza = 0.8
+        if max_val >= umbral_confianza:
+            # Obtiene las coordenadas del centro de la imagen de referencia
+            centro_x = max_loc[0] + ancho // 2
+            centro_y = max_loc[1] + altura // 2
+            # Haz clic en el centro de la imagen encontrada
+            pyautogui.click(centro_x, centro_y)
+            time.sleep(1)
+            self.cantidadPistas = 0
+            self.checkEtapa()
+            time.sleep(1)
+        else:
+           self.etapa_finalizada(ruta_imagen_etapa_finalizada)
+
+    def lucha(self, ruta_imagen):
+        global intentos_realizados
+        # Se hace un seguimiento de los intentos realizados
+        intentos_realizados += 1
+        # Límite de intentos alcanzado
+        if intentos_realizados > limite_intentos:
+            print("Límite de intentos alcanzado. La imagen no se encontró.")
+            return
+        # Carga la imagen de referencia y la captura de pantalla
+        imagen_referencia = cv2.imread(ruta_imagen)
+        captura_pantalla = pyautogui.screenshot()
+        captura_pantalla_np = np.array(captura_pantalla)
+        captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
+        # Obtén las dimensiones de la imagen de referencia
+        altura, ancho, _ = imagen_referencia.shape
+        # Encuentra la posición de la imagen de referencia en la captura de pantalla
+        resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+        # Define un umbral de confianza (puedes ajustar según tus necesidades)
+        umbral_confianza = 0.8
+        if max_val >= umbral_confianza:
+            # Obtiene las coordenadas del centro de la imagen de referencia
+            centro_x = max_loc[0] + ancho // 2
+            centro_y = max_loc[1] + altura // 2
+            # Haz clic en el centro de la imagen encontrada
+            pyautogui.click(centro_x, centro_y)
+        else:
+            self.etapa_finalizada(ruta_imagen_lucha)
+
+    def buscar_y_clickear_monstruo(self, ruta_imagen):
+        global intentos_realizados
+        global inBattle
+        # Se hace un seguimiento de los intentos realizados
+        intentos_realizados += 1
+        # Límite de intentos alcanzado
+        if intentos_realizados > limite_intentos:
+            print("Límite de intentos alcanzado. La imagen no se encontró.")
+            return
+        # Carga la imagen de referencia y la captura de pantalla
+        imagen_referencia = cv2.imread(ruta_imagen)
+        imagen_referencia2 = cv2.imread(ruta_imagen_cerrar_bat)
+        imagen_referencia3 = cv2.imread(ruta_imagen_subirLvl)
+        captura_pantalla = pyautogui.screenshot()
+        captura_pantalla_np = np.array(captura_pantalla)
+        captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
+        # Obtén las dimensiones de la imagen de referencia
+        altura, ancho, _ = imagen_referencia.shape
+        altura2, ancho2, _ = imagen_referencia2.shape
+        altura3, ancho3, _ = imagen_referencia3.shape
+        # Encuentra la posición de la imagen de referencia en la captura de pantalla
+        resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+        resultado2 = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia2, cv2.TM_CCOEFF_NORMED)
+        resultado3 = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia3, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+        min_val2, max_val2, min_loc2, max_loc2 = cv2.minMaxLoc(resultado2)
+        min_val3, max_val3, min_loc3, max_loc3 = cv2.minMaxLoc(resultado3)
+        # Define un umbral de confianza (puedes ajustar según tus necesidades)
+        umbral_confianza = 0.8
+        if max_val >= umbral_confianza or max_val2 >= umbral_confianza or max_val3 >= umbral_confianza:
+            # Obtiene las coordenadas del centro de la imagen de referencia
+            
+            # Haz clic en el centro de la imagen encontrada si es monstruo
+            if(max_val >= umbral_confianza):
+                centro_x = max_loc[0] + ancho // 2
+                centro_y = max_loc[1] + altura // 2
+                pyautogui.tripleClick(centro_x, centro_y)
+
+            #Haz clic en el centro de la imagen encontrada si es cerrar
+            if(max_val2 >= umbral_confianza):
+                inBattle = False
+                btX = max_loc2[0] + ancho2 // 2
+                btY = max_loc2[1] + altura2 // 2
+                pyautogui.click(btX, btY)
+
+            #Haz clic en el centro de la imagen encontrada si es subir de level
+            if(max_val3 >= umbral_confianza):
+                inBattle = False
+                lvlOkX = max_loc3[0] + ancho3 // 2
+                lvlOkY = max_loc3[1] + altura3 // 2
+                pyautogui.click(lvlOkX, lvlOkY)
+                
+            time.sleep(1)
+        else:
+            self.buscar_y_clickear_monstruo(ruta_imagen_monstruo)
+
+    def pelea(self):
+        global inBattle
+        inBattle = True
+        #time.sleep(2)
+        #pyautogui.press('esc')
+        #time.sleep(2)
+        pyautogui.press('F1')
+        time.sleep(1)
+        pyautogui.press('F1')
+        time.sleep(6)
+        contador = 1
+        while inBattle == True:  # Mientras la condición sea verdadera
+            time.sleep(6)
+            #2 atks
+            pyautogui.press('1')
+            time.sleep(2)
+            self.buscar_y_clickear_monstruo(ruta_imagen_monstruo)
+            time.sleep(1)
+            pyautogui.press('F1')
+            time.sleep(1)
+
+            #pyautogui.press('1')
+            #time.sleep(1)
+            #buscar_y_clickear_monstruo(ruta_imagen_monstruo)
+            #time.sleep(1)
+            #pyautogui.press('F1')  # termina el turno
+
+            # Actualiza la condición para evitar un bucle infinito
+
     # start/stop th
     def starTask(self):
         self.status_label.config(text=f"Iniciando búsqueda")
@@ -3720,9 +3773,9 @@ class ImageFinderApp:
                 time.sleep(1)
             
             time.sleep(1)
-            lucha(ruta_imagen_lucha)
+            self.lucha(ruta_imagen_lucha)
             time.sleep(2)
-            pelea()
+            self.pelea()
             #time.sleep(6)
             self.etapa_iniciada = False
             self.save_to_text_file()
