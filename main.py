@@ -1831,6 +1831,7 @@ class ImageFinderApp:
         ## bot data
         self.mapas_avanzados = 0
         self.numero_pista = 0
+        self.navegador_actual = ''
 
         self.load_from_text_file()
 
@@ -2412,7 +2413,7 @@ class ImageFinderApp:
         #c2 = c2.strip()
         #time.sleep(1)
         #pyautogui.tripleClick(731, 360)
-        self.clickEnImagen(ruta_imagen_navegador1)
+        #self.clickEnImagen(ruta_imagen_navegador1)
         #self.clickEnImagen(ruta_imagen_reload_navegador)
         #time.sleep(2)
         #self.clickEnImagen(ruta_imagen_X_navegador)
@@ -2541,6 +2542,12 @@ class ImageFinderApp:
             return texto
         elif "crneo" in texto:
             texto = texto.replace("crneo", "craneo")
+            return texto
+        elif "Craneo der reno" in texto:
+            texto = texto.replace("Craneo der reno", "Craneo de reno")
+            return texto
+        elif "Ankam:" in texto:
+            texto = texto.replace("Ankam:", "Ankama")
             return texto
         elif "misi6n" in texto:
             texto = texto.replace("misi6n", "mision")
@@ -3239,9 +3246,10 @@ class ImageFinderApp:
         #self.clickEnImagen(ruta_imagen_chat_box)
         pyautogui.tripleClick(chatX, chatY)
         time.sleep(2)
-        text_coordactual = pyperclip.paste()
-        if '/travel 22 -27' in text_coordactual:
-            pyautogui.write('/travel 23, -27')
+        texto = pyperclip.paste()
+        print(texto)
+        if '19 -26' in texto:
+            pyautogui.write('/travel 24 -28')
             pyautogui.press('enter')
             time.sleep(0.5)
             pyautogui.press('enter')
@@ -3249,21 +3257,10 @@ class ImageFinderApp:
             pyautogui.press('enter')
             time.sleep(0.5)
             self.clickEnImagen(ruta_imagen_llegado_destino)
-            pyautogui.tripleClick(chatX, chatY)
-            pyautogui.write('/travel 22, -27')
-        if '/travel 21 -37' in text_coordactual:
-            pyautogui.write('/travel 20, -37')
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            self.clickEnImagen(ruta_imagen_llegado_destino)
-            pyautogui.tripleClick(chatX, chatY)
-            pyautogui.write('/travel 21, -37')
-        else:
-            pyautogui.hotkey('ctrl', 'v')
+            time.sleep(1)
+            self.eliminar_chat()
+            time.sleep(1)
+        pyautogui.hotkey('ctrl', 'v')
         pyautogui.press('enter')
         time.sleep(0.5)
         pyautogui.press('enter')
@@ -3493,7 +3490,12 @@ class ImageFinderApp:
                 # Haz clic en el centro de la imagen encontrada
                 #pyautogui.click(cnac2_x, nav2_y)
                 time.sleep(1)
-                self.clickEnImagen(ruta_imagen_navegador2)
+                if self.navegador_actual == ruta_imagen_navegador1:
+                    self.clickEnImagen(ruta_imagen_navegador2)
+                    self.navegador_actual = ruta_imagen_navegador2
+                else:
+                    self.clickEnImagen(ruta_imagen_navegador1)
+                    self.navegador_actual = ruta_imagen_navegador1
                 time.sleep(1)
                 #self.checkSalida()
                 inicio = self.salida['text']
@@ -3665,17 +3667,51 @@ class ImageFinderApp:
                     #self.clickEnImagen(ruta_imagen_chat_box)
                     pyautogui.click(chatX, chatY)
                     time.sleep(1)
+                    texto = self.salida['text']
+                    print(texto)
+                    if "'22', '-27'" in texto:
+                        pyautogui.write('/travel 23 -27')
+                        pyautogui.press('enter')
+                        time.sleep(0.5)
+                        pyautogui.press('enter')
+                        time.sleep(0.5)
+                        pyautogui.press('enter')
+                        time.sleep(0.5)
+                        self.clickEnImagen(ruta_imagen_llegado_destino)
+                        time.sleep(1)
+                        self.eliminar_chat()
+                        time.sleep(1)
+                        #pyautogui.write('/travel 22, -27')
+                    if "'21', '-37'" in texto:
+                        pyautogui.write('/travel 20 -37')
+                        pyautogui.press('enter')
+                        time.sleep(0.5)
+                        pyautogui.press('enter')
+                        time.sleep(0.5)
+                        pyautogui.press('enter')
+                        time.sleep(0.5)
+                        self.clickEnImagen(ruta_imagen_llegado_destino)
+                        time.sleep(1)
+                        self.eliminar_chat()
+                        time.sleep(1)
+                        #pyautogui.write('/travel 21, -37')
+                    
+                    pyautogui.tripleClick(chatX, chatY)
+                    time.sleep(1)
                     pyautogui.write(f"/travel {primer_coord} {segundo_coord}")
                     time.sleep(1)
                     pyautogui.press('enter')
                     time.sleep(0.5) 
                     pyautogui.press('enter')
                     self.clickEnImagen(ruta_imagen_llegado_destino)
-                    time.sleep(1)   
+                    time.sleep(1)
                     self.eliminar_chat()
-                    game_coords = (primer_coord, segundo_coord)
-                    self.coordActual.config(text=f"{game_coords}")
-                    self.coordActual.update_idletasks()
+                    time.sleep(1)
+
+                #self.eliminar_chat()
+                game_coords = (primer_coord, segundo_coord)
+                self.coordActual.config(text=f"{game_coords}")
+                self.coordActual.update_idletasks()
 
             while primer_numero < segundo_numero: # Mientras la condición sea verdadera
                 self.checkPistas()
