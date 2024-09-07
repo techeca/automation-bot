@@ -1297,7 +1297,7 @@
             </child>
             <child>
               <object class="ttk.Label" id="label39" named="True">
-                <property name="text" translatable="yes">Pista 6:</property>
+                <property name="text" translatable="yes">Primera bandera:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="padx">3</property>
@@ -1508,6 +1508,50 @@
                   <property name="padx">3</property>
                   <property name="pady">3</property>
                   <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Labelframe" id="labelframe4" named="True">
+            <property name="text" translatable="yes">Recolectar</property>
+            <property name="width">300</property>
+            <layout manager="grid">
+              <property name="column">1</property>
+              <property name="ipadx">12</property>
+              <property name="ipady">6</property>
+              <property name="row">2</property>
+              <property name="sticky">nw</property>
+            </layout>
+            <child>
+              <object class="ttk.Button" id="button30" named="True">
+                <property name="command" type="command" cbtype="simple">iniciar_recoleccion</property>
+                <property name="text" translatable="yes">Start</property>
+                <layout manager="pack">
+                  <property name="fill">x</property>
+                  <property name="padx">6</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button31" named="True">
+                <property name="text" translatable="yes">Stop</property>
+                <layout manager="pack">
+                  <property name="fill">x</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button32" named="True">
+                <property name="command" type="command" cbtype="simple">loadData</property>
+                <property name="text" translatable="yes">Check</property>
+                <layout manager="pack">
+                  <property name="fill">x</property>
+                  <property name="padx">5</property>
+                  <property name="side">left</property>
                 </layout>
               </object>
             </child>

@@ -64,6 +64,11 @@ ruta_imagen_maxBusqueda = './treasureHunt/maximizar_busqueda.png'
 ruta_imagen_navegador1 = './treasureHunt/nav1.png'
 ruta_imagen_navegador2 = './treasureHunt/nav2.png'
 ruta_imagen_validar = './treasureHunt/validar.png'
+
+#rutas recursos
+ruta_imagen_recurso_trigo = './resources/Trigo.png'
+ruta_imagen_recurso_hierro = './resources/hierro'
+
 limite_intentos = 200000000000000000000
 intentos_realizados = 0
 
@@ -1782,6 +1787,7 @@ class ImageFinderApp:
         self.navHint = self.builder.get_object('lblHint')
 
         self.cboxHuntlvl = self.builder.get_object('cboxHuntlvl')
+        self.pistaDL6 = self.builder.get_object('lblPistaDL6')
 
         #Para resources
         self.image_offset = 25
@@ -1910,12 +1916,25 @@ class ImageFinderApp:
 
         # Definir un umbral para determinar si hay coincidencia
         umbral = 0.8
-        _, max_val, _, _ = cv2.minMaxLoc(resultado)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
 
         if max_val >= umbral:
-            return True
+            # Obtener el tamaño de la imagen buscada
+            altura, ancho = img_fragmento.shape[:2]
+            
+            # Obtener la posición de la esquina superior izquierda donde se encuentra la imagen
+            top_left = max_loc
+            
+            # Calcular el centro de la imagen para hacer clic
+            centro_x = top_left[0] + ancho // 2
+            centro_y = top_left[1] + altura // 2
+            
+            # Hacer clic en el centro de la imagen encontrada
+            pyautogui.click(centro_x, centro_y)
+            print(f"Imagen encontrada en ({centro_x}, {centro_y}), realizando clic.")      
         else:
-            return False
+            print(f"No hay recurso, volviendo a buscar.") 
+            self.buscar_image(ruta_imagen_a_buscar)
 
     # Funciones para configurar areas
     def configCoordActual(self):
@@ -2242,11 +2261,12 @@ class ImageFinderApp:
         #print(f"salida de texto {salida_actual_texto}")
         merkaX, merkaY = self.get4CoordFromText(self.btnMerkasako['text'])
         pyautogui.click(merkaX, merkaY)
-        time.sleep(2)
+        time.sleep(3)
         chatX, chatY = self.get4CoordFromText(self.chat['text'])
         pyautogui.click(chatX, chatY)
         pyautogui.write('/clear')
         pyautogui.press('enter')
+        time.sleep(1)
         pyautogui.write('%pos%')
         pyautogui.press('enter')
         time.sleep(2)
@@ -2522,6 +2542,9 @@ class ImageFinderApp:
         elif "crneo" in texto:
             texto = texto.replace("crneo", "craneo")
             return texto
+        elif "misi6n" in texto:
+            texto = texto.replace("misi6n", "mision")
+            return texto
         elif "Ilave" in texto:
             texto = texto.replace("Ilave", "llave")
             return texto
@@ -2696,6 +2719,8 @@ class ImageFinderApp:
             file.write(f"XNav: {self.navX['text']}\n")
             file.write(f"YNav: {self.navY['text']}\n")
             file.write(f"hintNav: {self.navHint['text']}\n")
+
+            file.write(f"bandera1: {self.pistaDL6['text']}\n")
         
         self.status_label.config(text=f"Datos guardados")
 
@@ -2844,6 +2869,10 @@ class ImageFinderApp:
             if len(lines) > 34 and lines[34].strip():
                 texto = eval(lines[34].split(': ')[1].strip())
                 self.navHint.config(text=f"{texto}") 
+
+            if len(lines) > 35 and lines[35].strip():
+                texto = eval(lines[35].split(': ')[1].strip())
+                self.pistaDL6.config(text=f"{texto}") 
         
         self.status_label.config(text=f"Datos cargados")
 
@@ -3474,6 +3503,75 @@ class ImageFinderApp:
         else:
             self.hintBox(ruta_imagen)
 
+    def buscar_recursos_y_click(self, carpeta_imagenes, escalas=[1.0, 0.9, 0.8, 0.7]):
+        # Captura de pantalla antes de buscar las imágenes
+        self.capturaPantalla()
+        time.sleep(1)
+
+        # Cargar la captura de pantalla
+        img_grande = cv2.imread(ruta_imagen_captura, cv2.IMREAD_COLOR)
+
+        # Definir un umbral para determinar si hay coincidencia
+        umbral = 0.8
+
+        # Iterar sobre las imágenes en la carpeta
+        for imagen_nombre in os.listdir(carpeta_imagenes):
+            ruta_imagen_a_buscar = os.path.join(carpeta_imagenes, imagen_nombre)
+            img_fragmento = cv2.imread(ruta_imagen_a_buscar, cv2.IMREAD_COLOR)
+
+            if img_fragmento is None:
+                continue  # Ignorar archivos que no sean imágenes
+
+            # Probar diferentes escalas de la imagen fragmento
+            for escala in escalas:
+                # Redimensionar la imagen fragmento según la escala
+                ancho_escalado = int(img_fragmento.shape[1] * escala)
+                alto_escalado = int(img_fragmento.shape[0] * escala)
+                img_fragmento_escalado = cv2.resize(img_fragmento, (ancho_escalado, alto_escalado))
+
+                # Realizar la búsqueda de la imagen escalada
+                resultado = cv2.matchTemplate(img_grande, img_fragmento_escalado, cv2.TM_CCOEFF_NORMED)
+                min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+
+                # Si la imagen se encuentra con un valor de coincidencia mayor al umbral
+                if max_val >= umbral:
+                    # Obtener el tamaño de la imagen buscada
+                    altura, ancho = img_fragmento_escalado.shape[:2]
+
+                    # Obtener la posición de la esquina superior izquierda donde se encuentra la imagen
+                    top_left = max_loc
+
+                    # Calcular el centro de la imagen para hacer clic
+                    centro_x = top_left[0] + ancho // 2
+                    centro_y = top_left[1] + altura // 2
+
+                    # Hacer clic en el centro de la imagen encontrada
+                    pyautogui.click(centro_x, centro_y)
+                    print(f"Imagen '{imagen_nombre}' encontrada en ({centro_x}, {centro_y}), realizando clic.")
+                    return True  # Salir de la función al encontrar la primera coincidencia
+
+        print("Ninguna imagen encontrada.")
+        return False
+
+    def recolectar_recurso(self, ruta_imagen_recurso, cantidad):
+        recolectados = 0
+        cantidad_recolectar = cantidad
+
+        while recolectados <= cantidad_recolectar: 
+            #self.buscar_image(ruta_imagen_recurso)
+            self.buscar_recursos_y_click(ruta_imagen_recurso_hierro)
+            print('buscando recurso')
+            recolectados = recolectados + 1
+            time.sleep(3)
+    
+    def iniciar_recoleccion(self):
+        recurso = ruta_imagen_recurso_trigo
+        self.recolectar_recurso(recurso, 100)
+
+    def resetearPistas(self):
+        bX, bY = self.get4CoordFromText(self.pistaDL6['text'])
+        pyautogui.click(bX, bY)
+        time.sleep(2)
 
     # start/stop th
     def starTask(self):
@@ -3600,6 +3698,11 @@ class ImageFinderApp:
             #pyautogui.press('0')
         except ValueError as e:
             print(f"Error: {e}")
+            print("El programa is dead, vamos a limpiar banderitas y volver a iniciar")
+            self.resetearPistas()
+            time.sleep(2)
+            self.starTask()
+
 
         self.starTask()
 
