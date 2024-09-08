@@ -2240,11 +2240,17 @@ class ImageFinderApp:
             self.salida.update_idletasks()
 
         except Exception as e:
-        # Lanzar la excepción para que sea capturada en startTask()
+            # Lanzar la excepción para que sea capturada en startTask()
             print(f"Error en checkSalida: {e}")
             #print('Intentando retomar captura de salida')
             #self.mostrar_area(self.checkSalida, self.area_salida)
             raise
+        
+        finally:
+            # Liberar recursos de las imágenes para evitar acumulación de memoria
+            del imagen, imagen_gris, imagen_contrastada, imagen_umbral
+            cv2.destroyAllWindows()  # Asegurarse de que cualquier ventana de OpenCV se cierre correctamente
+
 
     def capturaPantalla(self):
         imagen = pyautogui.screenshot()
@@ -3283,7 +3289,7 @@ class ImageFinderApp:
         if "Perforatroz" in texto:
             #buscar_y_clickear_dofus(ruta_imagen_dofus)
             self.clickEnImagen(ruta_imagen_minBusqueda, 100)
-            #self.checkGameCoord()
+            self.checkGameCoord()
             time.sleep(2)
             comienzo_perfo_actual = self.coordActual['text']
             self.condicion_perforatroz(texto_hasta_coma, comienzo_perfo_actual)
@@ -3696,6 +3702,7 @@ class ImageFinderApp:
         pyautogui.click(teleport_zaapX, teleport_zaapY)
         #self.clickEnImagen(ruta_imagen_teleport_btn)
         time.sleep(2)
+        self.checkGameCoord()
 
     def resetTreasure(self):
         self.etapa_iniciada = False
@@ -3766,7 +3773,7 @@ class ImageFinderApp:
                 #self.clickEnImagen(ruta_imagen_merkasako)
                 #self.clickEnImagen(ruta_imagen_zaap_merka)
                 #self.clickEnImagen(ruta_imagen_buscar_zaap)
-                
+                self.irACoordenadaMasCercana(nombre_cercano)
                 
                 #self.coordActual.config(text=f"{game_coords}")
                 #time.sleep(1)
@@ -3774,7 +3781,7 @@ class ImageFinderApp:
                 print(f"Salida {self.salida['text']}")
                 print(f"Coordenada actual {self.coordActual['text']}")
                 if(f"{self.salida['text']}" != f"{self.coordActual['text']}"):
-                    self.irACoordenadaMasCercana(nombre_cercano)
+                    
                     chatX, chatY = self.get4CoordFromText(self.chat['text'])
                     #self.clickEnImagen(ruta_imagen_chat_box)
                     pyautogui.click(chatX, chatY)
