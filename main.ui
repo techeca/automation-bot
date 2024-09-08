@@ -44,7 +44,7 @@
                 <property name="relief">flat</property>
                 <property name="takefocus">false</property>
                 <property name="text" translatable="yes">None</property>
-                <property name="width">15</property>
+                <property name="width">18</property>
                 <layout manager="grid">
                   <property name="column">1</property>
                   <property name="ipadx">10</property>
@@ -267,8 +267,9 @@
             <property name="width">300</property>
             <layout manager="grid">
               <property name="column">0</property>
-              <property name="ipadx">12</property>
+              <property name="ipadx">6</property>
               <property name="ipady">6</property>
+              <property name="padx">3</property>
               <property name="row">2</property>
               <property name="sticky">nw</property>
             </layout>
@@ -299,6 +300,16 @@
                 <layout manager="pack">
                   <property name="fill">x</property>
                   <property name="padx">5</property>
+                  <property name="side">left</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Button" id="button33" named="True">
+                <property name="command" type="command" cbtype="simple">resetTreasure</property>
+                <property name="text" translatable="yes">Reset</property>
+                <layout manager="pack">
+                  <property name="fill">x</property>
                   <property name="side">left</property>
                 </layout>
               </object>
@@ -349,7 +360,7 @@
                 <property name="relief">flat</property>
                 <property name="takefocus">false</property>
                 <property name="text" translatable="yes">None</property>
-                <property name="width">15</property>
+                <property name="width">20</property>
                 <layout manager="grid">
                   <property name="column">1</property>
                   <property name="ipadx">10</property>
@@ -1519,8 +1530,9 @@
             <property name="width">300</property>
             <layout manager="grid">
               <property name="column">1</property>
-              <property name="ipadx">12</property>
+              <property name="ipadx">6</property>
               <property name="ipady">6</property>
+              <property name="padx">3</property>
               <property name="row">2</property>
               <property name="sticky">nw</property>
             </layout>
