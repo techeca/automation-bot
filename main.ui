@@ -273,23 +273,26 @@
               <property name="row">2</property>
               <property name="sticky">nw</property>
             </layout>
+            <containerlayout manager="grid">
+              <property name="anchor">center</property>
+            </containerlayout>
             <child>
               <object class="ttk.Button" id="btnStartTask" named="True">
                 <property name="command" type="command" cbtype="simple">starTask</property>
                 <property name="text" translatable="yes">Start</property>
-                <layout manager="pack">
-                  <property name="fill">x</property>
-                  <property name="padx">6</property>
-                  <property name="side">left</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="row">0</property>
+                  <property name="sticky">w</property>
                 </layout>
               </object>
             </child>
             <child>
               <object class="ttk.Button" id="button23" named="True">
                 <property name="text" translatable="yes">Stop</property>
-                <layout manager="pack">
-                  <property name="fill">x</property>
-                  <property name="side">left</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="row">0</property>
                 </layout>
               </object>
             </child>
@@ -297,10 +300,9 @@
               <object class="ttk.Button" id="btnCheck" named="True">
                 <property name="command" type="command" cbtype="simple">loadData</property>
                 <property name="text" translatable="yes">Check</property>
-                <layout manager="pack">
-                  <property name="fill">x</property>
-                  <property name="padx">5</property>
-                  <property name="side">left</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="row">0</property>
                 </layout>
               </object>
             </child>
@@ -308,9 +310,20 @@
               <object class="ttk.Button" id="button33" named="True">
                 <property name="command" type="command" cbtype="simple">resetTreasure</property>
                 <property name="text" translatable="yes">Reset</property>
-                <layout manager="pack">
-                  <property name="fill">x</property>
-                  <property name="side">left</property>
+                <layout manager="grid">
+                  <property name="column">3</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="ttk.Checkbutton" id="checkPerforatroz" named="True">
+                <property name="text" translatable="yes">Saltar Perforatroz</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="pady">3</property>
+                  <property name="row">4</property>
+                  <property name="sticky">s</property>
                 </layout>
               </object>
             </child>

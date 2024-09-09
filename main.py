@@ -7,7 +7,7 @@ import pytesseract
 
 import os
 import threading
-from tkinter import ttk, Tk, Button, Label, Listbox, Scrollbar, Toplevel, Canvas
+from tkinter import ttk, Tk, Button, Label, Listbox, Scrollbar, Toplevel, Canvas, BooleanVar
 import pathlib
 import pygubu
 import re
@@ -66,6 +66,7 @@ ruta_imagen_navegador2 = './treasureHunt/nav2.png'
 ruta_imagen_validar = './treasureHunt/validar.png'
 ruta_imagen_banderita_brillante = './treasureHunt/banderita_brillante.png'
 ruta_imagen_subirLvl = './treasureHunt/lvlok.png'
+ruta_imagen_cerrar_busqueda = './treasureHunt/cerrar_busqueda.png'
 
 #rutas recursos
 ruta_imagen_recurso_trigo = './resources/Trigo.png'
@@ -1656,6 +1657,10 @@ class ImageFinderApp:
         self.cboxHuntlvl = self.builder.get_object('cboxHuntlvl')
         self.pistaDL6 = self.builder.get_object('lblPistaDL6')
 
+        self.buscarPerforatroz = self.builder.get_object('checkPerforatroz')
+        self.buscar_var = BooleanVar()
+        
+
         #Para resources
         self.image_offset = 25
         self.image_path = None
@@ -2436,6 +2441,12 @@ class ImageFinderApp:
         elif "Champifién" in texto:
             texto = texto.replace("Champifién", "Champinon")
             return texto
+        elif "'Símbolo de mision" in texto:
+            texto = texto.replace("'Símbolo de mision", "Simbolo de mision")
+            return texto
+        elif "Grabado de símbolo de mi:" in texto:
+            texto = texto.replace("Grabado de símbolo de mi:", "Grabado de simbolo de mision")
+            return texto
         elif "vinturén" in texto:
             texto = texto.replace("vinturén", "Cinturon")
             return texto
@@ -2642,6 +2653,7 @@ class ImageFinderApp:
             file.write(f"hintNav: {self.navHint['text']}\n")
 
             file.write(f"bandera1: {self.pistaDL6['text']}\n")
+            file.write(f"buscar_perforatroz: {self.buscar_var.get()}\n")
         
         self.status_label.config(text=f"Datos guardados")
 
@@ -2794,7 +2806,15 @@ class ImageFinderApp:
             if len(lines) > 35 and lines[35].strip():
                 texto = eval(lines[35].split(': ')[1].strip())
                 self.pistaDL6.config(text=f"{texto}") 
-        
+            
+            if len(lines) > 36 and lines[36].strip():
+                texto = eval(lines[36].split(': ')[1].strip())
+                #self.pistaDL6.config(text=f"{texto}") 
+                nuevo_valor = texto #== "True"
+                self.buscar_var.set(nuevo_valor)
+                self.buscarPerforatroz.config(variable=self.buscar_var)
+                self.buscarPerforatroz.update_idletasks()
+
         self.status_label.config(text=f"Datos cargados")
 
     def resize_image_if_needed(self, imagen, plantilla):
@@ -3282,6 +3302,11 @@ class ImageFinderApp:
             time.sleep(1)
             self.ha_llegado_destino(ruta_imagen_llegado_destino)  # Llamada recursiva
 
+    def eliminarBusqueda(self):
+        self.clickEnImagen(ruta_imagen_cerrar_busqueda)
+        time.sleep(1)
+        pyautogui.press('enter')
+
     def pista(self, texto_hasta_coma):
         texto_hasta_coma = texto_hasta_coma
         texto = self.OCR(ruta_imagen_recortada)
@@ -3293,11 +3318,16 @@ class ImageFinderApp:
         #print(texto_hasta_coma)
         if "Perforatroz" in texto:
             #buscar_y_clickear_dofus(ruta_imagen_dofus)
-            self.clickEnImagen(ruta_imagen_minBusqueda, 100)
-            self.checkGameCoord()
-            time.sleep(2)
-            comienzo_perfo_actual = self.coordActual['text']
-            self.condicion_perforatroz(texto_hasta_coma, comienzo_perfo_actual)
+            if self.buscar_var == False:
+                self.clickEnImagen(ruta_imagen_minBusqueda, 100)
+                self.checkGameCoord()
+                time.sleep(2)
+                comienzo_perfo_actual = self.coordActual['text']
+                self.condicion_perforatroz(texto_hasta_coma, comienzo_perfo_actual)
+            else:
+                #eliminar busqueda()
+                self.eliminarBusqueda()
+                raise Exception("Busqueda eliminada")
         else:
             #pyautogui.tripleClick(755, 727)
             self.hintBox(ruta_imagen_hint_box)
@@ -3431,8 +3461,15 @@ class ImageFinderApp:
                     self.navegador_actual = ruta_imagen_navegador1
                 time.sleep(1)
                 #self.checkSalida()
-                inicio = self.salida['text']
+                inicio = self.coordActual['text']
                 self.coordEnNav(inicio)
+                #self.
+                self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_1)
+                time.sleep(0.5)
+                texto_hasta_coma = self.detectar_direccion()
+                time.sleep(0.5)
+                self.moverEnDireccion(texto_hasta_coma)
+                #self.recorte_Imagen(ruta_imagen_captura, self.area_pista_1)
                 time.sleep(1)
                 self.hintBox(ruta_imagen)
         else:
