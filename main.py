@@ -2426,6 +2426,9 @@ class ImageFinderApp:
         elif "vinturén" in texto:
             texto = texto.replace("vinturén", "Cinturon")
             return texto
+        elif "Caiia" in texto:
+            texto = texto.replace("Caiia", "Cana")
+            return texto
         elif "coraz6n" in texto:
             texto = texto.replace("coraz6n", "corazon")
             return texto
