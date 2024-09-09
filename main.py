@@ -3840,13 +3840,15 @@ class ImageFinderApp:
                     
                     pyautogui.tripleClick(chatX, chatY)
                     time.sleep(1)
-                    pyautogui.write(f"/travel {primer_coord} {segundo_coord}")
-                    time.sleep(1)
-                    pyautogui.press('enter')
-                    time.sleep(0.5) 
-                    pyautogui.press('enter')
-                    self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-                    time.sleep(1)
+
+                    if(f"{self.salida['text']}" != f"{self.coordActual['text']}"):
+                        pyautogui.write(f"/travel {primer_coord} {segundo_coord}")
+                        time.sleep(1)
+                        pyautogui.press('enter')
+                        time.sleep(0.5) 
+                        pyautogui.press('enter')
+                        self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                        time.sleep(1)
                     self.eliminar_chat()
                     time.sleep(1)
 
