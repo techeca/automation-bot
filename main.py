@@ -3190,6 +3190,18 @@ class ImageFinderApp:
             time.sleep(1)
             self.eliminar_chat()
             time.sleep(1)
+        if "'21', '-26'" in texto:
+            pyautogui.write('/travel 24 -28')
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+            time.sleep(1)
+            self.eliminar_chat()
+            time.sleep(1)
         pyautogui.hotkey('ctrl', 'v')
         pyautogui.press('enter')
         time.sleep(0.5)
@@ -3760,7 +3772,7 @@ class ImageFinderApp:
                 time.sleep(1)
                 buscar_y_clickear_salir_puerta(ruta_imagen_salir_puerta)
                 time.sleep(1)
-                self.irACoordenadaMasCercana(nombre_cercano)
+                #self.irACoordenadaMasCercana(nombre_cercano)
                 
             self.capturaPantalla()
             print('captura realizada')
@@ -3786,7 +3798,7 @@ class ImageFinderApp:
             print(f"etapa actual: {primer_numero}, {segundo_numero}")
             print(f"numero de pista: {self.numero_pista}")
 
-            if (self.numero_pista == 0): #primer_numero == 1 and 
+            if (primer_numero == 1 and self.numero_pista == 0): #primer_numero == 1 and 
                 coordenada_cercana, nombre_cercano = coordenada_mas_cercana(primer_coord, segundo_coord, coordenadas_zaap)
                 print(f"El zaap más cercano a la Salida es: {nombre_cercano}, {coordenada_cercana}")
 
@@ -3796,7 +3808,7 @@ class ImageFinderApp:
                 #self.clickEnImagen(ruta_imagen_zaap_merka)
                 #self.clickEnImagen(ruta_imagen_buscar_zaap)
                 
-                #self.irACoordenadaMasCercana(nombre_cercano)
+                self.irACoordenadaMasCercana(nombre_cercano)
                 
                 #self.coordActual.config(text=f"{game_coords}")
                 #time.sleep(1)
@@ -3804,7 +3816,7 @@ class ImageFinderApp:
                 print(f"Salida {self.salida['text']}")
                 print(f"Coordenada actual {self.coordActual['text']}")
                 if(f"{self.salida['text']}" != f"{self.coordActual['text']}"):
-                    self.irACoordenadaMasCercana(nombre_cercano)
+                    #self.irACoordenadaMasCercana(nombre_cercano)
                     chatX, chatY = self.get4CoordFromText(self.chat['text'])
                     #self.clickEnImagen(ruta_imagen_chat_box)
                     pyautogui.click(chatX, chatY)
@@ -3836,6 +3848,7 @@ class ImageFinderApp:
                         time.sleep(1)
                         self.eliminar_chat()
                         time.sleep(1)
+                    
                         #pyautogui.write('/travel 21, -37')
                     
                     pyautogui.tripleClick(chatX, chatY)
