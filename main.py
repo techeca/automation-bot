@@ -2429,6 +2429,9 @@ class ImageFinderApp:
         elif "coraz6n" in texto:
             texto = texto.replace("coraz6n", "corazon")
             return texto
+        elif "brochete" in texto:
+            texto = texto.replace("brochete", "brocheta")
+            return texto
         elif "plstico" in texto:
             texto = texto.replace("plstico", "plastico")
             return texto
@@ -2760,10 +2763,12 @@ class ImageFinderApp:
             if len(lines) > 29 and lines[29].strip():
                 texto_entryPytesseract = lines[29].strip()
                 texto_entryPytesseract = texto_entryPytesseract.replace('ruta_tesseract: ', '')
+                self.entryPytesseract.delete(0, 'end') 
                 self.entryPytesseract.insert(0, texto_entryPytesseract)
 
             if len(lines) > 30 and lines[30].strip():
                 texto_umbral = eval(lines[30].split(': ')[1].strip())
+                self.umbral.delete(0, 'end')
                 self.umbral.insert(0, texto_umbral)     
 
             if len(lines) > 31 and lines[31].strip():
@@ -3536,6 +3541,7 @@ class ImageFinderApp:
         time.sleep(2)
 
     def restablecerEtapa(self):
+        self.numero_pista == 0
         enMerka = self.buscar_image(ruta_imagen_zaap_merka)
         time.sleep(1)
         hayBanderitaActivada = self.buscar_image(ruta_imagen_banderita_brillante)
@@ -3892,7 +3898,9 @@ class ImageFinderApp:
             print(f"Error: {e}")
             print("El programa is dead, vamos a limpiar banderitas y volver a iniciar")
             #self.mostrar_area(self.checkSalida, self.area_salida)
-            print("Limpiando")
+            
+            print("Cargando datos y Limpiando")
+            self.load_from_text_file()
             self.restablecerEtapa()
             time.sleep(1)
             print('iniciando otra vez la busqueda')
