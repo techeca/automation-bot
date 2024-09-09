@@ -3309,7 +3309,7 @@ class ImageFinderApp:
         #print(texto_hasta_coma)
         if "Perforatroz" in texto:
             #buscar_y_clickear_dofus(ruta_imagen_dofus)
-            if self.buscar_var == True:
+            if self.buscar_var.get() == True:
                 self.clickEnImagen(ruta_imagen_minBusqueda, 100)
                 self.checkGameCoord()
                 time.sleep(2)
