@@ -3759,6 +3759,8 @@ class ImageFinderApp:
                 buscar_y_clickear_salir(ruta_imagen_salir)
                 time.sleep(1)
                 buscar_y_clickear_salir_puerta(ruta_imagen_salir_puerta)
+                time.sleep(1)
+                self.irACoordenadaMasCercana(nombre_cercano)
                 
             self.capturaPantalla()
             print('captura realizada')
@@ -3775,7 +3777,6 @@ class ImageFinderApp:
             segundo_numero = int(segundo_numero)
 
             salida_actual_texto = self.salida['text']
-            print(salida_actual_texto)
             salida_actual_texto = self.cleanText(salida_actual_texto)
             primer_coord, segundo_coord = salida_actual_texto.split(',')
             primer_coord = int(primer_coord)
@@ -3794,7 +3795,8 @@ class ImageFinderApp:
                 #self.clickEnImagen(ruta_imagen_merkasako)
                 #self.clickEnImagen(ruta_imagen_zaap_merka)
                 #self.clickEnImagen(ruta_imagen_buscar_zaap)
-                self.irACoordenadaMasCercana(nombre_cercano)
+                
+                #self.irACoordenadaMasCercana(nombre_cercano)
                 
                 #self.coordActual.config(text=f"{game_coords}")
                 #time.sleep(1)
@@ -3802,7 +3804,7 @@ class ImageFinderApp:
                 print(f"Salida {self.salida['text']}")
                 print(f"Coordenada actual {self.coordActual['text']}")
                 if(f"{self.salida['text']}" != f"{self.coordActual['text']}"):
-                    
+                    self.irACoordenadaMasCercana(nombre_cercano)
                     chatX, chatY = self.get4CoordFromText(self.chat['text'])
                     #self.clickEnImagen(ruta_imagen_chat_box)
                     pyautogui.click(chatX, chatY)
