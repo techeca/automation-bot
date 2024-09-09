@@ -1450,35 +1450,7 @@ def recorte_verificacion_pistas(ruta_imagen):
     # Guardar el recorte en un archivo (opcional)
     cv2.imwrite('captura_recorte.png', recorte)
 
-def cantidad_pistas(ruta_imagen):
-    try:
-        # Cargar la imagen de la captura de pantalla
-        captura_pantalla = cv2.imread(ruta_imagen)
-        if captura_pantalla is None:
-            raise ValueError(f"No se pudo cargar la imagen de captura de pantalla desde {ruta_imagen}")
 
-        # Cargar la imagen de referencia
-        referencia = cv2.imread(ruta_imagen_interrogacion)
-        if referencia is None:
-            raise ValueError(f"No se pudo cargar la imagen de referencia desde {ruta_imagen_interrogacion}")
-
-        # Buscar la imagen de referencia en la captura de pantalla
-        resultado = cv2.matchTemplate(captura_pantalla, referencia, cv2.TM_CCOEFF_NORMED)
-
-        # Definir un umbral de confianza
-        umbral_confianza = 0.8
-        ubicaciones = np.where(resultado >= umbral_confianza)
-
-        # Convertir ubicaciones a una lista de coordenadas
-        ubicaciones = list(zip(*ubicaciones[::-1]))
-
-        # Contar las ocurrencias encontradas
-        cantidad_ocurrencias = len(ubicaciones)
-        return cantidad_ocurrencias
-
-    except Exception as e:
-        print(f"Error al procesar las imágenes: {e}")
-        return 0
 
 def buscarXenNavegador(ruta_imagen):
     global intentos_realizados
@@ -1923,35 +1895,10 @@ class ImageFinderApp:
         self.area_chat = self.search_area
         self.chat.config(text=f"{self.area_chat}")
     
-    def configDireccionLPista1(self):
-        self.select_area()
-        area_btnMerkasako = self.search_area
-        self.btnMerkasako.config(text=f"{area_btnMerkasako}")
-
-    def configDireccionLPista2(self):
-        self.select_area()
-        area_zaap_merkasako = self.search_area
-        self.zaapMerkasako.config(text=f"{area_zaap_merkasako}")
-
-    def configDireccionLPista3(self):
-        self.select_area()
-        area_buscar_zaap = self.search_area
-        self.buscarZaap.config(text=f"{area_buscar_zaap}")
-
-    def configDireccionLPista4(self):
-        self.select_area()
-        area_teleport_merka = self.search_area
-        self.teleportMerka.config(text=f"{area_teleport_merka}")
-
     def configSetCoordchat(self):
         self.select_area()
         texto_coord_chat = self.search_area
         self.coordChat.config(text=f"{texto_coord_chat}")
-
-    def configDireccionLPista6(self):
-        self.select_area()
-        self.area_pistaDL_6 = self.search_area
-        self.pistaDL6.config(text=f"{self.area_pistaDL_6}")
 
     def configChat(self):
         self.select_area()
@@ -2189,6 +2136,35 @@ class ImageFinderApp:
         pyautogui.click(merkaX, merkaY)
         time.sleep(2)
 
+    def cantidad_pistas(self, ruta_imagen):
+        try:
+            # Cargar la imagen de la captura de pantalla
+            captura_pantalla = cv2.imread(ruta_imagen)
+            if captura_pantalla is None:
+                raise ValueError(f"No se pudo cargar la imagen de captura de pantalla desde {ruta_imagen}")
+
+            # Cargar la imagen de referencia
+            referencia = cv2.imread(ruta_imagen_interrogacion)
+            if referencia is None:
+                raise ValueError(f"No se pudo cargar la imagen de referencia desde {ruta_imagen_interrogacion}")
+
+            # Buscar la imagen de referencia en la captura de pantalla
+            resultado = cv2.matchTemplate(captura_pantalla, referencia, cv2.TM_CCOEFF_NORMED)
+
+            # Definir un umbral de confianza
+            umbral_confianza = 0.8
+            ubicaciones = np.where(resultado >= umbral_confianza)
+
+            # Convertir ubicaciones a una lista de coordenadas
+            ubicaciones = list(zip(*ubicaciones[::-1]))
+
+            # Contar las ocurrencias encontradas
+            cantidad_ocurrencias = len(ubicaciones)
+            return cantidad_ocurrencias
+
+        except Exception as e:
+            print(f"Error al procesar las imágenes: {e}")
+            return 0
     
     def checkEtapa(self):
         self.recorte_Imagen(ruta_imagen_captura, self.area_etapa_actual)
@@ -2199,7 +2175,7 @@ class ImageFinderApp:
 
     def checkPistas(self):
         self.recorte_Imagen(ruta_imagen_captura, self.area_pistas)
-        cantidad = cantidad_pistas(ruta_imagen_recortada)
+        cantidad = self.cantidad_pistas(ruta_imagen_recortada)
         print(cantidad)
         pistas_actual = cantidad
         self.cantidadPistas.config(text=f"{pistas_actual}")
@@ -2473,6 +2449,9 @@ class ImageFinderApp:
             return texto
         elif "Ankam:" in texto:
             texto = texto.replace("Ankam:", "Ankama")
+            return texto
+        elif "claveteado:" in texto:
+            texto = texto.replace("claveteado:", "claveteado")
             return texto
         elif "misi6n" in texto:
             texto = texto.replace("misi6n", "mision")
@@ -3303,7 +3282,7 @@ class ImageFinderApp:
             self.ha_llegado_destino(ruta_imagen_llegado_destino)  # Llamada recursiva
 
     def eliminarBusqueda(self):
-        self.clickEnImagen(ruta_imagen_cerrar_busqueda)
+        self.clickEnImagen(ruta_imagen_cerrar_busqueda, 100)
         time.sleep(1)
         pyautogui.press('enter')
 
@@ -3318,7 +3297,7 @@ class ImageFinderApp:
         #print(texto_hasta_coma)
         if "Perforatroz" in texto:
             #buscar_y_clickear_dofus(ruta_imagen_dofus)
-            if self.buscar_var == False:
+            if self.buscar_var == True:
                 self.clickEnImagen(ruta_imagen_minBusqueda, 100)
                 self.checkGameCoord()
                 time.sleep(2)
