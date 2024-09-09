@@ -2430,6 +2430,9 @@ class ImageFinderApp:
         if "Afiche" in texto:
             texto = texto
             return texto
+        elif "Grabado de lave" in texto:
+            texto = texto.replace("Grabado de lave", "Grabado de llave")
+            return texto
         elif "Champifién" in texto:
             texto = texto.replace("Champifién", "Champinon")
             return texto
@@ -3199,7 +3202,9 @@ class ImageFinderApp:
 
     def eliminar_chat(self):
         #pyautogui.press('w')
-        chatBox(ruta_imagen_chat_box)
+        #chatBox(ruta_imagen_chat_box)
+        chatX, chatY = self.get4CoordFromText(self.chat['text'])
+        pyautogui.tripleClick(chatX, chatY)
         pyautogui.write('/clear')
         pyautogui.press('enter')
         time.sleep(0.5)
@@ -3416,7 +3421,7 @@ class ImageFinderApp:
                 cnac2_x = max_loc2[0] + ancho2// 2
                 nav2_y = max_loc2[1] + altura2 // 2
                 # Haz clic en el centro de la imagen encontrada
-                #pyautogui.click(cnac2_x, nav2_y)
+                pyautogui.click(cnac2_x, nav2_y)
                 time.sleep(1)
                 if self.navegador_actual == ruta_imagen_navegador1:
                     self.clickEnImagen(ruta_imagen_navegador2, 100)
