@@ -130,6 +130,10 @@ def coordenada_mas_cercana(x, y, coordenadas):
             coordenada_mas_cercana = (coord_x, coord_y)
             nombre_mas_cercano = nombre
 
+        if x == -55 and y == -64:
+            coordenada_mas_cercana = (-78, -41)
+            nombre_mas_cercano = "Burgo"
+
     print(f"La coordenada más cercana es: {coordenada_mas_cercana} - {nombre_mas_cercano} con una distancia de {distancia_minima:.2f}")
     return coordenada_mas_cercana, nombre_mas_cercano
 
@@ -2426,6 +2430,9 @@ class ImageFinderApp:
         elif "vinturén" in texto:
             texto = texto.replace("vinturén", "Cinturon")
             return texto
+        elif "helado'" in texto:
+            texto = texto.replace("helado'", "helado")
+            return texto
         elif "Caiia" in texto:
             texto = texto.replace("Caiia", "Cana")
             return texto
@@ -3903,6 +3910,7 @@ class ImageFinderApp:
             #self.mostrar_area(self.checkSalida, self.area_salida)
             
             print("Cargando datos y Limpiando")
+            cv2.destroyAllWindows()
             self.load_from_text_file()
             self.restablecerEtapa()
             time.sleep(1)
