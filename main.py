@@ -14,6 +14,7 @@ import re
 import math
 import ast
 import pyperclip
+import gc
 
 PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "main.ui"
@@ -107,7 +108,8 @@ coordenadas_zaap = [
     (-25, 12, "Camino de las caravanas"),
     (-26, 37, "Coraza"),
     (-16, 1, "Pueblo de los ganaderos"),
-    (-27, -36, "Campos de cania")
+    (-27, -36, "Campos de cania"),
+    (13, 26, "Sufokia")
 ]
 
 # Calcular la distancia Euclidiana
@@ -3660,72 +3662,98 @@ class ImageFinderApp:
     def buscar_y_clickear_monstruo(self, ruta_imagen):
         global intentos_realizados
         global inBattle
-        # Se hace un seguimiento de los intentos realizados
+
+        # Seguimiento de los intentos realizados
         intentos_realizados += 1
+
         # Límite de intentos alcanzado
         if intentos_realizados > limite_intentos:
             print("Límite de intentos alcanzado. La imagen no se encontró.")
-            return
-        # Carga la imagen de referencia y la captura de pantalla
+            return False
+
+        # Cargar las imágenes de referencia
         imagen_referencia = cv2.imread(ruta_imagen)
         imagen_referencia2 = cv2.imread(ruta_imagen_cerrar_bat)
         imagen_referencia3 = cv2.imread(ruta_imagen_subirLvl)
-        captura_pantalla = pyautogui.screenshot()
-        captura_pantalla_np = np.array(captura_pantalla)
-        captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-        # Obtén las dimensiones de la imagen de referencia
-        altura, ancho, _ = imagen_referencia.shape
-        altura2, ancho2, _ = imagen_referencia2.shape
-        altura3, ancho3, _ = imagen_referencia3.shape
-        # Encuentra la posición de la imagen de referencia en la captura de pantalla
-        resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-        resultado2 = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia2, cv2.TM_CCOEFF_NORMED)
-        resultado3 = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia3, cv2.TM_CCOEFF_NORMED)
-        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-        min_val2, max_val2, min_loc2, max_loc2 = cv2.minMaxLoc(resultado2)
-        min_val3, max_val3, min_loc3, max_loc3 = cv2.minMaxLoc(resultado3)
-        # Define un umbral de confianza (puedes ajustar según tus necesidades)
-        umbral_confianza = 0.8
-        if max_val >= umbral_confianza or max_val2 >= umbral_confianza or max_val3 >= umbral_confianza:
-            # Obtiene las coordenadas del centro de la imagen de referencia
-            
-            # Haz clic en el centro de la imagen encontrada si es monstruo
-            if(max_val >= umbral_confianza):
-                centro_x = max_loc[0] + ancho // 2
-                centro_y = max_loc[1] + altura // 2
-                pyautogui.tripleClick(centro_x, centro_y)
 
-            #Haz clic en el centro de la imagen encontrada si es cerrar
-            if(max_val2 >= umbral_confianza):
-                inBattle = False
-                btX = max_loc2[0] + ancho2 // 2
-                btY = max_loc2[1] + altura2 // 2
-                pyautogui.click(btX, btY)
+        if imagen_referencia is None or imagen_referencia2 is None or imagen_referencia3 is None:
+            print("Error al cargar una o más imágenes de referencia.")
+            return False
 
-            #Haz clic en el centro de la imagen encontrada si es subir de level
-            if(max_val3 >= umbral_confianza):
-                inBattle = False
-                lvlOkX = max_loc3[0] + ancho3 // 2
-                lvlOkY = max_loc3[1] + altura3 // 2
-                pyautogui.click(lvlOkX, lvlOkY)
-                
-            time.sleep(1)
-        else:
-            self.buscar_y_clickear_monstruo(ruta_imagen_monstruo)
+        try:
+            # Captura la pantalla
+            captura_pantalla = pyautogui.screenshot()
+            captura_pantalla_np = np.array(captura_pantalla)
+            captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
+
+            # Obtener las dimensiones de las imágenes de referencia
+            altura, ancho, _ = imagen_referencia.shape
+            altura2, ancho2, _ = imagen_referencia2.shape
+            altura3, ancho3, _ = imagen_referencia3.shape
+
+            # Encontrar las posiciones de las imágenes de referencia en la captura de pantalla
+            resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+            resultado2 = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia2, cv2.TM_CCOEFF_NORMED)
+            resultado3 = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia3, cv2.TM_CCOEFF_NORMED)
+
+            # Obtener los valores máximos de coincidencia
+            _, max_val, _, max_loc = cv2.minMaxLoc(resultado)
+            _, max_val2, _, max_loc2 = cv2.minMaxLoc(resultado2)
+            _, max_val3, _, max_loc3 = cv2.minMaxLoc(resultado3)
+
+            # Definir el umbral de confianza
+            umbral_confianza = 0.8
+
+            # Si se encuentra una coincidencia con suficiente confianza, realizar clic
+            if max_val >= umbral_confianza or max_val2 >= umbral_confianza or max_val3 >= umbral_confianza:
+                # Si es un monstruo
+                if max_val >= umbral_confianza:
+                    centro_x = max_loc[0] + ancho // 2
+                    centro_y = max_loc[1] + altura // 2
+                    pyautogui.tripleClick(centro_x, centro_y)
+
+                # Si es cerrar batalla
+                if max_val2 >= umbral_confianza:
+                    inBattle = False
+                    btX = max_loc2[0] + ancho2 // 2
+                    btY = max_loc2[1] + altura2 // 2
+                    pyautogui.click(btX, btY)
+
+                # Si es subir de nivel
+                if max_val3 >= umbral_confianza:
+                    inBattle = False
+                    lvlOkX = max_loc3[0] + ancho3 // 2
+                    lvlOkY = max_loc3[1] + altura3 // 2
+                    pyautogui.click(lvlOkX, lvlOkY)
+
+                time.sleep(1)
+                return True  # Imagen encontrada
+
+            else:
+                # Si no se encontró ninguna coincidencia, intenta otra acción
+                self.buscar_y_clickear_monstruo(ruta_imagen)
+                return False
+
+        finally:
+            # Liberar recursos de OpenCV
+            del imagen_referencia, imagen_referencia2, imagen_referencia3, captura_pantalla_cv2
+            gc.collect()  # Llamar al recolector de basura para limpiar memoria
+            cv2.destroyAllWindows()  # Asegurarse de que cualquier ventana de OpenCV se cierre correctamente
+
 
     def pelea(self):
         global inBattle
         inBattle = True
         #time.sleep(2)
         #pyautogui.press('esc')
-        #time.sleep(2)
+        time.sleep(2)
         pyautogui.press('F1')
-        time.sleep(1)
+        time.sleep(2)
         pyautogui.press('F1')
         time.sleep(6)
         contador = 1
         while inBattle == True:  # Mientras la condición sea verdadera
-            time.sleep(6)
+            time.sleep(5)
             #2 atks
             pyautogui.press('1')
             time.sleep(2)
