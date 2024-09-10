@@ -709,7 +709,13 @@ class ImageFinderApp:
             #self.buscar_image(ruta_imagen_a_buscar)
             return False
 
+    # Funciones del bot
+
+
+
+    #--------------------------------#
     # Funciones para configurar areas
+    #--------------------------------#
     def configCoordActual(self):
         self.select_area()
         self.area_game_coord = self.search_area
@@ -850,12 +856,18 @@ class ImageFinderApp:
         texto = self.search_area
         self.navHint.config(text=f"{texto}")
 
-    ##probar
+     ##probar
+    
     def configArea(self, container):
         self.select_area()
         texto = self.search_area
         container.config(text=f"{texto}")
 
+
+    #--------------------#
+    # Funciones para OCR
+    #--------------------#
+    #   
     def get4CoordFromText(self, texto):
         texto = texto.strip("()")
         coords = texto.split(", ")
@@ -1061,7 +1073,7 @@ class ImageFinderApp:
         pyautogui.click(merkaX, merkaY)
         time.sleep(2)
 
-    def cantidad_pistas(self, ):
+    def cantidad_pistas(self):
         try:
             # Cargar la imagen de la captura de pantalla
             captura_pantalla = cv2.imread(ruta_imagen_recortada)
@@ -1134,8 +1146,6 @@ class ImageFinderApp:
 
             # Realizar OCR en la imagen preprocesada
             salida_actual_texto = pytesseract.image_to_string(imagen_umbral)
-            print('texto generado por pytesseract')
-            print(salida_actual_texto)
 
             # Extraer números de la salida
             salida_actual_texto = re.findall(r'-?\d+', salida_actual_texto)
@@ -2171,7 +2181,7 @@ class ImageFinderApp:
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_6)
+            self.recorte_Imagen(self.area_flecha_6)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
