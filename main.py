@@ -378,1086 +378,6 @@ def buscar_y_clickear_salir_puerta(ruta_imagen):
     else:
         buscar_y_clickear_salir_puerta(ruta_imagen_salir_puerta)
 
-def verificacion_pistas():
-    recorte_verificacion_pistas(ruta_imagen_captura)
-    time.sleep(1)
-    cantidad_pistas(ruta_imagen_recortada)
-    cantidad = cantidad_pistas(ruta_imagen_recortada)
-    print(cantidad)
-    # Realizar acciones según la cantidad de símbolos "?"
-    if cantidad == 0:
-        print("Cero '?'")
-        print("Pista1")
-        recorte(ruta_imagen_captura)
-        cordenadas()
-        recorte_primerapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas()
-        recorte_primerapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-        etapa_finalizada('etapa_finalizada.png')
-    if cantidad == 1:
-        print("Uno '?'")
-        print("Pista1")
-        recorte(ruta_imagen_captura)
-        cordenadas()
-        recorte_primerapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas()
-        recorte_primerapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-        print("Pista2")
-        recorte_segundapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_2pista()
-        recorte_segundapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-        etapa_finalizada('etapa_finalizada.png')
-    elif cantidad == 2:
-        print("Dos '?'")
-        print("Pista1")
-        recorte(ruta_imagen_captura)
-        cordenadas()
-        recorte_primerapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas()
-        recorte_primerapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-        print("Pista2")
-        recorte_segundapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_2pista()
-        recorte_segundapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-        print("Pista3")
-        recorte_tercerapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_3pista()
-        recorte_tercerapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-        etapa_finalizada('etapa_finalizada.png')
-    elif cantidad == 3:
-        print("Tres '?'")
-
-        print("Pista1")
-        recorte(ruta_imagen_captura)
-        cordenadas()
-        recorte_primerapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas()
-        recorte_primerapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-
-        print("Pista2")
-        recorte_segundapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_2pista()
-        recorte_segundapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-
-        print("Pista3")
-        recorte_tercerapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_3pista()
-        recorte_tercerapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-
-        print("Pista4")
-        recorte_cuartapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_4pista()
-        recorte_cuartapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-        etapa_finalizada('etapa_finalizada.png')
-    elif cantidad == 4:
-        print("Cuatro '?'")
-        print("Pista1")
-        recorte(ruta_imagen_captura)
-        cordenadas()
-        recorte_primerapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas()
-        recorte_primerapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-        print("Pista2")
-        recorte_segundapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_2pista()
-        recorte_segundapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-        print("Pista3")
-        recorte_tercerapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_3pista()
-        recorte_tercerapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-        print("Pista4")
-        recorte_cuartapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_4pista()
-        recorte_cuartapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-        print("Pista5")
-        recorte_quintapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_5pista()
-        recorte_quintapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-        etapa_finalizada('etapa_finalizada.png')
-    elif cantidad == 5:
-        print("Cinco '?'")
-        print("Pista1")
-        recorte(ruta_imagen_captura)
-        cordenadas()
-        recorte_primerapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas()
-        print(texto_hasta_coma)
-        recorte_primerapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-
-        print("Pista2")
-        recorte_segundapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_2pista()
-        recorte_segundapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-
-        print("Pista3")
-        recorte_tercerapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_3pista()
-        recorte_tercerapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-
-        print("Pista4")
-        recorte_cuartapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_4pista()
-        recorte_cuartapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-
-        print("Pista5")
-        recorte_quintapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_5pista()
-        recorte_quintapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-
-        print("Pista6")
-        recorte_sextapista_flecha(ruta_imagen_captura)
-        texto_hasta_coma = comparacion_flechas_6pista()
-        recorte_sextapista(ruta_imagen_captura)
-        OCR(ruta_imagen_recortada)
-        pista(texto_hasta_coma)
-        etapa_finalizada('etapa_finalizada.png')
-
-def comenzar_etapas():
-    try:
-        primer_numero, segundo_numero = verificacion_etapas(ruta_imagen_captura)
-        primer_numero = int(primer_numero)
-        segundo_numero = int(segundo_numero)
-        
-        while primer_numero < segundo_numero:  # Mientras la condición sea verdadera
-            verificacion_pistas()
-            primer_numero += 1  # Actualiza la condición para evitar un bucle infinito
-            time.sleep(1)
-        
-        time.sleep(1)
-        lucha('lucha.png')
-        time.sleep(2)
-        pelea()
-        time.sleep(2)
-        pyautogui.press('0')
-    except ValueError as e:
-        print(f"Error: {e}")
-
-def recorte_etapas(ruta_imagen):
-    imagen = pyautogui.screenshot()
-    imagen.save('captura.png')
-    imagen = cv2.imread(ruta_imagen)
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 603, 172, 640  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte(ruta_imagen):
-    imagen = pyautogui.screenshot()
-    imagen.save('captura.png')
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 50, 653, 172, 672  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_cordenada_juego(ruta_imagen):
-    imagen = pyautogui.screenshot()
-    imagen.save('captura.png')
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 5, 70, 95, 105  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-# limpia coord de salida
-def manipulacion_cordenada():
-    texto = OCR(ruta_imagen_recortada)
-    #print(texto)
-    texto = texto.replace("Salida", "")
-    texto = texto.replace("o", "6")
-    
-    # Dividir la cadena usando "," como delimitador
-    partes = texto.split(",")
-
-    # Extraer el primer elemento después de eliminar los espacios en blanco
-    primer_elemento = partes[0].strip()
-
-    # Extraer el número entre corchetes
-    primera_coordenada = primer_elemento.split("[")[-1]
-
-    # ________________________________________________________
-
-    # Encuentra la posición de la coma
-    pos_coma = texto.find(',')
-
-    # Encuentra la posición del corchete de cierre "]"
-    pos_corchete_cierre = len(texto)
-
-    # Extrae el número después de la coma (excluyendo el corchete de cierre)
-    segunda_coordenada = texto[pos_coma + 1: pos_corchete_cierre]
-
-    return primera_coordenada, segunda_coordenada
-
-def manipulacion_cordenada_juego():
-    texto = OCR(ruta_imagen_recortada)
-    texto = texto.replace(")", "")
-    texto = texto.replace("=", "-")
-    texto = texto.replace("Salida", "")
-    texto = texto.replace("o", "6")
-    texto = texto.replace("»", "")
-    texto = texto.replace("!", "")
-    texto = texto.replace(";", "")
-    # Dividir la cadena por la coma
-    numeros = texto.split(',')
-    # Obtener los valores
-
-    salida_actual_texto = OCR(ruta_imagen_recortada)
-    salida_actual_texto = re.findall(r'-?\d+', salida_actual_texto)
-    c1 = salida_actual_texto[0]
-    c2 = salida_actual_texto[1]
-
-    primera_coordenada = str(numeros[0])
-    segunda_coordenada = str(numeros[1])
-
-    return primera_coordenada, segunda_coordenada
-
-def cordenadas():
-    buscar_y_clickear_chrome(ruta_imagen_chrome)
-    c1, c2 = manipulacion_cordenada()
-    time.sleep(1)
-    #pyautogui.tripleClick(731, 360)
-    reloadNavegador(ruta_imagen_reload_navegador)
-    time.sleep(1)
-    buscarXenNavegador(ruta_imagen_X_navegador)
-    pyautogui.write(c1)
-    time.sleep(1)
-    #pyautogui.press('tab')
-    buscarYenNavegador(ruta_imagen_Y_navegador)
-    pyautogui.write(c2)
-    time.sleep(1)
-
-def cordenadas_juegos():
-    buscar_y_clickear_chrome(ruta_imagen_chrome)
-    c1, c2 = manipulacion_cordenada_juego()
-    time.sleep(0.5)
-    pyautogui.tripleClick(731, 360)
-    reloadNavegador(ruta_imagen_reload_navegador)
-    time.sleep(0.5)
-    buscarXenNavegador(ruta_imagen_X_navegador)
-    pyautogui.write(c1)
-    time.sleep(0.5)
-    #pyautogui.press('tab')
-    #time.sleep(0.5)
-    buscarYenNavegador(ruta_imagen_Y_navegador)
-    pyautogui.write(c2)
-    time.sleep(3)
-    buscar_y_clickear_dofus(ruta_imagen_dofus)
-
-def recorte_primerapista(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 50, 673, 300, 700  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def obtener_solo_letras(texto):
-    # Busca todas las letras (mayúsculas y minúsculas)
-    letras = re.findall(r'[a-zA-Z]', texto)
-    # Une las letras encontradas en un solo string
-    return ''.join(letras)
-
-def recorte_primerapista_flecha(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 673, 55, 700  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_sextapista_flecha(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 810, 55, 845  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def comparacion_flechas():
-    global intentos_realizados
-    # Se hace un seguimiento de los intentos realizados
-    intentos_realizados += 1
-    # Límite de intentos alcanzado
-    if intentos_realizados > limite_intentos:
-        print("Límite de intentos alcanzado. La imagen no se encontró.")
-        return
-    buscar_y_clickear_dofus(ruta_imagen_dofus)
-    # Lista de rutas alternativas de imágenes
-    rutas_alternativas = [ruta_imagen_recortada]
-
-    for ruta_alternativa in rutas_alternativas:
-        imagen_referencia = cv2.imread(ruta_alternativa)
-        if imagen_referencia is not None:
-            # Se encontró una imagen alternativa, procede con la búsqueda y acción
-            # Tu lógica actual para buscar y hacer clic en la imagen
-            altura, ancho, _ = imagen_referencia.shape
-            captura_pantalla = pyautogui.screenshot()
-            captura_pantalla_np = np.array(captura_pantalla)
-            captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-            resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-            umbral_confianza = 0.8
-
-            if max_val >= umbral_confianza:
-                centro_x = max_loc[0] + ancho // 2
-                centro_y = max_loc[1] + altura // 2
-                pyautogui.click(centro_x, centro_y)
-                imagen = pyautogui.screenshot()
-                imagen.save('captura.png')
-                recorte_captura_mesaje_flecha1(ruta_imagen_captura)
-
-                texto = OCR(ruta_imagen_recortada)
-                partes = texto.split(",")  # Divide el texto en partes usando la coma como separador
-                texto_hasta_coma = partes[0] + ","  # Toma la primera parte antes de la coma
-                if texto_hasta_coma == "Dirigete hacia el Sur,":
-                    navegacion_flechas(ruta_imagen_flecha_abajo2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Norte,":
-                    navegacion_flechas(ruta_imagen_flecha_arriba2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Oeste,":
-                    navegacion_flechas(ruta_imagen_flecha_izquierda2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Este,":
-                    navegacion_flechas(ruta_imagen_flecha_derecha2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                else:
-                    recorte_captura_mesajelargo_flecha1(ruta_imagen_captura)
-                    texto = OCR(ruta_imagen_recortada)
-                    partes = texto.split(",")  # Divide el texto en partes usando la coma como separador
-                    texto_hasta_coma = partes[0] + ","  # Toma la primera parte antes de la coma
-                    if texto_hasta_coma == "Dirigete hacia el Sur,":
-                        navegacion_flechas(ruta_imagen_flecha_abajo2)
-                        time.sleep(0.5)
-                        return texto_hasta_coma
-                    elif texto_hasta_coma == "Dirigete hacia el Norte,":
-                        navegacion_flechas(ruta_imagen_flecha_arriba2)
-                        time.sleep(0.5)
-                        return texto_hasta_coma
-                    elif texto_hasta_coma == "Dirigete hacia el Oeste,":
-                        navegacion_flechas(ruta_imagen_flecha_izquierda2)
-                        time.sleep(0.5)
-                        return texto_hasta_coma
-                    elif texto_hasta_coma == "Dirigete hacia el Este,":
-                        navegacion_flechas(ruta_imagen_flecha_derecha2)
-                        time.sleep(0.5)
-                        return texto_hasta_coma
-                    break
-
-            break  # Termina el bucle ya que se encontró y clickeó una imagen
-        else:
-            print(f"No se encontró la imagen en la ruta: {ruta_alternativa}")
-
-    # Si ninguna de las imágenes alternativas fue encontrada
-    else:
-        comparacion_flechas()
-
-def comparacion_flechas_2pista():
-    global intentos_realizados
-    # Se hace un seguimiento de los intentos realizados
-    intentos_realizados += 1
-    # Límite de intentos alcanzado
-    if intentos_realizados > limite_intentos:
-        print("Límite de intentos alcanzado. La imagen no se encontró.")
-        return
-    # Lista de rutas alternativas de imágenes
-    rutas_alternativas = [ruta_imagen_recortada]
-
-    for ruta_alternativa in rutas_alternativas:
-        imagen_referencia = cv2.imread(ruta_alternativa)
-        if imagen_referencia is not None:
-            # Se encontró una imagen alternativa, procede con la búsqueda y acción
-            # Tu lógica actual para buscar y hacer clic en la imagen
-            altura, ancho, _ = imagen_referencia.shape
-            captura_pantalla = pyautogui.screenshot()
-            captura_pantalla_np = np.array(captura_pantalla)
-            captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-            resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-            umbral_confianza = 0.8
-
-            if max_val >= umbral_confianza:
-                centro_x = max_loc[0] + ancho // 2
-                centro_y = max_loc[1] + altura // 2
-                pyautogui.click(centro_x, centro_y)
-                imagen = pyautogui.screenshot()
-                imagen.save('captura.png')
-                recorte_captura_mesaje_flecha2(ruta_imagen_captura)
-                texto = OCR(ruta_imagen_recortada)
-                partes = texto.split(",")  # Divide el texto en partes usando la coma como separador
-                texto_hasta_coma = partes[0] + ","  # Toma la primera parte antes de la coma
-                if texto_hasta_coma == "Dirigete hacia el Sur,":
-                    navegacion_flechas(ruta_imagen_flecha_abajo2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Norte,":
-                    navegacion_flechas(ruta_imagen_flecha_arriba2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Oeste,":
-                    navegacion_flechas(ruta_imagen_flecha_izquierda2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Este,":
-                    navegacion_flechas(ruta_imagen_flecha_derecha2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                else:
-                    recorte_captura_mesajelargo_flecha2(ruta_imagen_captura)
-                    texto = OCR(ruta_imagen_recortada)
-                    partes = texto.split(",")  # Divide el texto en partes usando la coma como separador
-                    texto_hasta_coma = partes[0] + ","  # Toma la primera parte antes de la coma
-                    if texto_hasta_coma == "Dirigete hacia el Sur,":
-                        navegacion_flechas(ruta_imagen_flecha_abajo2)
-                        time.sleep(0.5)
-                        return texto_hasta_coma
-                    elif texto_hasta_coma == "Dirigete hacia el Norte,":
-                        navegacion_flechas(ruta_imagen_flecha_arriba2)
-                        time.sleep(0.5)
-                        return texto_hasta_coma
-                    elif texto_hasta_coma == "Dirigete hacia el Oeste,":
-                        navegacion_flechas(ruta_imagen_flecha_izquierda2)
-                        time.sleep(0.5)
-                        return texto_hasta_coma
-                    elif texto_hasta_coma == "Dirigete hacia el Este,":
-                        navegacion_flechas(ruta_imagen_flecha_derecha2)
-                        time.sleep(0.5)
-                        return texto_hasta_coma
-                    break
-
-            break  # Termina el bucle ya que se encontró y clickeó una imagen
-        else:
-            print(f"No se encontró la imagen en la ruta: {ruta_alternativa}")
-
-    # Si ninguna de las imágenes alternativas fue encontrada
-    else:
-        comparacion_flechas_2pista()
-
-def comparacion_flechas_3pista():
-    global intentos_realizados
-    # Se hace un seguimiento de los intentos realizados
-    intentos_realizados += 1
-    # Límite de intentos alcanzado
-    if intentos_realizados > limite_intentos:
-        print("Límite de intentos alcanzado. La imagen no se encontró.")
-        return
-    # Lista de rutas alternativas de imágenes
-    rutas_alternativas = [ruta_imagen_recortada]
-
-    for ruta_alternativa in rutas_alternativas:
-        imagen_referencia = cv2.imread(ruta_alternativa)
-        if imagen_referencia is not None:
-            # Se encontró una imagen alternativa, procede con la búsqueda y acción
-            # Tu lógica actual para buscar y hacer clic en la imagen
-            altura, ancho, _ = imagen_referencia.shape
-            captura_pantalla = pyautogui.screenshot()
-            captura_pantalla_np = np.array(captura_pantalla)
-            captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-            resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-            umbral_confianza = 0.8
-
-            if max_val >= umbral_confianza:
-                centro_x = max_loc[0] + ancho // 2
-                centro_y = max_loc[1] + altura // 2
-                pyautogui.click(centro_x, centro_y)
-                imagen = pyautogui.screenshot()
-                imagen.save('captura.png')
-                recorte_captura_mesaje_flecha3(ruta_imagen_captura)
-                texto = OCR(ruta_imagen_recortada)
-                partes = texto.split(",")  # Divide el texto en partes usando la coma como separador
-                texto_hasta_coma = partes[0] + ","  # Toma la primera parte antes de la coma
-                print(texto_hasta_coma)
-                if texto_hasta_coma == "Dirigete hacia el Sur,":
-                    navegacion_flechas(ruta_imagen_flecha_abajo2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Norte,":
-                    navegacion_flechas(ruta_imagen_flecha_arriba2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Oeste,":
-                    navegacion_flechas(ruta_imagen_flecha_izquierda2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Este,":
-                    navegacion_flechas(ruta_imagen_flecha_derecha2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-            break  # Termina el bucle ya que se encontró y clickeó una imagen
-        else:
-            print(f"No se encontró la imagen en la ruta: {ruta_alternativa}")
-
-    # Si ninguna de las imágenes alternativas fue encontrada
-    else:
-        comparacion_flechas_3pista()
-
-def comparacion_flechas_4pista():
-    global intentos_realizados
-    # Se hace un seguimiento de los intentos realizados
-    intentos_realizados += 1
-    # Límite de intentos alcanzado
-    if intentos_realizados > limite_intentos:
-        print("Límite de intentos alcanzado. La imagen no se encontró.")
-        return
-    # Lista de rutas alternativas de imágenes
-    rutas_alternativas = [ruta_imagen_recortada]
-
-    for ruta_alternativa in rutas_alternativas:
-        imagen_referencia = cv2.imread(ruta_alternativa)
-        if imagen_referencia is not None:
-            # Se encontró una imagen alternativa, procede con la búsqueda y acción
-            # Tu lógica actual para buscar y hacer clic en la imagen
-            altura, ancho, _ = imagen_referencia.shape
-            captura_pantalla = pyautogui.screenshot()
-            captura_pantalla_np = np.array(captura_pantalla)
-            captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-            resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-            umbral_confianza = 0.8
-            print(max_val)
-            if max_val >= umbral_confianza:
-                centro_x = max_loc[0] + ancho // 2
-                centro_y = max_loc[1] + altura // 2
-                pyautogui.click(centro_x, centro_y)
-                imagen = pyautogui.screenshot()
-                imagen.save('captura.png')
-                recorte_captura_mesaje_flecha4(ruta_imagen_captura)
-                texto = OCR(ruta_imagen_recortada)
-                partes = texto.split(",")  # Divide el texto en partes usando la coma como separador
-                texto_hasta_coma = partes[0] + ","  # Toma la primera parte antes de la coma
-                print(texto_hasta_coma)
-                
-
-                if texto_hasta_coma == "Dirigete hacia el Sur,":
-                    navegacion_flechas(ruta_imagen_flecha_abajo2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Norte,":
-                    navegacion_flechas(ruta_imagen_flecha_arriba2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Oeste,":
-                    navegacion_flechas(ruta_imagen_flecha_izquierda2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Este,":
-                    navegacion_flechas(ruta_imagen_flecha_derecha2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                else:
-                    recorte_captura_mesajelargo_flecha4(ruta_imagen_captura)
-                    texto = OCR(ruta_imagen_recortada)
-                    partes = texto.split(",")  # Divide el texto en partes usando la coma como separador
-                    texto_hasta_coma = partes[0] + ","  # Toma la primera parte antes de la coma
-                    if texto_hasta_coma == "Dirigete hacia el Sur,":
-                        navegacion_flechas(ruta_imagen_flecha_abajo2)
-                        time.sleep(0.5)
-                        return texto_hasta_coma
-                    elif texto_hasta_coma == "Dirigete hacia el Norte,":
-                        navegacion_flechas(ruta_imagen_flecha_arriba2)
-                        time.sleep(0.5)
-                        return texto_hasta_coma
-                    elif texto_hasta_coma == "Dirigete hacia el Oeste,":
-                        navegacion_flechas(ruta_imagen_flecha_izquierda2)
-                        time.sleep(0.5)
-                        return texto_hasta_coma
-                    elif texto_hasta_coma == "Dirigete hacia el Este,":
-                        navegacion_flechas(ruta_imagen_flecha_derecha2)
-                        time.sleep(0.5)
-                        return texto_hasta_coma
-                    break
-            break  # Termina el bucle ya que se encontró y clickeó una imagen
-        else:
-            print(f"No se encontró la imagen en la ruta: {ruta_alternativa}")
-
-    # Si ninguna de las imágenes alternativas fue encontrada
-    else:
-        comparacion_flechas_4pista()
-
-def comparacion_flechas_5pista():
-    global intentos_realizados
-    # Se hace un seguimiento de los intentos realizados
-    intentos_realizados += 1
-    # Límite de intentos alcanzado
-    if intentos_realizados > limite_intentos:
-        print("Límite de intentos alcanzado. La imagen no se encontró.")
-        return
-    # Lista de rutas alternativas de imágenes
-    rutas_alternativas = [ruta_imagen_recortada]
-
-    for ruta_alternativa in rutas_alternativas:
-        imagen_referencia = cv2.imread(ruta_alternativa)
-        if imagen_referencia is not None:
-            # Se encontró una imagen alternativa, procede con la búsqueda y acción
-            # Tu lógica actual para buscar y hacer clic en la imagen
-            altura, ancho, _ = imagen_referencia.shape
-            captura_pantalla = pyautogui.screenshot()
-            captura_pantalla_np = np.array(captura_pantalla)
-            captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-            resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-            umbral_confianza = 0.8
-
-            if max_val >= umbral_confianza:
-                centro_x = max_loc[0] + ancho // 2
-                centro_y = max_loc[1] + altura // 2
-                pyautogui.click(centro_x, centro_y)
-                imagen = pyautogui.screenshot()
-                imagen.save('captura.png')
-                recorte_captura_mesaje_flecha5(ruta_imagen_captura)
-                texto = OCR(ruta_imagen_recortada)
-                partes = texto.split(",")  # Divide el texto en partes usando la coma como separador
-                texto_hasta_coma = partes[0] + ","  # Toma la primera parte antes de la coma
-
-                print(texto_hasta_coma)
-                if texto_hasta_coma == "Dirigete hacia el Sur,":
-                    navegacion_flechas(ruta_imagen_flecha_abajo2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Norte,":
-                    navegacion_flechas(ruta_imagen_flecha_arriba2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Oeste,":
-                    navegacion_flechas(ruta_imagen_flecha_izquierda2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Este,":
-                    navegacion_flechas(ruta_imagen_flecha_derecha2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-            break  # Termina el bucle ya que se encontró y clickeó una imagen
-        else:
-            print(f"No se encontró la imagen en la ruta: {ruta_alternativa}")
-
-    # Si ninguna de las imágenes alternativas fue encontrada
-    else:
-        comparacion_flechas_5pista()
-
-def comparacion_flechas_6pista():
-    global intentos_realizados
-    # Se hace un seguimiento de los intentos realizados
-    intentos_realizados += 1
-    # Límite de intentos alcanzado
-    if intentos_realizados > limite_intentos:
-        print("Límite de intentos alcanzado. La imagen no se encontró.")
-        return
-    # Lista de rutas alternativas de imágenes
-    rutas_alternativas = [ruta_imagen_recortada]
-
-    for ruta_alternativa in rutas_alternativas:
-        imagen_referencia = cv2.imread(ruta_alternativa)
-        if imagen_referencia is not None:
-            # Se encontró una imagen alternativa, procede con la búsqueda y acción
-            # Tu lógica actual para buscar y hacer clic en la imagen
-            altura, ancho, _ = imagen_referencia.shape
-            captura_pantalla = pyautogui.screenshot()
-            captura_pantalla_np = np.array(captura_pantalla)
-            captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-            resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-            umbral_confianza = 0.8
-
-            if max_val >= umbral_confianza:
-                centro_x = max_loc[0] + ancho // 2
-                centro_y = max_loc[1] + altura // 2
-                pyautogui.click(centro_x, centro_y)
-                imagen = pyautogui.screenshot()
-                imagen.save('captura.png')
-                recorte_captura_mesaje_flecha6(ruta_imagen_captura)
-                texto = OCR(ruta_imagen_recortada)
-                partes = texto.split(",")  # Divide el texto en partes usando la coma como separador
-                texto_hasta_coma = partes[0] + ","  # Toma la primera parte antes de la coma
-
-                if texto_hasta_coma == "Dirigete hacia el Sur,":
-                    navegacion_flechas(ruta_imagen_flecha_abajo2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Norte,":
-                    navegacion_flechas(ruta_imagen_flecha_arriba2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Oeste,":
-                    navegacion_flechas(ruta_imagen_flecha_izquierda2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-                elif texto_hasta_coma == "Dirigete hacia el Este,":
-                    navegacion_flechas(ruta_imagen_flecha_derecha2)
-                    time.sleep(0.5)
-                    return texto_hasta_coma
-            break  # Termina el bucle ya que se encontró y clickeó una imagen
-        else:
-            print(f"No se encontró la imagen en la ruta: {ruta_alternativa}")
-
-    # Si ninguna de las imágenes alternativas fue encontrada
-    else:
-        comparacion_flechas_6pista()
-
-#selecciona flecha dirección en navegador
-def navegacion_flechas(ruta_imagen):
-    global intentos_realizados
-    #buscar_y_clickear_chrome(ruta_imagen_chrome)
-    # Se hace un seguimiento de los intentos realizados
-    intentos_realizados += 1
-    # Límite de intentos alcanzado
-    if intentos_realizados > limite_intentos:
-        print("Límite de intentos alcanzado. La imagen no se encontró.")
-        return
-    # Carga la imagen de referencia y la captura de pantalla
-    imagen_referencia = cv2.imread(ruta_imagen)
-    captura_pantalla = pyautogui.screenshot()
-    captura_pantalla_np = np.array(captura_pantalla)
-    captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-    # Obtén las dimensiones de la imagen de referencia
-    altura, ancho, _ = imagen_referencia.shape
-    # Encuentra la posición de la imagen de referencia en la captura de pantalla
-    resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-    # Define un umbral de confianza (puedes ajustar según tus necesidades)
-    umbral_confianza = 0.8
-    print(max_val)
-    if max_val >= umbral_confianza:
-        # Obtiene las coordenadas del centro de la imagen de referencia
-        centro_x = max_loc[0] + ancho // 2
-        centro_y = max_loc[1] + altura // 2
-        # Haz clic en el centro de la imagen encontrada
-        pyautogui.click(centro_x, centro_y)
-    else:
-        navegacion_flechas(ruta_imagen)
-
-def recorte_captura_mesaje_flecha1(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 628, 205, 662  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_captura_mesaje_flecha2(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 658, 205, 700  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_captura_mesajelargo_flecha2(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 628, 205, 700  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_captura_mesajelargo_flecha1(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 608, 205, 662  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_captura_mesajelargo_flecha4(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 700, 215, 740  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_captura_mesaje_flecha3(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 678, 205, 720  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_captura_mesaje_flecha4(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 708, 215, 740  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_captura_mesaje_flecha5(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 728, 215, 780  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_captura_mesaje_flecha6(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 20, 750, 215, 800  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def direction(ruta_imagen):
-    global intentos_realizados
-    # Se hace un seguimiento de los intentos realizados
-    intentos_realizados += 1
-    # Límite de intentos alcanzado
-    if intentos_realizados > limite_intentos:
-        print("Límite de intentos alcanzado. La imagen no se encontró.")
-        return
-    # Carga la imagen de referencia y la captura de pantalla
-    imagen_referencia = cv2.imread(ruta_imagen)
-    captura_pantalla = pyautogui.screenshot()
-    captura_pantalla_np = np.array(captura_pantalla)
-    captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-    # Obtén las dimensiones de la imagen de referencia
-    altura, ancho, _ = imagen_referencia.shape
-    # Encuentra la posición de la imagen de referencia en la captura de pantalla
-    resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-    # Define un umbral de confianza (puedes ajustar según tus necesidades)
-    umbral_confianza = 0.8
-    if max_val >= umbral_confianza:
-        # Obtiene las coordenadas del centro de la imagen de referencia
-        centro_x = max_loc[0] + ancho // 2
-        centro_y = max_loc[1] + altura // 2
-        # Haz clic en el centro de la imagen encontrada
-        pyautogui.click(centro_x, centro_y)
-        time.sleep(0.5)
-    else:
-        direction(ruta_imagen)
-
-def recorte_segundapista(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 50, 700, 298, 730  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_segundapista_flecha(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 700, 55, 730  # Ejemplo de coordenadas de recorte
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_tercerapista(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 50, 727, 298, 760  # Ejemplo de coordenadas de recorte   y1=27, y2=30
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_cuartapista(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 50, 754, 298, 783  # Ejemplo de coordenadas de recorte   y1=27, y2=30
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_quintapista(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 50, 780, 298, 813  # Ejemplo de coordenadas de recorte   y1=27, y2=30
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_sextapista(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 50, 820, 298, 850  # Ejemplo de coordenadas de recorte   y1=27, y2=30
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_tercerapista_flecha(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 728, 55, 780  # Ejemplo de coordenadas de recorte y1=27 y2= 30
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_cuartapista_flecha(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 755, 55, 810  # Ejemplo de coordenadas de recorte y1=27 y2= 30
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_quintapista_flecha(ruta_imagen):
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 785, 55, 815  # Ejemplo de coordenadas de recorte y1=27 y2= 30
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-def recorte_verificacion_pistas(ruta_imagen):
-    imagen = pyautogui.screenshot()
-    imagen.save('captura.png')
-    imagen = cv2.imread(ruta_imagen)
-
-    # Definir las coordenadas del recorte (x1, y1, x2, y2)
-    x1, y1, x2, y2 = 30, 700, 300, 855  # Ejemplo de coordenadas de recorte y1=27 y2= 30
-
-    # Recortar la región de interés
-    recorte = imagen[y1:y2, x1:x2]
-
-    # Guardar el recorte en un archivo (opcional)
-    cv2.imwrite('captura_recorte.png', recorte)
-
-
-
 def buscarXenNavegador(ruta_imagen):
     global intentos_realizados
     # Se hace un seguimiento de los intentos realizados
@@ -1547,7 +467,6 @@ def reloadNavegador(ruta_imagen):
         time.sleep(1)
     else:
         reloadNavegador(ruta_imagen)
-
 
 def chatBox(ruta_imagen):
     global intentos_realizados
@@ -2142,12 +1061,12 @@ class ImageFinderApp:
         pyautogui.click(merkaX, merkaY)
         time.sleep(2)
 
-    def cantidad_pistas(self, ruta_imagen):
+    def cantidad_pistas(self, ):
         try:
             # Cargar la imagen de la captura de pantalla
-            captura_pantalla = cv2.imread(ruta_imagen)
+            captura_pantalla = cv2.imread(ruta_imagen_recortada)
             if captura_pantalla is None:
-                raise ValueError(f"No se pudo cargar la imagen de captura de pantalla desde {ruta_imagen}")
+                raise ValueError(f"No se pudo cargar la imagen de captura de pantalla desde {ruta_imagen_recortada}")
 
             # Cargar la imagen de referencia
             referencia = cv2.imread(ruta_imagen_interrogacion)
@@ -2171,25 +1090,30 @@ class ImageFinderApp:
         except Exception as e:
             print(f"Error al procesar las imágenes: {e}")
             return 0
+
+        finally:
+            # Liberar recursos para evitar acumulación de memoria
+            del captura_pantalla, referencia, resultado, ubicaciones
+            gc.collect()  # Llamar al recolector de basura para limpiar memoria
+            cv2.destroyAllWindows()  # Asegurarse de que cualquier ventana de OpenCV se cierre correctamente
     
     def checkEtapa(self):
-        self.recorte_Imagen(ruta_imagen_captura, self.area_etapa_actual)
-        primer_numero, segundo_numero = self.verificacion_etapas(ruta_imagen_captura)
+        self.recorte_Imagen(self.area_etapa_actual)
+        primer_numero, segundo_numero = self.verificacion_etapas()
         etapa_actual = (primer_numero, segundo_numero)
         self.etapaActual.config(text=f"{etapa_actual}")
         self.etapaActual.update_idletasks()
 
     def checkPistas(self):
-        self.recorte_Imagen(ruta_imagen_captura, self.area_pistas)
-        cantidad = self.cantidad_pistas(ruta_imagen_recortada)
-        print(cantidad)
+        self.recorte_Imagen(self.area_pistas)
+        cantidad = self.cantidad_pistas()
         pistas_actual = cantidad
         self.cantidadPistas.config(text=f"{pistas_actual}")
         self.cantidadPistas.update_idletasks()
 
     def checkSalida(self):
         try:
-            self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
+            self.recorte_Imagen(self.area_salida)
             time.sleep(2)
             ruta_tesseract = self.entryPytesseract.get()
             pytesseract.pytesseract.tesseract_cmd = fr'{ruta_tesseract}\tesseract.exe'
@@ -2245,31 +1169,42 @@ class ImageFinderApp:
         time.sleep(0.5)
 
     #otros
-    def recorte_Imagen(self, ruta_imagen, coords):
+    def recorte_Imagen(self, coords):
+        # Capturar la pantalla con pyautogui y guardar la captura
         imagen = pyautogui.screenshot()
         imagen.save(ruta_imagen_captura)
-        imagen = cv2.imread(ruta_imagen)
 
-        if imagen is None:
-            raise FileNotFoundError(f"No se pudo cargar la imagen en la ruta: {ruta_imagen}")
+        # Cargar la imagen guardada con OpenCV
+        imagen_cv2 = cv2.imread(ruta_imagen_captura)
 
-        # Definir las coordenadas del recorte (x1, y1, x2, y2)
-        x1, y1, x2, y2 = coords
+        # Verificar si la imagen se cargó correctamente
+        if imagen_cv2 is None:
+            raise FileNotFoundError(f"No se pudo cargar la imagen en la ruta: {ruta_imagen_captura}")
 
-        # Verifica que las coordenadas estén dentro del rango
-        height, width = imagen.shape[:2]
-        if not (0 <= x1 < x2 <= width and 0 <= y1 < y2 <= height):
-            raise ValueError("Las coordenadas de recorte están fuera de los límites de la imagen.")
+        try:
+            # Definir las coordenadas del recorte (x1, y1, x2, y2)
+            x1, y1, x2, y2 = coords
 
-        # Recortar la región de interés
-        recorte = imagen[y1:y2, x1:x2]
+            # Verificar que las coordenadas estén dentro del rango de la imagen
+            height, width = imagen_cv2.shape[:2]
+            if not (0 <= x1 < x2 <= width and 0 <= y1 < y2 <= height):
+                raise ValueError("Las coordenadas de recorte están fuera de los límites de la imagen.")
 
-        # Verifica si el recorte es válido
-        if recorte.size == 0:
-            raise ValueError("El recorte resultante está vacío. Verifica las coordenadas.")
+            # Realizar el recorte de la región de interés
+            recorte = imagen_cv2[y1:y2, x1:x2]
 
-        # Guardar el recorte en un archivo (opcional)
-        cv2.imwrite(ruta_imagen_recortada, recorte)
+            # Verificar si el recorte es válido
+            if recorte.size == 0:
+                raise ValueError("El recorte resultante está vacío. Verifica las coordenadas.")
+
+            # Guardar el recorte en un archivo
+            cv2.imwrite(ruta_imagen_recortada, recorte)
+
+        finally:
+            # Liberar recursos de OpenCV
+            del imagen_cv2, recorte
+            gc.collect()  # Llamar al recolector de basura para limpiar memoria
+            cv2.destroyAllWindows()  # Asegurarse de que cualquier ventana de OpenCV se cierre correctamente
 
     def cleanText(self, text):
         texto = text
@@ -2323,19 +1258,19 @@ class ImageFinderApp:
         # Lista de rutas alternativas de imágenes
         texto_hasta_coma = direccion  # Toma la primera parte antes de la coma
         if texto_hasta_coma == "Dirigete hacia el Sur,":
-            navegacion_flechas(ruta_imagen_flecha_abajo2)
+            self.navegacion_flechas(ruta_imagen_flecha_abajo2)
             time.sleep(0.5)
             return texto_hasta_coma
         elif texto_hasta_coma == "Dirigete hacia el Norte,":
-            navegacion_flechas(ruta_imagen_flecha_arriba2)
+            self.navegacion_flechas(ruta_imagen_flecha_arriba2)
             time.sleep(0.5)
             return texto_hasta_coma
         elif texto_hasta_coma == "Dirigete hacia el Oeste,":
-            navegacion_flechas(ruta_imagen_flecha_izquierda2)
+            self.navegacion_flechas(ruta_imagen_flecha_izquierda2)
             time.sleep(0.5)
             return texto_hasta_coma
         elif texto_hasta_coma == "Dirigete hacia el Este,":
-            navegacion_flechas(ruta_imagen_flecha_derecha2)
+            self.navegacion_flechas(ruta_imagen_flecha_derecha2)
             time.sleep(0.5)
             return texto_hasta_coma
 
@@ -2582,29 +1517,43 @@ class ImageFinderApp:
         else:
             return texto
 
-    def verificacion_etapas(self, ruta_imagen):
-        recorte_etapas(ruta_imagen)
-        texto = self.OCR(ruta_imagen_recortada)
-        texto = texto.strip()
-        
-        print(f"Texto extraído por OCR: '{texto}'")  # Agregar impresión de depuración
-        
-        # Separar la información usando el método split(' ')
-        separado = texto.split(' ')
-        
-        if len(separado) < 2:
-            raise ValueError(f"El texto extraído no tiene el formato esperado: '{texto}'")
-        
-        # Buscar los números en la última parte de la cadena
-        numeros = separado[-1].split('/')
-        
-        if len(numeros) < 2:
-            raise ValueError(f"No se encontraron dos números separados por '/'. Texto procesado: '{separado[-1]}'")
-        
-        # Guardar los números en variables separadas
-        primer_numero = numeros[0]
-        segundo_numero = numeros[1]
-        return primer_numero, segundo_numero
+    def verificacion_etapas(self):
+        try:
+            # Realizar el recorte de la imagen
+            #recorte_etapas(ruta_imagen)  # Suponiendo que recorte_etapas maneja bien los recortes
+
+            # Realizar OCR en la imagen recortada
+            texto = self.OCR(ruta_imagen_recortada)  # Suponiendo que OCR es tu método para extraer texto de imágenes
+            texto = texto.strip()
+
+            print(f"Texto extraído por OCR: '{texto}'")  # Impresión de depuración
+
+            # Separar la información en partes usando el espacio como delimitador
+            separado = texto.split(' ')
+            
+            if len(separado) < 2:
+                raise ValueError(f"El texto extraído no tiene el formato esperado: '{texto}'")
+
+            # Buscar los números en la última parte de la cadena separada
+            numeros = separado[-1].split('/')
+            
+            if len(numeros) < 2:
+                raise ValueError(f"No se encontraron dos números separados por '/'. Texto procesado: '{separado[-1]}'")
+
+            # Guardar los números en variables separadas
+            primer_numero = numeros[0]
+            segundo_numero = numeros[1]
+
+            return primer_numero, segundo_numero
+
+        except Exception as e:
+            print(f"Error en verificacion_etapas: {e}")
+            return None, None  # Devuelve valores por defecto si hay error
+
+        finally:
+            # Asegurar la liberación de memoria si se utilizaron variables que contienen imágenes u otros recursos
+            gc.collect()  # Recolección de basura para liberar memoria no utilizada
+            cv2.destroyAllWindows()  # Cerrar cualquier ventana abierta por OpenCV
 
     #save/load
     def save_to_text_file(self):
@@ -2838,40 +1787,112 @@ class ImageFinderApp:
         return plantilla
 
     def detectar_direccion(self):
-        # Cargar la imagen que se quiere analizar
-        imagen = cv2.imread(ruta_imagen_recortada, cv2.IMREAD_GRAYSCALE)
+        try:
+            # Cargar la imagen que se quiere analizar en escala de grises
+            imagen = cv2.imread(ruta_imagen_recortada, cv2.IMREAD_GRAYSCALE)
+            if imagen is None:
+                raise FileNotFoundError(f"No se pudo cargar la imagen en la ruta: {ruta_imagen_recortada}")
 
-        # Cargar las imágenes de referencia de las flechas
-        flecha_arriba = cv2.imread(ruta_imagen_flecha_arriba1, cv2.IMREAD_GRAYSCALE)
-        flecha_abajo = cv2.imread(ruta_imagen_flecha_abajo1, cv2.IMREAD_GRAYSCALE)
-        flecha_izquierda = cv2.imread(ruta_imagen_flecha_izquierda1, cv2.IMREAD_GRAYSCALE)
-        flecha_derecha = cv2.imread(ruta_imagen_flecha_derecha1, cv2.IMREAD_GRAYSCALE)
+            # Cargar las imágenes de referencia de las flechas
+            flecha_arriba = cv2.imread(ruta_imagen_flecha_arriba1, cv2.IMREAD_GRAYSCALE)
+            flecha_abajo = cv2.imread(ruta_imagen_flecha_abajo1, cv2.IMREAD_GRAYSCALE)
+            flecha_izquierda = cv2.imread(ruta_imagen_flecha_izquierda1, cv2.IMREAD_GRAYSCALE)
+            flecha_derecha = cv2.imread(ruta_imagen_flecha_derecha1, cv2.IMREAD_GRAYSCALE)
 
-        # Lista de direcciones y sus respectivas imágenes
-        direcciones = {
-            "Dirigete hacia el Sur,": flecha_abajo,
-            "Dirigete hacia el Norte,": flecha_arriba,
-            "Dirigete hacia el Oeste,": flecha_izquierda,
-            "Dirigete hacia el Este,": flecha_derecha
-        }
+            # Verificar que todas las imágenes de referencia se carguen correctamente
+            if any(flecha is None for flecha in [flecha_arriba, flecha_abajo, flecha_izquierda, flecha_derecha]):
+                raise FileNotFoundError("Una o más imágenes de referencia de flechas no se pudieron cargar.")
 
-        # Inicializar las variables para almacenar la mejor coincidencia
-        mejor_direccion = None
-        mejor_valor = -1
+            # Lista de direcciones y sus respectivas imágenes
+            direcciones = {
+                "Dirigete hacia el Sur,": flecha_abajo,
+                "Dirigete hacia el Norte,": flecha_arriba,
+                "Dirigete hacia el Oeste,": flecha_izquierda,
+                "Dirigete hacia el Este,": flecha_derecha
+            }
 
-        # Realizar coincidencia de plantillas con cada flecha
-        for direccion, plantilla in direcciones.items():
-            plantilla = self.resize_image_if_needed(imagen, plantilla)  # Redimensionar si es necesario
-            resultado = cv2.matchTemplate(imagen, plantilla, cv2.TM_CCOEFF_NORMED)
-            _, max_val, _, _ = cv2.minMaxLoc(resultado)
+            # Inicializar las variables para almacenar la mejor coincidencia
+            mejor_direccion = None
+            mejor_valor = -1
 
-            # Si esta coincidencia es mejor que las anteriores, la guardamos
-            if max_val > mejor_valor:
-                mejor_valor = max_val
-                mejor_direccion = direccion
+            # Realizar coincidencia de plantillas con cada flecha
+            for direccion, plantilla in direcciones.items():
+                # Redimensionar la imagen de referencia si es necesario
+                plantilla = self.resize_image_if_needed(imagen, plantilla)  # Suponiendo que este método está implementado
+                if plantilla is not None:
+                    resultado = cv2.matchTemplate(imagen, plantilla, cv2.TM_CCOEFF_NORMED)
+                    _, max_val, _, _ = cv2.minMaxLoc(resultado)
 
-        print(mejor_direccion)
-        return mejor_direccion
+                    # Si esta coincidencia es mejor que las anteriores, la guardamos
+                    if max_val > mejor_valor:
+                        mejor_valor = max_val
+                        mejor_direccion = direccion
+
+            # Imprimir y devolver la mejor dirección encontrada
+            print(mejor_direccion)
+            return mejor_direccion
+
+        except Exception as e:
+            print(f"Error al detectar la dirección: {e}")
+            return None  # Devuelve None si ocurre algún error
+
+        finally:
+            # Liberar recursos y limpiar la memoria
+            gc.collect()
+            cv2.destroyAllWindows()
+
+    def navegacion_flechas(self, ruta_imagen):
+        global intentos_realizados
+        try:
+            # Incrementar los intentos realizados
+            intentos_realizados += 1
+
+            # Límite de intentos alcanzado
+            if intentos_realizados > limite_intentos:
+                print("Límite de intentos alcanzado. La imagen no se encontró.")
+                return
+
+            # Cargar la imagen de referencia
+            imagen_referencia = cv2.imread(ruta_imagen)
+            if imagen_referencia is None:
+                raise FileNotFoundError(f"No se pudo cargar la imagen de referencia desde: {ruta_imagen}")
+
+            # Capturar la pantalla actual
+            captura_pantalla = pyautogui.screenshot()
+            captura_pantalla_np = np.array(captura_pantalla)
+            captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
+
+            # Obtener dimensiones de la imagen de referencia
+            altura, ancho = imagen_referencia.shape[:2]
+
+            # Realizar coincidencia de plantillas
+            resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+
+            # Definir un umbral de confianza
+            umbral_confianza = 0.8
+            print(f"Valor de coincidencia: {max_val}")
+
+            if max_val >= umbral_confianza:
+                # Obtener las coordenadas del centro de la imagen de referencia
+                centro_x = max_loc[0] + ancho // 2
+                centro_y = max_loc[1] + altura // 2
+
+                # Hacer clic en el centro de la imagen encontrada
+                pyautogui.click(centro_x, centro_y)
+            else:
+                # Recursión si no se encuentra la imagen
+                print("Imagen no encontrada, reintentando...")
+                self.navegacion_flechas(ruta_imagen)
+
+        except Exception as e:
+            print(f"Error durante la navegación con flechas: {e}")
+            return
+
+        finally:
+            # Liberar recursos y limpiar la memoria
+            gc.collect()
+            cv2.destroyAllWindows()
 
     def verificacionPistas(self):
         #recorte_verificacion_pistas(ruta_imagen_captura)
@@ -2887,146 +1908,146 @@ class ImageFinderApp:
             print("Cero '?'")
 
             print("Pista1")
-            self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
+            self.recorte_Imagen(self.area_salida)
             self.checkSalida()
             inicio = self.salida['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_1)
+            self.recorte_Imagen(self.area_flecha_1)
             time.sleep(0.5)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_1)
+            self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         if cantPistasTexto == "1":
             print("Uno '?'")
 
             print("Pista1")
-            self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
+            self.recorte_Imagen(self.area_salida)
             self.checkSalida()
             inicio = self.salida['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_1)
+            self.recorte_Imagen(self.area_flecha_1)
             time.sleep(0.5)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_1)
+            self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
 
             print("Pista2")
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_2)
+            self.recorte_Imagen(self.area_flecha_2)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_2)
+            self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == "2":
             print("Dos '?'")
             
             print("Pista1")
-            self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
+            self.recorte_Imagen(self.area_salida)
             self.checkSalida()
             inicio = self.salida['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_1)
+            self.recorte_Imagen(self.area_flecha_1)
             time.sleep(0.5)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_1)
+            self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
 
             print("Pista2")
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_2)
+            self.recorte_Imagen(self.area_flecha_2)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_2)
+            self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
             print("Pista3")
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_3)
+            self.recorte_Imagen(self.area_flecha_3)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_3)
+            self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == "3":
             print("Tres '?'")
 
             print("Pista1")
-            self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
+            self.recorte_Imagen(self.area_salida)
             self.checkSalida()
             inicio = self.salida['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_1)
+            self.recorte_Imagen(self.area_flecha_1)
             time.sleep(0.5)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_1)
+            self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
 
             print("Pista2")
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_2)
+            self.recorte_Imagen(self.area_flecha_2)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_2)
+            self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
             print("Pista3")
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_3)
+            self.recorte_Imagen(self.area_flecha_3)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_3)
+            self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
 
             print("Pista4")
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_4)
+            self.recorte_Imagen(self.area_flecha_4)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_4)
+            self.recorte_Imagen(self.area_pista_4)
             self.pista(texto_hasta_coma)
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == '4':
             print("Cuatro '?'")
 
             print("Pista1")
-            self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
+            self.recorte_Imagen(self.area_salida)
             self.checkSalida()
             inicio = self.salida['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_1)
+            self.recorte_Imagen(self.area_flecha_1)
             time.sleep(0.5)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_1)
+            self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
             
 
@@ -3034,44 +2055,44 @@ class ImageFinderApp:
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_2)
+            self.recorte_Imagen(self.area_flecha_2)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_2)
+            self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
             print("Pista3")
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_3)
+            self.recorte_Imagen(self.area_flecha_3)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_3)
+            self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
 
             print("Pista4")
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_4)
+            self.recorte_Imagen(self.area_flecha_4)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_4)
+            self.recorte_Imagen(self.area_pista_4)
             self.pista(texto_hasta_coma)
 
             print("Pista5")
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_5)
+            self.recorte_Imagen(self.area_flecha_5)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_5)
+            self.recorte_Imagen(self.area_pista_5)
             self.pista(texto_hasta_coma)
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == "5":
@@ -3079,7 +2100,7 @@ class ImageFinderApp:
 
             print("Pista1")
             #obtiene coord de salida
-            self.recorte_Imagen(ruta_imagen_captura, self.area_salida)
+            self.recorte_Imagen(self.area_salida)
             #escribe coord de salida en navegador
             #cordenadas()
             self.checkSalida()
@@ -3087,7 +2108,7 @@ class ImageFinderApp:
             self.coordEnNav(inicio)
             #recorta flecha de primera pista
             #recorte_primerapista_flecha(ruta_imagen_captura)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_1)
+            self.recorte_Imagen(self.area_flecha_1)
             time.sleep(0.5)
             #obtiene la direccion segun la flecha
             #texto_hasta_coma = self.obtenerDireccion(self.area_arriba, self.area_pistaDL_1) #comparacion_flechas()
@@ -3096,7 +2117,7 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             # obtiene recorte de pista
             #recorte_primerapista(ruta_imagen_captura)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_1)
+            self.recorte_Imagen(self.area_pista_1)
             #obtiene texto de pista de recorte
             #OCR(ruta_imagen_recortada)
             #mueve el personaje según la pista obtenida
@@ -3106,44 +2127,44 @@ class ImageFinderApp:
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_2)
+            self.recorte_Imagen(self.area_flecha_2)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_2)
+            self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
             print("Pista3")
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_3)
+            self.recorte_Imagen(self.area_flecha_3)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_3)
+            self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
 
             print("Pista4")
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_4)
+            self.recorte_Imagen(self.area_flecha_4)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_4)
+            self.recorte_Imagen(self.area_pista_4)
             self.pista(texto_hasta_coma)
 
             print("Pista5")
             self.checkGameCoord()
             inicio = self.coordActual['text']
             self.coordEnNav(inicio)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_5)
+            self.recorte_Imagen(self.area_flecha_5)
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_5)
+            self.recorte_Imagen(self.area_pista_5)
             self.pista(texto_hasta_coma)
 
             print("Pista6")
@@ -3154,7 +2175,7 @@ class ImageFinderApp:
             texto_hasta_coma = self.detectar_direccion()
             time.sleep(0.5)
             self.moverEnDireccion(texto_hasta_coma)
-            self.recorte_Imagen(ruta_imagen_captura, self.area_pista_6)
+            self.recorte_Imagen(self.area_pista_6)
             self.pista(texto_hasta_coma)
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)    
 
@@ -3484,7 +2505,7 @@ class ImageFinderApp:
                 inicio = self.coordActual['text']
                 self.coordEnNav(inicio)
                 #self.
-                self.recorte_Imagen(ruta_imagen_captura, self.area_flecha_1)
+                self.recorte_Imagen(self.area_flecha_1)
                 time.sleep(0.5)
                 texto_hasta_coma = self.detectar_direccion()
                 time.sleep(0.5)
@@ -3602,65 +2623,119 @@ class ImageFinderApp:
 
     def etapa_finalizada(self, ruta_imagen):
         global intentos_realizados
-        # Se hace un seguimiento de los intentos realizados
-        intentos_realizados += 1
-        # Límite de intentos alcanzado
-        if intentos_realizados > limite_intentos:
-            print("Límite de intentos alcanzado. La imagen no se encontró.")
+        try:
+            # Incrementar los intentos realizados
+            intentos_realizados += 1
+
+            # Límite de intentos alcanzado
+            if intentos_realizados > limite_intentos:
+                print("Límite de intentos alcanzado. La imagen no se encontró.")
+                return
+
+            # Cargar la imagen de referencia
+            imagen_referencia = cv2.imread(ruta_imagen)
+            if imagen_referencia is None:
+                raise FileNotFoundError(f"No se pudo cargar la imagen de referencia desde: {ruta_imagen}")
+
+            # Capturar la pantalla actual
+            captura_pantalla = pyautogui.screenshot()
+            captura_pantalla_np = np.array(captura_pantalla)
+            captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
+
+            # Obtener dimensiones de la imagen de referencia
+            altura, ancho = imagen_referencia.shape[:2]
+
+            # Realizar coincidencia de plantillas
+            resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+
+            # Definir un umbral de confianza
+            umbral_confianza = 0.8
+            print(f"Valor de coincidencia: {max_val}")
+
+            if max_val >= umbral_confianza:
+                # Obtener las coordenadas del centro de la imagen de referencia
+                centro_x = max_loc[0] + ancho // 2
+                centro_y = max_loc[1] + altura // 2
+
+                # Hacer clic en el centro de la imagen encontrada
+                pyautogui.click(centro_x, centro_y)
+
+                # Pausa para evitar clicks rápidos
+                time.sleep(1)
+
+                # Resetear el contador de pistas y verificar la etapa
+                self.numero_pista = 0
+                self.checkEtapa()
+
+                # Pausa adicional después de la verificación
+                time.sleep(1)
+            else:
+                # Reintentar la búsqueda si la imagen no se encuentra
+                print("Imagen no encontrada, reintentando...")
+                self.etapa_finalizada(ruta_imagen)
+
+        except Exception as e:
+            print(f"Error en la verificación de la etapa: {e}")
             return
-        # Carga la imagen de referencia y la captura de pantalla
-        imagen_referencia = cv2.imread(ruta_imagen)
-        captura_pantalla = pyautogui.screenshot()
-        captura_pantalla_np = np.array(captura_pantalla)
-        captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-        # Obtén las dimensiones de la imagen de referencia
-        altura, ancho, _ = imagen_referencia.shape
-        # Encuentra la posición de la imagen de referencia en la captura de pantalla
-        resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-        # Define un umbral de confianza (puedes ajustar según tus necesidades)
-        umbral_confianza = 0.8
-        if max_val >= umbral_confianza:
-            # Obtiene las coordenadas del centro de la imagen de referencia
-            centro_x = max_loc[0] + ancho // 2
-            centro_y = max_loc[1] + altura // 2
-            # Haz clic en el centro de la imagen encontrada
-            pyautogui.click(centro_x, centro_y)
-            time.sleep(1)
-            self.numero_pista = 0
-            self.checkEtapa()
-            time.sleep(1)
-        else:
-           self.etapa_finalizada(ruta_imagen_etapa_finalizada)
+
+        finally:
+            # Liberar recursos y limpiar la memoria
+            gc.collect()
+            cv2.destroyAllWindows()
 
     def lucha(self, ruta_imagen):
         global intentos_realizados
-        # Se hace un seguimiento de los intentos realizados
-        intentos_realizados += 1
-        # Límite de intentos alcanzado
-        if intentos_realizados > limite_intentos:
-            print("Límite de intentos alcanzado. La imagen no se encontró.")
+        try:
+            # Incrementar el contador de intentos realizados
+            intentos_realizados += 1
+
+            # Verificar si se ha alcanzado el límite de intentos
+            if intentos_realizados > limite_intentos:
+                print("Límite de intentos alcanzado. La imagen no se encontró.")
+                return
+
+            # Cargar la imagen de referencia
+            imagen_referencia = cv2.imread(ruta_imagen)
+            if imagen_referencia is None:
+                raise FileNotFoundError(f"No se pudo cargar la imagen de referencia desde: {ruta_imagen}")
+
+            # Capturar la pantalla actual
+            captura_pantalla = pyautogui.screenshot()
+            captura_pantalla_np = np.array(captura_pantalla)
+            captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
+
+            # Obtener las dimensiones de la imagen de referencia
+            altura, ancho = imagen_referencia.shape[:2]
+
+            # Realizar coincidencia de plantillas
+            resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+
+            # Definir un umbral de confianza
+            umbral_confianza = 0.8
+            print(f"Valor de coincidencia: {max_val}")
+
+            if max_val >= umbral_confianza:
+                # Calcular las coordenadas del centro de la imagen encontrada
+                centro_x = max_loc[0] + ancho // 2
+                centro_y = max_loc[1] + altura // 2
+
+                # Hacer clic en el centro de la imagen encontrada
+                pyautogui.click(centro_x, centro_y)
+            else:
+                # Si la imagen no se encuentra, reintentar la búsqueda
+                print("Imagen de lucha no encontrada, reintentando...")
+                self.lucha(ruta_imagen)
+
+        except Exception as e:
+            print(f"Error en la verificación de la lucha: {e}")
             return
-        # Carga la imagen de referencia y la captura de pantalla
-        imagen_referencia = cv2.imread(ruta_imagen)
-        captura_pantalla = pyautogui.screenshot()
-        captura_pantalla_np = np.array(captura_pantalla)
-        captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
-        # Obtén las dimensiones de la imagen de referencia
-        altura, ancho, _ = imagen_referencia.shape
-        # Encuentra la posición de la imagen de referencia en la captura de pantalla
-        resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
-        # Define un umbral de confianza (puedes ajustar según tus necesidades)
-        umbral_confianza = 0.8
-        if max_val >= umbral_confianza:
-            # Obtiene las coordenadas del centro de la imagen de referencia
-            centro_x = max_loc[0] + ancho // 2
-            centro_y = max_loc[1] + altura // 2
-            # Haz clic en el centro de la imagen encontrada
-            pyautogui.click(centro_x, centro_y)
-        else:
-            self.etapa_finalizada(ruta_imagen_lucha)
+
+        finally:
+            # Liberar recursos y limpiar la memoria
+            gc.collect()
+            cv2.destroyAllWindows()
 
     def buscar_y_clickear_monstruo(self, ruta_imagen):
         global intentos_realizados
@@ -3754,7 +2829,6 @@ class ImageFinderApp:
         time.sleep(2)
         pyautogui.press('F1')
         time.sleep(6)
-        contador = 1
         while inBattle == True:  # Mientras la condición sea verdadera
             time.sleep(5)
             #2 atks
@@ -3764,14 +2838,6 @@ class ImageFinderApp:
             time.sleep(1)
             pyautogui.press('F1')
             time.sleep(1)
-
-            #pyautogui.press('1')
-            #time.sleep(1)
-            #buscar_y_clickear_monstruo(ruta_imagen_monstruo)
-            #time.sleep(1)
-            #pyautogui.press('F1')  # termina el turno
-
-            # Actualiza la condición para evitar un bucle infinito
 
     def irACoordenadaMasCercana(self, nombre_cercano):
         #recibe nombre de teleport
@@ -3959,26 +3025,6 @@ class ImageFinderApp:
 
 
         self.starTask()
-
-#buscar_y_clickear_dofus(ruta_imagen_dofus)
-# moverse()
-# moverse()
-# buscar_y_clickear_puerta(ruta_imagen_puerta)
-# buscar_y_clickear_moverse(ruta_imagen_moverse)
-# buscar_y_clickear_tesoro(ruta_imagen_tesoro)
-# buscar_y_clickear_200(ruta_imagen_160)
-# buscar_y_clickear_salir(ruta_imagen_salir)
-# buscar_y_clickear_salir_puerta(ruta_imagen_salir_puerta)
-##comenzar_etapas()
-##pelea()
-
-#while n > 5:
-#comenzar_etapas()
-#time.sleep(2)
-#buscar_y_clickear_tesoro(ruta_imagen_tesoro)
-#buscar_y_clickear_200(ruta_imagen_160)
-#buscar_y_clickear_salir(ruta_imagen_salir)
-#buscar_y_clickear_salir_puerta(ruta_imagen_salir_puerta)
 
 if __name__ == "__main__":
     #root = Tk()

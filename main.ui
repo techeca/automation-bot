@@ -283,7 +283,6 @@
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="row">0</property>
-                  <property name="sticky">w</property>
                 </layout>
               </object>
             </child>
@@ -298,7 +297,6 @@
             </child>
             <child>
               <object class="ttk.Button" id="btnCheck" named="True">
-                <property name="command" type="command" cbtype="simple">loadData</property>
                 <property name="text" translatable="yes">Check</property>
                 <layout manager="grid">
                   <property name="column">2</property>
