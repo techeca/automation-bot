@@ -2433,6 +2433,9 @@ class ImageFinderApp:
         elif "helado'" in texto:
             texto = texto.replace("helado'", "helado")
             return texto
+        elif "Champiifion" in texto:
+            texto = texto.replace("Champiifion", "Champinon")
+            return texto
         elif "Caiia" in texto:
             texto = texto.replace("Caiia", "Cana")
             return texto
@@ -2490,6 +2493,9 @@ class ImageFinderApp:
         elif "- Craneo" in texto:
             texto = texto.replace("- Craneo", "Craneo")
             return texto
+        elif "Caiia" in texto:
+            texto = texto.replace("Caiia", "Cana")
+            return texto
         elif "sedimentacién" in texto:
             texto = texto.replace("sedimentacién", "sedimentacion")
             return texto
@@ -2498,6 +2504,9 @@ class ImageFinderApp:
             return texto
         elif "Bot6n" in texto:
             texto = texto.replace("Bot6n", "Boton")
+            return texto
+        elif "Caparaz6n" in texto:
+            texto = texto.replace("Caparaz6n", "Caparazon")
             return texto
         elif "Telade cuadros anudada" in texto:
             texto = texto.replace("Telade cuadros anudada", "Tela de cuadros anudada")
