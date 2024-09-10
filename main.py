@@ -2602,6 +2602,7 @@ class ImageFinderApp:
         hayBanderitaActivada = self.buscar_image(ruta_imagen_banderita_brillante)
         time.sleep(1)
         if enMerka == True:
+            print('en merka, hay que salir')
             #clic boton merka para salir
             merkaX, merkaY = self.get4CoordFromText(self.btnMerkasako['text'])
             pyautogui.click(merkaX, merkaY)
@@ -2609,27 +2610,32 @@ class ImageFinderApp:
         #hay banderita brillante?
         if hayBanderitaActivada == True:
             #si hay, presionar
+            print('borrar pistas buscadas')
             bandBriX, bandBriY = self.get4CoordFromText(self.pistaDL6['text'])
             pyautogui.click(bandBriX, bandBriY)
-        #ir a punto de salida
-        if self.etapa_iniciada == True:
-            self.checkSalida()
-            time.sleep(1)
-            texto_salida = self.salida['text']
-            texto_salida = re.findall(r'-?\d+', texto_salida)
-            c1 = texto_salida[0]
-            c2 = texto_salida[1]
-            chatX, chatY = self.get4CoordFromText(self.chat['text'])
-            pyautogui.tripleClick(chatX, chatY)
-            pyautogui.write(f"/travel {c1} {c2}")
-            pyautogui.press('enter')
-            time.sleep(1)
-            pyautogui.press('enter')
-            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-            time.sleep(1)
-            pyautogui.tripleClick(chatX, chatY)
-            pyautogui.write('/clear')
-            pyautogui.press('enter')
+            self.etapa_iniciada = True
+        else:
+            self.etapa_iniciada = False
+            
+        #ir a punto de salida, (esto ya se hace cuando inicia cualquier busqueda StartTask())
+        # if self.etapa_iniciada == True:
+        #     self.checkSalida()
+        #     time.sleep(1)
+        #     texto_salida = self.salida['text']
+        #     texto_salida = re.findall(r'-?\d+', texto_salida)
+        #     c1 = texto_salida[0]
+        #     c2 = texto_salida[1]
+        #     chatX, chatY = self.get4CoordFromText(self.chat['text'])
+        #     pyautogui.tripleClick(chatX, chatY)
+        #     pyautogui.write(f"/travel {c1} {c2}")
+        #     pyautogui.press('enter')
+        #     time.sleep(1)
+        #     pyautogui.press('enter')
+        #     self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+        #     time.sleep(1)
+        #     pyautogui.tripleClick(chatX, chatY)
+        #     pyautogui.write('/clear')
+        #     pyautogui.press('enter')
 
     def etapa_finalizada(self, ruta_imagen):
         global intentos_realizados
@@ -2930,7 +2936,7 @@ class ImageFinderApp:
             print(f"etapa actual: {primer_numero}, {segundo_numero}")
             print(f"numero de pista: {self.numero_pista}")
 
-            if (primer_numero == 1 and self.numero_pista == 0): #primer_numero == 1 and 
+            if (self.numero_pista == 0): #primer_numero == 1 and 
                 coordenada_cercana, nombre_cercano = coordenada_mas_cercana(primer_coord, segundo_coord, coordenadas_zaap)
                 print(f"El zaap más cercano a la Salida es: {nombre_cercano}, {coordenada_cercana}")
 
