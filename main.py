@@ -2600,6 +2600,7 @@ class ImageFinderApp:
         enMerka = self.buscar_image(ruta_imagen_zaap_merka)
         time.sleep(1)
         hayBanderitaActivada = self.buscar_image(ruta_imagen_banderita_brillante)
+        hayBanderita = self.buscar_image(ruta_imagen_banderita)
         time.sleep(1)
         if enMerka == True:
             print('en merka, hay que salir')
@@ -2610,11 +2611,12 @@ class ImageFinderApp:
         #hay banderita brillante?
         if hayBanderitaActivada == True:
             #si hay, presionar
-            print('borrar pistas buscadas')
+            print('borrar pistas encontradas')
             bandBriX, bandBriY = self.get4CoordFromText(self.pistaDL6['text'])
             pyautogui.click(bandBriX, bandBriY)
             self.etapa_iniciada = True
-        else:
+        if hayBanderita == False:
+            #no hay busqueda
             self.etapa_iniciada = False
             
         #ir a punto de salida, (esto ya se hace cuando inicia cualquier busqueda StartTask())
