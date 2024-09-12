@@ -2910,6 +2910,10 @@ class ImageFinderApp:
             print('iniciando otra vez la busqueda')
             #self.starTask()
 
+        finally:
+            # Cerrar ventanas y liberar recursos aquí
+            cv2.destroyAllWindows()
+            self.load_from_text_file()  # Si es necesario restaurar datos
 
         self.starTask()
 
