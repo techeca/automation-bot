@@ -2794,8 +2794,8 @@ class ImageFinderApp:
                 time.sleep(1)
                 #self.irACoordenadaMasCercana(nombre_cercano)
                 
-            self.capturaPantalla()
-            print('captura realizada')
+            #self.capturaPantalla()
+            #print('captura realizada')
 
             self.checkPistas()
             self.checkEtapa()
@@ -2820,7 +2820,7 @@ class ImageFinderApp:
             coordenada_cercana, nombre_cercano = coordenada_mas_cercana(primer_coord, segundo_coord, coordenadas_zaap)
             print(f"El zaap más cercano a la Salida es: {nombre_cercano}, {coordenada_cercana}")
 
-            if (primer_numero == 1 and self.numero_pista == 0): #primer_numero == 1 and          
+            if (self.numero_pista == 0): #primer_numero == 1 and          
                 self.irACoordenadaMasCercana(nombre_cercano)
                 
                 print(f"Salida {self.salida['text']}")

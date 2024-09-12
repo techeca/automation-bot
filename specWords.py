@@ -9,6 +9,7 @@ REEMPLAZOS = {
         "Champifién": "Champinon",
         "Cinturén": "Cinturon",
         "Champiion": "Champinon",
+        "Champion": "Champinon",
         "wukin:": "wukin",
         "'Símbolo de mision": "Simbolo de mision",
         "Grabado de símbolo de mi:": "Grabado de simbolo de mision",
