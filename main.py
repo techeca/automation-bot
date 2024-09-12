@@ -2793,7 +2793,7 @@ class ImageFinderApp:
                 buscar_y_clickear_salir_puerta(ruta_imagen_salir_puerta)
                 time.sleep(1)
                 #self.irACoordenadaMasCercana(nombre_cercano)
-                
+
             #self.capturaPantalla()
             #print('captura realizada')
 
@@ -2908,7 +2908,7 @@ class ImageFinderApp:
             #self.restablecerEtapa()
             time.sleep(1)
             print('iniciando otra vez la busqueda')
-            self.starTask()
+            #self.starTask()
 
 
         self.starTask()
