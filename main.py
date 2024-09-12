@@ -1723,7 +1723,7 @@ class ImageFinderApp:
         time.sleep(0.5)
         pyautogui.press('enter')
         time.sleep(0.5)
-        self.ha_llegado_destino(ruta_imagen_llegado_destino, 1000)
+        self.ha_llegado_destino(ruta_imagen_llegado_destino)
 
     def coordEnNav(self, inicio):
         #Ingresa las coordenadas entregadas en el navegador
