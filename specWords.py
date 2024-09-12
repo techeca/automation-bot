@@ -1,6 +1,8 @@
 REEMPLAZOS = {
         "coraz6on": "corazon",
         "croneo": "craneo",
+        "pldstico": "plastico",
+        "nrefux": "firefux",
         "Afiche": "Afiche",
         "Grabado de lave": "Grabado de llave",
         "Champifién": "Champinon",

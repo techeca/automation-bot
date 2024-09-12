@@ -1019,25 +1019,9 @@ class ImageFinderApp:
         try:
             self.recorte_Imagen(self.area_salida)
             time.sleep(2)
-            ruta_tesseract = self.entryPytesseract.get()
-            pytesseract.pytesseract.tesseract_cmd = fr'{ruta_tesseract}\tesseract.exe'
-
-            imagen = cv2.imread(ruta_imagen_recortada)
-            if imagen is None:
-                raise ValueError("No se pudo cargar la imagen recortada.")
-
-            # Convertir la imagen a escala de grises
-            imagen_gris = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
-
-            # Aumentar el contraste usando CLAHE (Contrast Limited Adaptive Histogram Equalization)
-            clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(9, 8))
-            imagen_contrastada = clahe.apply(imagen_gris)
-
-            # Aplicar umbralización para mejorar la definición del texto
-            _, imagen_umbral = cv2.threshold(imagen_contrastada, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
             # Realizar OCR en la imagen preprocesada
-            salida_actual_texto = pytesseract.image_to_string(imagen_umbral)
+            salida_actual_texto = self.OCR(ruta_imagen_recortada) #pytesseract.image_to_string(imagen_umbral)
 
             # Extraer números de la salida
             salida_actual_texto = re.findall(r'-?\d+', salida_actual_texto)
@@ -1055,14 +1039,8 @@ class ImageFinderApp:
         except Exception as e:
             # Lanzar la excepción para que sea capturada en startTask()
             print(f"Error en checkSalida: {e}")
-            #print('Intentando retomar captura de salida')
             #self.mostrar_area(self.checkSalida, self.area_salida)
             raise
-        
-        finally:
-            # Liberar recursos de las imágenes para evitar acumulación de memoria
-            del imagen, imagen_gris, imagen_contrastada, imagen_umbral
-            cv2.destroyAllWindows()  # Asegurarse de que cualquier ventana de OpenCV se cierre correctamente
 
     def detectar_direccion(self):
         #reconoce hacia donde apunta la flecha
@@ -2273,60 +2251,40 @@ class ImageFinderApp:
 
     def buscar_y_clickear_200(self, ruta_imagen):
         global intentos_realizados
-        limite_intentos = 10  # Asegúrate de definir el límite de intentos si no lo tienes
-
         # Se hace un seguimiento de los intentos realizados
         intentos_realizados += 1
-
         # Límite de intentos alcanzado
         if intentos_realizados > limite_intentos:
             print("Límite de intentos alcanzado. La imagen no se encontró.")
             return
+        # Carga la imagen de referencia y la captura de pantalla
+        imagen_referencia = cv2.imread(ruta_imagen)
+        captura_pantalla = pyautogui.screenshot()
+        captura_pantalla_np = np.array(captura_pantalla)
+        captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
 
-        try:
-            # Carga la imagen de referencia y la captura de pantalla
-            imagen_referencia = cv2.imread(ruta_imagen)
-            captura_pantalla = pyautogui.screenshot()
-            captura_pantalla_np = np.array(captura_pantalla)
-            captura_pantalla_cv2 = cv2.cvtColor(captura_pantalla_np, cv2.COLOR_RGB2BGR)
+        # Obtén las dimensiones de la imagen de referencia
+        altura, ancho, _ = imagen_referencia.shape
 
-            # Verifica que las imágenes se hayan cargado correctamente
-            if imagen_referencia is None or captura_pantalla_cv2 is None:
-                raise ValueError("Error al cargar las imágenes.")
+        # Encuentra la posición de la imagen de referencia en la captura de pantalla
+        resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
 
-            # Obtén las dimensiones de la imagen de referencia
-            altura, ancho, _ = imagen_referencia.shape
+        # Define un umbral de confianza (puedes ajustar según tus necesidades)
+        umbral_confianza = 0.8
 
-            # Encuentra la posición de la imagen de referencia en la captura de pantalla
-            resultado = cv2.matchTemplate(captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
-            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+        if max_val >= umbral_confianza:
+            # Obtiene las coordenadas del centro de la imagen de referencia
+            centro_x = max_loc[0] + ancho // 2
+            centro_y = max_loc[1] + altura // 2
 
-            # Define un umbral de confianza (puedes ajustar según tus necesidades)
-            umbral_confianza = 0.8
-
-            if max_val >= umbral_confianza:
-                # Obtiene las coordenadas del centro de la imagen de referencia
-                centro_x = max_loc[0] + ancho // 2
-                centro_y = max_loc[1] + altura // 2
-
-                # Haz clic en el centro de la imagen encontrada
-                pyautogui.tripleClick(centro_x, centro_y)
-                time.sleep(5)
-                self.etapa_iniciada = True
-                self.save_to_text_file()
-
-            else:
-                print("Imagen no encontrada, intentando de nuevo...")
-                time.sleep(1)
-                self.buscar_y_clickear_200(ruta_imagen)
-
-        except Exception as e:
-            print(f"Error en buscar_y_clickear_200: {e}")
-
-        finally:
-            # Libera la memoria de las imágenes
-            del imagen_referencia
-            del captura_pantalla_cv2
+            # Haz clic en el centro de la imagen encontrada
+            pyautogui.tripleClick(centro_x, centro_y)
+            time.sleep(5)
+            self.etapa_iniciada = True
+            self.save_to_text_file()
+        else:
+            self.buscar_y_clickear_200(ruta_imagen_200)
 
     def hintBox(self, ruta_imagen):
         global intentos_realizados

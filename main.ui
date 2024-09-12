@@ -609,7 +609,7 @@
             </layout>
             <child>
               <object class="ttk.Label" id="label2">
-                <property name="text" translatable="yes">Pista 1:</property>
+                <property name="text" translatable="yes">Flecha 1:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="padx">3</property>
@@ -650,7 +650,7 @@
             </child>
             <child>
               <object class="ttk.Label" id="label4">
-                <property name="text" translatable="yes">Pista 2:</property>
+                <property name="text" translatable="yes">Flecha 2:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="padx">3</property>
@@ -690,7 +690,7 @@
             </child>
             <child>
               <object class="ttk.Label" id="label8">
-                <property name="text" translatable="yes">Pista 3:</property>
+                <property name="text" translatable="yes">Flecha 3:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="padx">3</property>
@@ -730,7 +730,7 @@
             </child>
             <child>
               <object class="ttk.Label" id="label12">
-                <property name="text" translatable="yes">Pista 4:</property>
+                <property name="text" translatable="yes">Flecha 4:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="padx">3</property>
@@ -770,7 +770,7 @@
             </child>
             <child>
               <object class="ttk.Label" id="label16">
-                <property name="text" translatable="yes">Pista 5:</property>
+                <property name="text" translatable="yes">Flecha 5:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="padx">3</property>
@@ -810,7 +810,7 @@
             </child>
             <child>
               <object class="ttk.Label" id="label6">
-                <property name="text" translatable="yes">Pista 6:</property>
+                <property name="text" translatable="yes">Flecha 6:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="padx">3</property>
