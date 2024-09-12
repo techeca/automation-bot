@@ -1212,7 +1212,7 @@ class ImageFinderApp:
             
         # Si no coincide con ninguna dirección predefinida
         else:
-            self.moverEnDireccion(texto_hasta_coma)
+            self.moverEnDireccion(direccion)
             
     def navegacion_flechas(self, ruta_imagen):
         #seleccionar la flecha en navegador
@@ -2820,7 +2820,7 @@ class ImageFinderApp:
             coordenada_cercana, nombre_cercano = coordenada_mas_cercana(primer_coord, segundo_coord, coordenadas_zaap)
             print(f"El zaap más cercano a la Salida es: {nombre_cercano}, {coordenada_cercana}")
 
-            if (self.numero_pista == 0): #primer_numero == 1 and          
+            if (primer_numero == 1 and self.numero_pista == 0): #primer_numero == 1 and          
                 self.irACoordenadaMasCercana(nombre_cercano)
                 
                 print(f"Salida {self.salida['text']}")
@@ -2888,6 +2888,7 @@ class ImageFinderApp:
             self.pelea()
             #time.sleep(6)
             self.etapa_iniciada = False
+            self.numero_pista = 0
             self.save_to_text_file()
             time.sleep(2)
             #pyautogui.press('enter')
