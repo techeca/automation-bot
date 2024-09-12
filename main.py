@@ -513,7 +513,7 @@ class ImageFinderApp:
         self.area_pista_5 = None 
         self.area_pista_6 = None 
 
-        ## pistas - areas (dirección)
+        ## direccion - areas (clic arriba, abajo, izq, der)
         self.area_arriba = None
         self.area_abajo = None
         self.area_izquierda = None
@@ -1688,7 +1688,7 @@ class ImageFinderApp:
             time.sleep(0.5)
             pyautogui.press('enter')
             time.sleep(0.5)
-            self.clickEnImagen(ruta_imagen_llegado_destino)
+            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
             time.sleep(1)
             self.eliminar_chat()
             time.sleep(1)
@@ -1700,7 +1700,7 @@ class ImageFinderApp:
             time.sleep(0.5)
             pyautogui.press('enter')
             time.sleep(0.5)
-            self.clickEnImagen(ruta_imagen_llegado_destino)
+            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
             time.sleep(1)
             self.eliminar_chat()
             time.sleep(1)
@@ -1723,7 +1723,7 @@ class ImageFinderApp:
         time.sleep(0.5)
         pyautogui.press('enter')
         time.sleep(0.5)
-        self.ha_llegado_destino(ruta_imagen_llegado_destino)
+        self.ha_llegado_destino(ruta_imagen_llegado_destino, 1000)
 
     def coordEnNav(self, inicio):
         #Ingresa las coordenadas entregadas en el navegador
@@ -2905,7 +2905,7 @@ class ImageFinderApp:
             print("Cargando datos y Limpiando")
             cv2.destroyAllWindows()
             self.load_from_text_file()
-            self.restablecerEtapa()
+            #self.restablecerEtapa()
             time.sleep(1)
             print('iniciando otra vez la busqueda')
             self.starTask()
