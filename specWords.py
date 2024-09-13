@@ -18,6 +18,7 @@ REEMPLAZOS = {
         "vinturén": "Cinturon",
         "Caja para kebab": "Cana para kebab",
         "misién": "mision",
+        "corazén": "corazon",
         "'Simbolo": "Simbolo",
         "helado'": "helado",
         "Champiifion": "Champinon",
