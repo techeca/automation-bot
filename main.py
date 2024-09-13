@@ -1331,6 +1331,8 @@ class ImageFinderApp:
             else:
                 #eliminar busqueda()
                 self.eliminarBusqueda()
+                self.etapa_iniciada = False
+                self.save_to_text_file()
                 raise Exception("Busqueda eliminada")
         else:
             #pyautogui.tripleClick(755, 727)
@@ -1758,7 +1760,7 @@ class ImageFinderApp:
     def pelea(self):
         global inBattle
         inBattle = True
-        self.click_mas_lejano()
+        #self.click_mas_lejano()
         #time.sleep(2)
         #pyautogui.press('esc')
         time.sleep(3)
@@ -2990,10 +2992,11 @@ class ImageFinderApp:
             cv2.destroyAllWindows()
             #print("Cargando datos guardados")
             #self.load_from_text_file()
-            self.restablecerEtapa()
+            #self.restablecerEtapa()
             #time.sleep(1)
-            #print('iniciando otra vez la busqueda')
-            #self.starTask()
+            self.load_from_text_file()
+            print('iniciando otra vez la busqueda')
+            threading.Timer(3, self.starTask).start()
 
         finally:
             # Cerrar ventanas y liberar recursos aquí
