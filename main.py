@@ -2987,7 +2987,7 @@ class ImageFinderApp:
         finally:
             # Cerrar ventanas y liberar recursos aquí
             cv2.destroyAllWindows()
-            self.load_from_text_file()  # Si es necesario restaurar datos
+            #self.load_from_text_file()  # Si es necesario restaurar datos
 
         # Vuelve a programar la tarea para evitar recursión infinita
         threading.Timer(3, self.starTask).start()  # Repetir después de 3 segundos
