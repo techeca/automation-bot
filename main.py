@@ -2184,6 +2184,81 @@ class ImageFinderApp:
         time.sleep(1)
         pyautogui.press('enter')
 
+    def encontrar_imagen(self, ruta_imagen, screenshot):
+        """Encuentra todas las coincidencias de una imagen dentro de una captura de pantalla"""
+        plantilla = cv2.imread(ruta_imagen, cv2.IMREAD_GRAYSCALE)
+        if plantilla is None:
+            print(f"No se pudo cargar la imagen {ruta_imagen}")
+            return []
+
+        pantalla = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2GRAY)
+
+        # Realizamos la coincidencia
+        resultado = cv2.matchTemplate(pantalla, plantilla, cv2.TM_CCOEFF_NORMED)
+        
+        umbral = 0.8  # Ajusta este valor según sea necesario
+        loc = np.where(resultado >= umbral)
+        
+        # Almacena las coincidencias
+        coincidencias = list(zip(*loc[::-1]))
+
+        # Agregar tamaño de la plantilla para encontrar el centro de la coincidencia
+        h, w = plantilla.shape
+        coincidencias_centro = [(pt[0] + w // 2, pt[1] + h // 2) for pt in coincidencias]
+        
+        # Libera memoria de las matrices
+        del plantilla
+        del pantalla
+        del resultado
+
+        return coincidencias_centro
+
+    def distancia(self, p1, p2):
+        """Calcula la distancia euclidiana entre dos puntos"""
+        return np.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
+
+    def click_mas_lejano(self, ruta_imagen_monstruo, ruta_imagen_rojo):
+        """Encuentra y hace clic en la imagen roja más lejana del monstruo"""
+        # Captura de pantalla
+        screenshot = pyautogui.screenshot()
+
+        # Encontrar el monstruo
+        monstruo_coincidencias = self.encontrar_imagen(ruta_imagen_monstruo, screenshot)
+        
+        if not monstruo_coincidencias:
+            print("No se encontró el monstruo en la pantalla.")
+            return
+
+        monstruo_pos = monstruo_coincidencias[0]  # Asumimos que solo hay un monstruo
+        
+        # Encontrar todas las coincidencias de la imagen roja
+        rojo_coincidencias = self.encontrar_imagen(ruta_imagen_rojo, screenshot)
+        
+        if not rojo_coincidencias:
+            print("No se encontró ninguna imagen roja en la pantalla.")
+            return
+
+        # Encontrar la coincidencia más lejana
+        max_distancia = 0
+        rojo_mas_lejano = None
+        
+        for rojo_pos in rojo_coincidencias:
+            dist = self.distancia(monstruo_pos, rojo_pos)
+            if dist > max_distancia:
+                max_distancia = dist
+                rojo_mas_lejano = rojo_pos
+
+        # Hacer clic en la imagen roja más lejana
+        if rojo_mas_lejano:
+            print(f"Click en la posición más lejana: {rojo_mas_lejano}")
+            pyautogui.click(rojo_mas_lejano[0], rojo_mas_lejano[1])
+
+        # Liberar memoria de la captura de pantalla
+        del screenshot
+
+        # Cerrar todas las ventanas abiertas de OpenCV si se hubieran abierto (aunque no lo estamos usando aquí)
+        cv2.destroyAllWindows()
+
     #-----------------------------------------
     # Click en imagenes, ESTAS PODRIAN CAMBIAR
     #-----------------------------------------
@@ -2679,7 +2754,7 @@ class ImageFinderApp:
                     
                     # Llama a la función banderita
                     self.banderita(ruta_imagen_banderita)
-                    self.checkGameCoord()
+                    #self.checkGameCoord()
                     # Termina el bucle ya que se encontró y clickeó una imagen
                     return
             else:
@@ -2900,12 +2975,13 @@ class ImageFinderApp:
             print("El programa is dead, vamos a limpiar banderitas y volver a iniciar")
             #self.mostrar_area(self.checkSalida, self.area_salida)
             
-            print("Cargando datos y Limpiando")
+            print("Limpiando")
             cv2.destroyAllWindows()
-            self.load_from_text_file()
-            #self.restablecerEtapa()
-            time.sleep(1)
-            print('iniciando otra vez la busqueda')
+            #print("Cargando datos guardados")
+            #self.load_from_text_file()
+            self.restablecerEtapa()
+            #time.sleep(1)
+            #print('iniciando otra vez la busqueda')
             #self.starTask()
 
         finally:
@@ -2913,7 +2989,8 @@ class ImageFinderApp:
             cv2.destroyAllWindows()
             self.load_from_text_file()  # Si es necesario restaurar datos
 
-        self.starTask()
+        # Vuelve a programar la tarea para evitar recursión infinita
+        threading.Timer(3, self.starTask).start()  # Repetir después de 3 segundos
 
 if __name__ == "__main__":
     #root = Tk()
