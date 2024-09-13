@@ -1113,7 +1113,6 @@ class ImageFinderApp:
         primer_coord = int(primer_coord)
         segundo_coord = int(segundo_coord)
 
-
         self.mapas_avanzados = self.mapas_avanzados + 1
         print(f"mapas buscando perforatroz: {self.mapas_avanzados}")
 
@@ -1154,7 +1153,6 @@ class ImageFinderApp:
             pyautogui.tripleClick(c1, c2)
             time.sleep(5)
             self.buscar_y_clickear_perforatroz(texto_hasta_coma, comienzo_perfo_actual)
-
         elif texto_hasta_coma == "Dirigete hacia el Oeste,":
             # funcion para moverse izquierda
             time.sleep(2)
@@ -2681,7 +2679,7 @@ class ImageFinderApp:
                     
                     # Llama a la función banderita
                     self.banderita(ruta_imagen_banderita)
-
+                    self.checkGameCoord()
                     # Termina el bucle ya que se encontró y clickeó una imagen
                     return
             else:
