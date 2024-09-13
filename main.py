@@ -443,8 +443,6 @@ class ImageFinderApp:
         builder.connect_callbacks(self)
         self.boton_presionado = False
 
-        
-
         # Obtener el Label definido en Pygubu
         self.status_label = self.builder.get_object('lblWInfo')
         self.coordActual = self.builder.get_object('lblCoordActual')
@@ -1702,7 +1700,7 @@ class ImageFinderApp:
             time.sleep(1)
             self.eliminar_chat()
             time.sleep(1)
-        if '21 -26' in texto:
+        if '21 -26' or '20 -26' in texto:
             pyautogui.write('/travel 24 -28')
             pyautogui.press('enter')
             time.sleep(0.5)
@@ -1760,9 +1758,10 @@ class ImageFinderApp:
     def pelea(self):
         global inBattle
         inBattle = True
+        self.click_mas_lejano()
         #time.sleep(2)
         #pyautogui.press('esc')
-        time.sleep(2)
+        time.sleep(3)
         pyautogui.press('F1')
         time.sleep(2)
         pyautogui.press('F1')
@@ -2184,46 +2183,58 @@ class ImageFinderApp:
         time.sleep(1)
         pyautogui.press('enter')
 
-    def encontrar_imagen(self, ruta_imagen, screenshot):
-        """Encuentra todas las coincidencias de una imagen dentro de una captura de pantalla"""
-        plantilla = cv2.imread(ruta_imagen, cv2.IMREAD_GRAYSCALE)
-        if plantilla is None:
-            print(f"No se pudo cargar la imagen {ruta_imagen}")
-            return []
+    def encontrar_imagen(lista_rutas_imagenes, captura_pantalla ,precision=0.8, clic=True):
+        #captura_pantalla = pyautogui.screenshot()
+        captura_np = np.array(captura_pantalla)
+        captura_gray = cv2.cvtColor(captura_np, cv2.COLOR_BGR2GRAY)
 
-        pantalla = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2GRAY)
+        for ruta_imagen in lista_rutas_imagenes:
+            # Cargar la imagen de plantilla
+            imagen_template = cv2.imread(ruta_imagen, 0)
+            if imagen_template is None:
+                print(f"Error al cargar la imagen {ruta_imagen}")
+                continue
 
-        # Realizamos la coincidencia
-        resultado = cv2.matchTemplate(pantalla, plantilla, cv2.TM_CCOEFF_NORMED)
-        
-        umbral = 0.8  # Ajusta este valor según sea necesario
-        loc = np.where(resultado >= umbral)
-        
-        # Almacena las coincidencias
-        coincidencias = list(zip(*loc[::-1]))
+            # Ejecutar la comparación de la plantilla
+            resultado = cv2.matchTemplate(captura_gray, imagen_template, cv2.TM_CCOEFF_NORMED)
+            ubicaciones = np.where(resultado >= precision)
 
-        # Agregar tamaño de la plantilla para encontrar el centro de la coincidencia
-        h, w = plantilla.shape
-        coincidencias_centro = [(pt[0] + w // 2, pt[1] + h // 2) for pt in coincidencias]
-        
-        # Libera memoria de las matrices
-        del plantilla
-        del pantalla
-        del resultado
+            # Si se encuentra una coincidencia
+            if len(ubicaciones[0]) > 0:
+                print(f"Imagen encontrada: {ruta_imagen}")
+                # Calcular el punto central de la imagen detectada
+                punto_max = (ubicaciones[1][0], ubicaciones[0][0])
+                h, w = imagen_template.shape
+                centro = (punto_max[0] + w // 2, punto_max[1] + h // 2)
 
-        return coincidencias_centro
+                # Realizar clic en la posición si es necesario
+                if clic:
+                    pyautogui.click(centro[0], centro[1])
+                return True  # Se encontró y se hizo clic en la imagen
+        return False  # No se encontró ninguna imagen
 
     def distancia(self, p1, p2):
         """Calcula la distancia euclidiana entre dos puntos"""
         return np.sqrt((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2)
 
-    def click_mas_lejano(self, ruta_imagen_monstruo, ruta_imagen_rojo):
+    def click_mas_lejano(self):
         """Encuentra y hace clic en la imagen roja más lejana del monstruo"""
         # Captura de pantalla
         screenshot = pyautogui.screenshot()
 
+        rutas_alternativas = [
+            "./treasureHunt/battle/1.png", 
+            './treasureHunt/battle/2.png', 
+            './treasureHunt/battle/3.png',
+            './treasureHunt/battle/4.png'
+        ]
+
+        rutas_rojo = [
+            './treasureHunt/battle/rojo.png'
+        ]
+
         # Encontrar el monstruo
-        monstruo_coincidencias = self.encontrar_imagen(ruta_imagen_monstruo, screenshot)
+        monstruo_coincidencias = self.encontrar_imagen(rutas_alternativas, screenshot)
         
         if not monstruo_coincidencias:
             print("No se encontró el monstruo en la pantalla.")
@@ -2232,7 +2243,7 @@ class ImageFinderApp:
         monstruo_pos = monstruo_coincidencias[0]  # Asumimos que solo hay un monstruo
         
         # Encontrar todas las coincidencias de la imagen roja
-        rojo_coincidencias = self.encontrar_imagen(ruta_imagen_rojo, screenshot)
+        rojo_coincidencias = self.encontrar_imagen(rutas_rojo, screenshot)
         
         if not rojo_coincidencias:
             print("No se encontró ninguna imagen roja en la pantalla.")
