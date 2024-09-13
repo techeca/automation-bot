@@ -1702,7 +1702,7 @@ class ImageFinderApp:
             time.sleep(1)
             self.eliminar_chat()
             time.sleep(1)
-        if "'21', '-26'" in texto:
+        if '21 -26' in texto:
             pyautogui.write('/travel 24 -28')
             pyautogui.press('enter')
             time.sleep(0.5)
