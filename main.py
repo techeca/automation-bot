@@ -1331,6 +1331,7 @@ class ImageFinderApp:
             else:
                 #eliminar busqueda()
                 self.eliminarBusqueda()
+                self.numero_pista = 0
                 self.etapa_iniciada = False
                 self.save_to_text_file()
                 raise Exception("Busqueda eliminada")
@@ -3006,9 +3007,9 @@ class ImageFinderApp:
             #self.load_from_text_file()
             #self.restablecerEtapa()
             #time.sleep(1)
-            self.load_from_text_file()
-            print('iniciando otra vez la busqueda')
-            threading.Timer(3, self.starTask).start()
+            #self.load_from_text_file()
+            #print('iniciando otra vez la busqueda')
+            #threading.Timer(3, self.starTask).start()
 
         finally:
             # Cerrar ventanas y liberar recursos aquí
