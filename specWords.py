@@ -9,6 +9,7 @@ REEMPLAZOS = {
         "Cinturén": "Cinturon",
         "Champiion": "Champinon",
         "Champion": "Champinon",
+        "Champijion": "Champinon",
         "rayado:": "rayado",
         "Champirion": "Champinon",
         "wukin:": "wukin",
@@ -61,4 +62,5 @@ REEMPLAZOS = {
         "Craneo de « ocra": "Craneo de ocra",
         "rosade": "rosa de",
         "See": "Rosa negra",
+        "Ileno": "lleno"
     }
