@@ -531,6 +531,7 @@ class ImageFinderApp:
         self.mapas_avanzados = 0
         self.numero_pista = 0
         self.navegador_actual = ''
+        self.inicio_proceso = False
 
         
         self.load_from_text_file()
@@ -1425,6 +1426,9 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
 
+            if self.etapa_iniciada == True:
+                return
+
             print("Pista2")
             self.checkGameCoord()
             inicio = self.coordActual['text']
@@ -1452,6 +1456,9 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
 
+            if self.etapa_iniciada == True:
+                return
+
             print("Pista2")
             self.checkGameCoord()
             inicio = self.coordActual['text']
@@ -1462,6 +1469,9 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
+
+            if self.etapa_iniciada == True:
+                return
 
             print("Pista3")
             self.checkGameCoord()
@@ -1490,6 +1500,9 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
 
+            if self.etapa_iniciada == True:
+                return
+
             print("Pista2")
             self.checkGameCoord()
             inicio = self.coordActual['text']
@@ -1501,6 +1514,9 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
+            if self.etapa_iniciada == True:
+                return
+
             print("Pista3")
             self.checkGameCoord()
             inicio = self.coordActual['text']
@@ -1511,6 +1527,9 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
+
+            if self.etapa_iniciada == True:
+                return
 
             print("Pista4")
             self.checkGameCoord()
@@ -1539,6 +1558,8 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
             
+            if self.etapa_iniciada == True:
+                return
 
             print("Pista2")
             self.checkGameCoord()
@@ -1551,6 +1572,9 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
+            if self.etapa_iniciada == True:
+                return
+
             print("Pista3")
             self.checkGameCoord()
             inicio = self.coordActual['text']
@@ -1562,6 +1586,9 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
 
+            if self.etapa_iniciada == True:
+                return
+
             print("Pista4")
             self.checkGameCoord()
             inicio = self.coordActual['text']
@@ -1572,6 +1599,9 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_4)
             self.pista(texto_hasta_coma)
+
+            if self.etapa_iniciada == True:
+                return
 
             print("Pista5")
             self.checkGameCoord()
@@ -1612,6 +1642,9 @@ class ImageFinderApp:
             #mueve el personaje según la pista obtenida
             self.pista(texto_hasta_coma)
 
+            if self.etapa_iniciada == True:
+                return
+
             print("Pista2")
             self.checkGameCoord()
             inicio = self.coordActual['text']
@@ -1622,6 +1655,9 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
+
+            if self.etapa_iniciada == True:
+                return
 
             print("Pista3")
             self.checkGameCoord()
@@ -1634,6 +1670,9 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
 
+            if self.etapa_iniciada == True:
+                return
+
             print("Pista4")
             self.checkGameCoord()
             inicio = self.coordActual['text']
@@ -1645,6 +1684,9 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_4)
             self.pista(texto_hasta_coma)
 
+            if self.etapa_iniciada == True:
+                return
+
             print("Pista5")
             self.checkGameCoord()
             inicio = self.coordActual['text']
@@ -1655,6 +1697,9 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_5)
             self.pista(texto_hasta_coma)
+
+            if self.etapa_iniciada == True:
+                return
 
             print("Pista6")
             self.checkGameCoord()
@@ -2853,155 +2898,164 @@ class ImageFinderApp:
     #----------------------------------#
     #----------------------------------#
 
-    def starTask(self):
+    def startTreasureHunt(self):
+        self.inicio_proceso = True
+
+    def stopTreasureHunt(self):
+        self.inicio_proceso = False
+
+
+    def treasureHunt(self):
         self.status_label.config(text=f"Iniciando búsqueda")
         
-        try:
-            ##obtener busqueda
-            if (self.etapa_iniciada == False):
-                self.irACofreTesoros()
-                time.sleep(4)
-                #print(f"Valor: {etapa_actual}, Tipo: {type(etapa_actual)}")
-                print('obtener busqueda')
-                buscar_y_clickear_tesoro(ruta_imagen_tesoro)
-                levelSeleccionado = self.cboxHuntlvl.get()
-                if levelSeleccionado:
-                    valor_guardado = levelSeleccionado
-                    print(f"Level de treasure hunt seleccionado: {valor_guardado}")
-                    if valor_guardado == "140":
-                        self.buscar_y_clickear_200(ruta_imagen_140)
-                    if valor_guardado == "160":
-                        self.buscar_y_clickear_200(ruta_imagen_160)
-                    if valor_guardado == "180":
-                        self.buscar_y_clickear_200(ruta_imagen_180)
-                    if valor_guardado == "200":
-                        self.buscar_y_clickear_200(ruta_imagen_200)
-                else:
-                    print("No hay selección")
-                
-                buscar_y_clickear_salir(ruta_imagen_salir)
-                time.sleep(1)
-                buscar_y_clickear_salir_puerta(ruta_imagen_salir_puerta)
-                time.sleep(1)
-                #self.irACoordenadaMasCercana(nombre_cercano)
+        while self.inicio_proceso == True:
 
-            #self.capturaPantalla()
-            #print('captura realizada')
-
-            self.checkPistas()
-            self.checkEtapa()
-            self.checkGameCoord()
-            self.checkSalida()
-            #self.mostrar_area(self.checkSalida, self.area_salida)
-            etapa_actual_texto = self.etapaActual['text']
-            etapa_actual_texto = self.cleanText(etapa_actual_texto)
-            primer_numero, segundo_numero = etapa_actual_texto.split(',')
-            primer_numero = int(primer_numero)
-            segundo_numero = int(segundo_numero)
-
-            salida_actual_texto = self.salida['text']
-            salida_actual_texto = self.cleanText(salida_actual_texto)
-            primer_coord, segundo_coord = salida_actual_texto.split(',')
-            primer_coord = int(primer_coord)
-            segundo_coord = int(segundo_coord)
-
-            print(f"coordenada salida: {primer_coord}, {segundo_coord}")
-            print(f"etapa actual: {primer_numero}, {segundo_numero}")
-            print(f"numero de pista: {self.numero_pista}")
-            coordenada_cercana, nombre_cercano = coordenada_mas_cercana(primer_coord, segundo_coord, coordenadas_zaap)
-            print(f"El zaap más cercano a la Salida es: {nombre_cercano}, {coordenada_cercana}")
-
-            if (self.numero_pista == 0): #primer_numero == 1 and          
-                self.irACoordenadaMasCercana(nombre_cercano)
+            try:
+                ##obtener busqueda
+                if (self.etapa_iniciada == False):
+                    self.irACofreTesoros()
+                    time.sleep(4)
+                    #print(f"Valor: {etapa_actual}, Tipo: {type(etapa_actual)}")
+                    print('obtener busqueda')
+                    buscar_y_clickear_tesoro(ruta_imagen_tesoro)
+                    levelSeleccionado = self.cboxHuntlvl.get()
+                    if levelSeleccionado:
+                        valor_guardado = levelSeleccionado
+                        print(f"Level de treasure hunt seleccionado: {valor_guardado}")
+                        if valor_guardado == "140":
+                            self.buscar_y_clickear_200(ruta_imagen_140)
+                        if valor_guardado == "160":
+                            self.buscar_y_clickear_200(ruta_imagen_160)
+                        if valor_guardado == "180":
+                            self.buscar_y_clickear_200(ruta_imagen_180)
+                        if valor_guardado == "200":
+                            self.buscar_y_clickear_200(ruta_imagen_200)
+                    else:
+                        print("No hay selección")
                     
-                print(f"Salida {self.salida['text']}")
-                print(f"Coordenada actual {self.coordActual['text']}")
-                if(f"{self.salida['text']}" != f"{self.coordActual['text']}"):
-                        #self.irACoordenadaMasCercana(nombre_cercano)
-                    chatX, chatY = self.get4CoordFromText(self.chat['text'])
-                        #self.clickEnImagen(ruta_imagen_chat_box)
-                    pyautogui.click(chatX, chatY)
+                    buscar_y_clickear_salir(ruta_imagen_salir)
                     time.sleep(1)
-                    texto = self.salida['text']
-                    print(texto)
-                    if "'22', '-27'" in texto:
-                        pyautogui.write('/travel 23 -27')
-                        pyautogui.press('enter')
-                        time.sleep(0.5)
-                        pyautogui.press('enter')
-                        time.sleep(0.5)
-                        pyautogui.press('enter')
-                        time.sleep(0.5)
-                        self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-                        time.sleep(1)
-                        self.eliminar_chat()
-                        time.sleep(1)
-                            #pyautogui.write('/travel 22, -27')
-                    if "'21', '-37'" in texto:
-                        pyautogui.write('/travel 20 -37')
-                        pyautogui.write('/travel 23 -27')
-                        pyautogui.press('enter')
-                        time.sleep(0.5)
-                        pyautogui.press('enter')
-                        time.sleep(0.5)
-                        pyautogui.press('enter')
-                        time.sleep(0.5)
-                        self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-                        time.sleep(1)
-                        self.eliminar_chat()
-                        time.sleep(1)
-                            #pyautogui.write('/travel 21, -37')
+                    buscar_y_clickear_salir_puerta(ruta_imagen_salir_puerta)
+                    time.sleep(1)
+                    #self.irACoordenadaMasCercana(nombre_cercano)
+
+                #self.capturaPantalla()
+                #print('captura realizada')
+
+                self.checkPistas()
+                self.checkEtapa()
+                self.checkGameCoord()
+                self.checkSalida()
+                #self.mostrar_area(self.checkSalida, self.area_salida)
+                etapa_actual_texto = self.etapaActual['text']
+                etapa_actual_texto = self.cleanText(etapa_actual_texto)
+                primer_numero, segundo_numero = etapa_actual_texto.split(',')
+                primer_numero = int(primer_numero)
+                segundo_numero = int(segundo_numero)
+
+                salida_actual_texto = self.salida['text']
+                salida_actual_texto = self.cleanText(salida_actual_texto)
+                primer_coord, segundo_coord = salida_actual_texto.split(',')
+                primer_coord = int(primer_coord)
+                segundo_coord = int(segundo_coord)
+
+                print(f"coordenada salida: {primer_coord}, {segundo_coord}")
+                print(f"etapa actual: {primer_numero}, {segundo_numero}")
+                print(f"numero de pista: {self.numero_pista}")
+                coordenada_cercana, nombre_cercano = coordenada_mas_cercana(primer_coord, segundo_coord, coordenadas_zaap)
+                print(f"El zaap más cercano a la Salida es: {nombre_cercano}, {coordenada_cercana}")
+
+                if (self.numero_pista == 0): #primer_numero == 1 and          
+                    self.irACoordenadaMasCercana(nombre_cercano)
                         
-                    pyautogui.tripleClick(chatX, chatY)
-                    time.sleep(1)
-
+                    print(f"Salida {self.salida['text']}")
+                    print(f"Coordenada actual {self.coordActual['text']}")
                     if(f"{self.salida['text']}" != f"{self.coordActual['text']}"):
-                        pyautogui.write(f"/travel {primer_coord} {segundo_coord}")
+                            #self.irACoordenadaMasCercana(nombre_cercano)
+                        chatX, chatY = self.get4CoordFromText(self.chat['text'])
+                            #self.clickEnImagen(ruta_imagen_chat_box)
+                        pyautogui.click(chatX, chatY)
                         time.sleep(1)
-                        pyautogui.press('enter')
-                        time.sleep(0.5) 
-                        pyautogui.press('enter')
-                        self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                        texto = self.salida['text']
+                        print(texto)
+                        if "'22', '-27'" in texto:
+                            pyautogui.write('/travel 23 -27')
+                            pyautogui.press('enter')
+                            time.sleep(0.5)
+                            pyautogui.press('enter')
+                            time.sleep(0.5)
+                            pyautogui.press('enter')
+                            time.sleep(0.5)
+                            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                            time.sleep(1)
+                            self.eliminar_chat()
+                            time.sleep(1)
+                                #pyautogui.write('/travel 22, -27')
+                        if "'21', '-37'" in texto:
+                            pyautogui.write('/travel 20 -37')
+                            pyautogui.write('/travel 23 -27')
+                            pyautogui.press('enter')
+                            time.sleep(0.5)
+                            pyautogui.press('enter')
+                            time.sleep(0.5)
+                            pyautogui.press('enter')
+                            time.sleep(0.5)
+                            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                            time.sleep(1)
+                            self.eliminar_chat()
+                            time.sleep(1)
+                                #pyautogui.write('/travel 21, -37')
+                            
+                        pyautogui.tripleClick(chatX, chatY)
                         time.sleep(1)
-                    self.eliminar_chat()
-                    time.sleep(1)
-                    self.checkGameCoord()
 
-                while primer_numero < segundo_numero and self.etapa_iniciada == True: # Mientras la condición sea verdadera
-                    self.checkPistas()
-                    self.verificacionPistas()
-                    primer_numero += 1  # Actualiza la condición para evitar un bucle infinito
-                    time.sleep(1)
+                        if(f"{self.salida['text']}" != f"{self.coordActual['text']}"):
+                            pyautogui.write(f"/travel {primer_coord} {segundo_coord}")
+                            time.sleep(1)
+                            pyautogui.press('enter')
+                            time.sleep(0.5) 
+                            pyautogui.press('enter')
+                            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                            time.sleep(1)
+                        self.eliminar_chat()
+                        time.sleep(1)
+                        self.checkGameCoord()
 
-            if self.etapa_iniciada == True:    
-                time.sleep(1)
-                self.lucha(ruta_imagen_lucha)
+                    while primer_numero < segundo_numero: # Mientras la condición sea verdadera
+                        self.checkPistas()
+                        self.verificacionPistas()
+                        primer_numero += 1  # Actualiza la condición para evitar un bucle infinito
+                        time.sleep(1)
+
+                if self.etapa_iniciada == True:    
+                    time.sleep(1)
+                    self.lucha(ruta_imagen_lucha)
+                    time.sleep(2)
+                    self.pelea()
+                        #time.sleep(6)
+                self.etapa_iniciada = False
+                self.numero_pista = 0
+                self.save_to_text_file()
                 time.sleep(2)
-                self.pelea()
-                    #time.sleep(6)
-            self.etapa_iniciada = False
-            self.numero_pista = 0
-            self.save_to_text_file()
-            time.sleep(2)
-                    #pyautogui.press('enter')
-            pyautogui.press('enter')
-                    #self.clickEnImagen(ruta_imagen_cerrar_bat)
-            self.status_label.config(text=f"Búsqueda terminada")
-                    #pyautogui.press('0')    
+                        #pyautogui.press('enter')
+                pyautogui.press('enter')
+                        #self.clickEnImagen(ruta_imagen_cerrar_bat)
+                self.status_label.config(text=f"Búsqueda terminada")
+                        #pyautogui.press('0')    
 
-        except Exception as e:
-            print(f"Error: {e}")
-            print("El programa is dead, vamos a limpiar")
-            print("Limpiando")
-            cv2.destroyAllWindows()
+            except Exception as e:
+                print(f"Error: {e}")
+                print("El programa is dead, vamos a limpiar")
+                print("Limpiando")
+                cv2.destroyAllWindows()
 
-        finally:
-            # Cerrar ventanas y liberar recursos aquí
-            cv2.destroyAllWindows()
-            self.load_from_text_file()  # Si es necesario restaurar datos
+            finally:
+                # Cerrar ventanas y liberar recursos aquí
+                cv2.destroyAllWindows()
+                self.load_from_text_file()  # Si es necesario restaurar datos
 
         # Vuelve a programar la tarea para evitar recursión infinita
-        threading.Timer(3, self.starTask).start()  # Repetir después de 3 segundos
+        #threading.Timer(3, self.starTask).start()  # Repetir después de 3 segundos
 
 if __name__ == "__main__":
     #root = Tk()

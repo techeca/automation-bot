@@ -278,7 +278,7 @@
             </containerlayout>
             <child>
               <object class="ttk.Button" id="btnStartTask" named="True">
-                <property name="command" type="command" cbtype="simple">starTask</property>
+                <property name="command" type="command" cbtype="simple">startTreasureHunt</property>
                 <property name="text" translatable="yes">Start</property>
                 <layout manager="grid">
                   <property name="column">0</property>
@@ -288,6 +288,7 @@
             </child>
             <child>
               <object class="ttk.Button" id="button23" named="True">
+                <property name="command" type="command" cbtype="simple">stopTreasureHunt</property>
                 <property name="text" translatable="yes">Stop</property>
                 <layout manager="grid">
                   <property name="column">1</property>
