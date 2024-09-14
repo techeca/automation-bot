@@ -1396,8 +1396,7 @@ class ImageFinderApp:
                 self.checkGameCoord()
                 time.sleep(2)
                 comienzo_perfo_actual = self.coordActual['text']
-                self.condicion_perforatroz(
-                    texto_hasta_coma, comienzo_perfo_actual)
+                self.condicion_perforatroz(texto_hasta_coma, comienzo_perfo_actual)
             else:
                 # eliminar busqueda()
                 self.eliminarBusqueda()
@@ -1853,14 +1852,19 @@ class ImageFinderApp:
             time.sleep(1)
             self.eliminar_chat()
             time.sleep(1)
-        pyautogui.hotkey('ctrl', 'v')
-        pyautogui.press('enter')
-        time.sleep(0.5)
-        pyautogui.press('enter')
-        time.sleep(0.5)
-        pyautogui.press('enter')
-        time.sleep(0.5)
-        self.ha_llegado_destino(ruta_imagen_llegado_destino)
+        #si el texto tiene [] quiere decir que no se encontró la pista
+        if '[' in texto:
+            print('No se encontró la pista, tal vez deberia reiniciar busqueda}')
+            self.restablecerEtapa()
+        else:    
+            pyautogui.hotkey('ctrl', 'v')
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            self.ha_llegado_destino(ruta_imagen_llegado_destino)
 
     def coordEnNav(self, inicio):
         # Ingresa las coordenadas entregadas en el navegador
@@ -1948,8 +1952,7 @@ class ImageFinderApp:
         self.numero_pista == 0
         enMerka = self.buscar_image(ruta_imagen_zaap_merka)
         time.sleep(1)
-        hayBanderitaActivada = self.buscar_image(
-            ruta_imagen_banderita_brillante)
+        hayBanderitaActivada = self.buscar_image(ruta_imagen_banderita_brillante)
         hayBanderita = self.buscar_image(ruta_imagen_banderita)
         time.sleep(1)
         if enMerka == True:
@@ -1964,10 +1967,9 @@ class ImageFinderApp:
             print('borrar pistas encontradas')
             bandBriX, bandBriY = self.get4CoordFromText(self.pistaDL6['text'])
             pyautogui.click(bandBriX, bandBriY)
-            self.etapa_iniciada = True
-        if hayBanderita == False:
-            # no hay busqueda
-            self.etapa_iniciada = False
+            #self.etapa_iniciada = True
+        self.numero_pista = 0
+        
 
     # ------------#
     # Save/Load
@@ -3112,8 +3114,7 @@ class ImageFinderApp:
                             time.sleep(1)
                             # pyautogui.write('/travel 22, -27')
                         if "('21', '-37')" in texto:
-                            pyautogui.write('/travel 20 -37')
-                            pyautogui.write('/travel 23 -27')
+                            pyautogui.write('/travel 20 -32')
                             pyautogui.press('enter')
                             time.sleep(0.5)
                             pyautogui.press('enter')
