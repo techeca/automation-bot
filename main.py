@@ -2900,6 +2900,7 @@ class ImageFinderApp:
 
     def startTreasureHunt(self):
         self.inicio_proceso = True
+        self.etapa_iniciada = True
         self.treasureHunt()
 
     def stopTreasureHunt(self):
@@ -3022,11 +3023,11 @@ class ImageFinderApp:
                         time.sleep(1)
                         self.checkGameCoord()
 
-                    while primer_numero < segundo_numero: # Mientras la condición sea verdadera
-                        self.checkPistas()
-                        self.verificacionPistas()
-                        primer_numero += 1  # Actualiza la condición para evitar un bucle infinito
-                        time.sleep(1)
+                while primer_numero < segundo_numero and self.etapa_iniciada == True: # Mientras la condición sea verdadera
+                    self.checkPistas()
+                    self.verificacionPistas()
+                    primer_numero += 1  # Actualiza la condición para evitar un bucle infinito
+                    time.sleep(1)
 
                 if self.etapa_iniciada == True:    
                     time.sleep(1)

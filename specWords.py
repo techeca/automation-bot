@@ -71,5 +71,6 @@ REEMPLAZOS = {
         "Craneo de « ocra": "Craneo de ocra",
         "rosade": "rosa de",
         "See": "Rosa negra",
-        "Ileno": "lleno"
+        "Ileno": "lleno",
+        "Bast6n": "Baston"
     }
