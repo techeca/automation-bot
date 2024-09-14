@@ -1426,7 +1426,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista2")
@@ -1456,7 +1456,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista2")
@@ -1470,7 +1470,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista3")
@@ -1500,7 +1500,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista2")
@@ -1514,7 +1514,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista3")
@@ -1528,7 +1528,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista4")
@@ -1558,7 +1558,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
             
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista2")
@@ -1572,7 +1572,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista3")
@@ -1586,7 +1586,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista4")
@@ -1600,7 +1600,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_4)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista5")
@@ -1642,7 +1642,7 @@ class ImageFinderApp:
             #mueve el personaje según la pista obtenida
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista2")
@@ -1656,7 +1656,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista3")
@@ -1670,7 +1670,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista4")
@@ -1684,7 +1684,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_4)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista5")
@@ -1698,7 +1698,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_5)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == True:
+            if self.etapa_iniciada == False:
                 return
 
             print("Pista6")
