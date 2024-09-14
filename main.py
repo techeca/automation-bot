@@ -1850,26 +1850,6 @@ class ImageFinderApp:
         if hayBanderita == False:
             #no hay busqueda
             self.etapa_iniciada = False
-            
-        #ir a punto de salida, (esto ya se hace cuando inicia cualquier busqueda StartTask())
-        # if self.etapa_iniciada == True:
-        #     self.checkSalida()
-        #     time.sleep(1)
-        #     texto_salida = self.salida['text']
-        #     texto_salida = re.findall(r'-?\d+', texto_salida)
-        #     c1 = texto_salida[0]
-        #     c2 = texto_salida[1]
-        #     chatX, chatY = self.get4CoordFromText(self.chat['text'])
-        #     pyautogui.tripleClick(chatX, chatY)
-        #     pyautogui.write(f"/travel {c1} {c2}")
-        #     pyautogui.press('enter')
-        #     time.sleep(1)
-        #     pyautogui.press('enter')
-        #     self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-        #     time.sleep(1)
-        #     pyautogui.tripleClick(chatX, chatY)
-        #     pyautogui.write('/clear')
-        #     pyautogui.press('enter')
 
     #------------#
     # Save/Load
