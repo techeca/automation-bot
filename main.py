@@ -12,7 +12,6 @@ import pathlib
 import pygubu
 import re
 import math
-import ast
 import pyperclip
 import gc
 from specWords import REEMPLAZOS
@@ -911,11 +910,13 @@ class ImageFinderApp:
 
         # Realizar OCR en la imagen en blanco y negro
         # salida_actual_texto = pytesseract.image_to_string(imagen_bn)
-
-        # print(f"salida de texto {salida_actual_texto}")
+        
+        enMerka = self.buscar_image(ruta_imagen_zaap_merka)
         merkaX, merkaY = self.get4CoordFromText(self.btnMerkasako['text'])
-        pyautogui.click(merkaX, merkaY)
-        time.sleep(4)
+        if not enMerka:
+            # print(f"salida de texto {salida_actual_texto}")
+            pyautogui.click(merkaX, merkaY)
+            time.sleep(4)
         chatX, chatY = self.get4CoordFromText(self.chat['text'])
         pyautogui.click(chatX, chatY)
         pyautogui.write('/clear')
@@ -1841,19 +1842,7 @@ class ImageFinderApp:
             self.eliminar_chat()
             time.sleep(1)
         if '19 -34' in texto:
-            pyautogui.write('/travel 20 -31')
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-            time.sleep(1)
-            self.eliminar_chat()
-            time.sleep(1)
-        if '21 -37' in texto:
-            pyautogui.write('/travel 20 -31')
+            pyautogui.write('/travel 20 -32')
             pyautogui.press('enter')
             time.sleep(0.5)
             pyautogui.press('enter')
@@ -3108,7 +3097,7 @@ class ImageFinderApp:
                         time.sleep(1)
                         texto = self.salida['text']
                         print(texto)
-                        if "'22', '-27'" in texto:
+                        if "('22', '-27')" in texto:
                             pyautogui.write('/travel 23 -27')
                             pyautogui.press('enter')
                             time.sleep(0.5)
@@ -3122,7 +3111,7 @@ class ImageFinderApp:
                             self.eliminar_chat()
                             time.sleep(1)
                             # pyautogui.write('/travel 22, -27')
-                        if "'21', '-37'" in texto:
+                        if "('21', '-37')" in texto:
                             pyautogui.write('/travel 20 -37')
                             pyautogui.write('/travel 23 -27')
                             pyautogui.press('enter')
@@ -3142,8 +3131,7 @@ class ImageFinderApp:
                         time.sleep(1)
 
                         if (f"{self.salida['text']}" != f"{self.coordActual['text']}"):
-                            pyautogui.write(
-                                f"/travel {primer_coord} {segundo_coord}")
+                            pyautogui.write(f"/travel {primer_coord} {segundo_coord}")
                             time.sleep(1)
                             pyautogui.press('enter')
                             time.sleep(0.5)
