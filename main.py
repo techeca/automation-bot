@@ -2900,6 +2900,7 @@ class ImageFinderApp:
 
     def startTreasureHunt(self):
         self.inicio_proceso = True
+        self.treasureHunt()
 
     def stopTreasureHunt(self):
         self.inicio_proceso = False
