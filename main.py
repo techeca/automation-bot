@@ -2888,121 +2888,112 @@ class ImageFinderApp:
             #self.capturaPantalla()
             #print('captura realizada')
 
-            while self.etapa_iniciada == True:
-                self.checkPistas()
-                self.checkEtapa()
-                self.checkGameCoord()
-                self.checkSalida()
-                #self.mostrar_area(self.checkSalida, self.area_salida)
-                etapa_actual_texto = self.etapaActual['text']
-                etapa_actual_texto = self.cleanText(etapa_actual_texto)
-                primer_numero, segundo_numero = etapa_actual_texto.split(',')
-                primer_numero = int(primer_numero)
-                segundo_numero = int(segundo_numero)
+            self.checkPistas()
+            self.checkEtapa()
+            self.checkGameCoord()
+            self.checkSalida()
+            #self.mostrar_area(self.checkSalida, self.area_salida)
+            etapa_actual_texto = self.etapaActual['text']
+            etapa_actual_texto = self.cleanText(etapa_actual_texto)
+            primer_numero, segundo_numero = etapa_actual_texto.split(',')
+            primer_numero = int(primer_numero)
+            segundo_numero = int(segundo_numero)
 
-                salida_actual_texto = self.salida['text']
-                salida_actual_texto = self.cleanText(salida_actual_texto)
-                primer_coord, segundo_coord = salida_actual_texto.split(',')
-                primer_coord = int(primer_coord)
-                segundo_coord = int(segundo_coord)
+            salida_actual_texto = self.salida['text']
+            salida_actual_texto = self.cleanText(salida_actual_texto)
+            primer_coord, segundo_coord = salida_actual_texto.split(',')
+            primer_coord = int(primer_coord)
+            segundo_coord = int(segundo_coord)
 
-                print(f"coordenada salida: {primer_coord}, {segundo_coord}")
-                print(f"etapa actual: {primer_numero}, {segundo_numero}")
-                print(f"numero de pista: {self.numero_pista}")
-                coordenada_cercana, nombre_cercano = coordenada_mas_cercana(primer_coord, segundo_coord, coordenadas_zaap)
-                print(f"El zaap más cercano a la Salida es: {nombre_cercano}, {coordenada_cercana}")
+            print(f"coordenada salida: {primer_coord}, {segundo_coord}")
+            print(f"etapa actual: {primer_numero}, {segundo_numero}")
+            print(f"numero de pista: {self.numero_pista}")
+            coordenada_cercana, nombre_cercano = coordenada_mas_cercana(primer_coord, segundo_coord, coordenadas_zaap)
+            print(f"El zaap más cercano a la Salida es: {nombre_cercano}, {coordenada_cercana}")
 
-                if (self.numero_pista == 0): #primer_numero == 1 and          
-                    self.irACoordenadaMasCercana(nombre_cercano)
+            if (self.numero_pista == 0): #primer_numero == 1 and          
+                self.irACoordenadaMasCercana(nombre_cercano)
                     
-                    print(f"Salida {self.salida['text']}")
-                    print(f"Coordenada actual {self.coordActual['text']}")
-                    if(f"{self.salida['text']}" != f"{self.coordActual['text']}"):
+                print(f"Salida {self.salida['text']}")
+                print(f"Coordenada actual {self.coordActual['text']}")
+                if(f"{self.salida['text']}" != f"{self.coordActual['text']}"):
                         #self.irACoordenadaMasCercana(nombre_cercano)
-                        chatX, chatY = self.get4CoordFromText(self.chat['text'])
+                    chatX, chatY = self.get4CoordFromText(self.chat['text'])
                         #self.clickEnImagen(ruta_imagen_chat_box)
-                        pyautogui.click(chatX, chatY)
+                    pyautogui.click(chatX, chatY)
+                    time.sleep(1)
+                    texto = self.salida['text']
+                    print(texto)
+                    if "'22', '-27'" in texto:
+                        pyautogui.write('/travel 23 -27')
+                        pyautogui.press('enter')
+                        time.sleep(0.5)
+                        pyautogui.press('enter')
+                        time.sleep(0.5)
+                        pyautogui.press('enter')
+                        time.sleep(0.5)
+                        self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
                         time.sleep(1)
-                        texto = self.salida['text']
-                        print(texto)
-                        if "'22', '-27'" in texto:
-                            pyautogui.write('/travel 23 -27')
-                            pyautogui.press('enter')
-                            time.sleep(0.5)
-                            pyautogui.press('enter')
-                            time.sleep(0.5)
-                            pyautogui.press('enter')
-                            time.sleep(0.5)
-                            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-                            time.sleep(1)
-                            self.eliminar_chat()
-                            time.sleep(1)
-                            #pyautogui.write('/travel 22, -27')
-                        if "'21', '-37'" in texto:
-                            pyautogui.write('/travel 20 -37')
-                            pyautogui.press('enter')
-                            time.sleep(0.5)
-                            pyautogui.press('enter')
-                            time.sleep(0.5)
-                            pyautogui.press('enter')
-                            time.sleep(0.5)
-                            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-                            time.sleep(1)
-                            self.eliminar_chat()
-                            time.sleep(1)
-                        
-                            #pyautogui.write('/travel 21, -37')
-                        
-                        pyautogui.tripleClick(chatX, chatY)
-                        time.sleep(1)
-
-                        if(f"{self.salida['text']}" != f"{self.coordActual['text']}"):
-                            pyautogui.write(f"/travel {primer_coord} {segundo_coord}")
-                            time.sleep(1)
-                            pyautogui.press('enter')
-                            time.sleep(0.5) 
-                            pyautogui.press('enter')
-                            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-                            time.sleep(1)
                         self.eliminar_chat()
                         time.sleep(1)
-                        self.checkGameCoord()
+                            #pyautogui.write('/travel 22, -27')
+                    if "'21', '-37'" in texto:
+                        pyautogui.write('/travel 20 -37')
+                        pyautogui.write('/travel 23 -27')
+                        pyautogui.press('enter')
+                        time.sleep(0.5)
+                        pyautogui.press('enter')
+                        time.sleep(0.5)
+                        pyautogui.press('enter')
+                        time.sleep(0.5)
+                        self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                        time.sleep(1)
+                        self.eliminar_chat()
+                        time.sleep(1)
+                            #pyautogui.write('/travel 21, -37')
+                        
+                    pyautogui.tripleClick(chatX, chatY)
+                    time.sleep(1)
 
-                while primer_numero < segundo_numero: # Mientras la condición sea verdadera
+                    if(f"{self.salida['text']}" != f"{self.coordActual['text']}"):
+                        pyautogui.write(f"/travel {primer_coord} {segundo_coord}")
+                        time.sleep(1)
+                        pyautogui.press('enter')
+                        time.sleep(0.5) 
+                        pyautogui.press('enter')
+                        self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                        time.sleep(1)
+                    self.eliminar_chat()
+                    time.sleep(1)
+                    self.checkGameCoord()
+
+                while primer_numero < segundo_numero and self.etapa_iniciada == True: # Mientras la condición sea verdadera
                     self.checkPistas()
                     self.verificacionPistas()
                     primer_numero += 1  # Actualiza la condición para evitar un bucle infinito
                     time.sleep(1)
-                
+
+            if self.etapa_iniciada == True:    
                 time.sleep(1)
                 self.lucha(ruta_imagen_lucha)
                 time.sleep(2)
                 self.pelea()
-                #time.sleep(6)
-                self.etapa_iniciada = False
-                self.numero_pista = 0
-                self.save_to_text_file()
-                time.sleep(2)
-                #pyautogui.press('enter')
-                pyautogui.press('enter')
-                #self.clickEnImagen(ruta_imagen_cerrar_bat)
-                self.status_label.config(text=f"Búsqueda terminada")
-                #pyautogui.press('0')
+                    #time.sleep(6)
+            self.etapa_iniciada = False
+            self.numero_pista = 0
+            self.save_to_text_file()
+            time.sleep(2)
+                    #pyautogui.press('enter')
+            pyautogui.press('enter')
+                    #self.clickEnImagen(ruta_imagen_cerrar_bat)
+            self.status_label.config(text=f"Búsqueda terminada")
+                    #pyautogui.press('0')    
 
         except Exception as e:
             print(f"Error: {e}")
-            print("El programa is dead, vamos a limpiar banderitas y volver a iniciar")
-            #self.mostrar_area(self.checkSalida, self.area_salida)
-            
+            print("El programa is dead, vamos a limpiar")
             print("Limpiando")
             cv2.destroyAllWindows()
-            #print("Cargando datos guardados")
-            #self.load_from_text_file()
-            #self.restablecerEtapa()
-            #time.sleep(1)
-            #self.load_from_text_file()
-            #print('iniciando otra vez la busqueda')
-            #threading.Timer(3, self.starTask).start()
 
         finally:
             # Cerrar ventanas y liberar recursos aquí
