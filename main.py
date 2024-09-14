@@ -1852,6 +1852,18 @@ class ImageFinderApp:
             time.sleep(1)
             self.eliminar_chat()
             time.sleep(1)
+        if '21 -37' in texto:
+            pyautogui.write('/travel 20 -31')
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+            time.sleep(1)
+            self.eliminar_chat()
+            time.sleep(1)
         pyautogui.hotkey('ctrl', 'v')
         pyautogui.press('enter')
         time.sleep(0.5)
@@ -3019,7 +3031,7 @@ class ImageFinderApp:
         self.treasureHunt()
 
     def stopTreasureHunt(self):
-        self.inicio_proceso = False
+        self.etapa_iniciada = False
 
     def treasureHunt(self):
         self.status_label.config(text="Iniciando búsqueda")
