@@ -79,5 +79,6 @@ REEMPLAZOS = {
         "dofus:": "dofus",
         "agujero:": "agujero",
         "osamodas:": "osamodas",
-        "Fildn": "Filon"
+        "Fildn": "Filon",
+        "brochet:": "brocheta"
     }

@@ -920,10 +920,10 @@ class ImageFinderApp:
         
         enMerka = self.buscar_image(ruta_imagen_zaap_merka)
         merkaX, merkaY = self.get4CoordFromText(self.btnMerkasako['text'])
-        if not enMerka:
+        #if not enMerka:
             # print(f"salida de texto {salida_actual_texto}")
-            pyautogui.click(merkaX, merkaY)
-            time.sleep(4)
+        pyautogui.click(merkaX, merkaY)
+        time.sleep(4)
         chatX, chatY = self.get4CoordFromText(self.chat['text'])
         pyautogui.click(chatX, chatY)
         pyautogui.write('/clear')
@@ -1814,11 +1814,11 @@ class ImageFinderApp:
         texto = pyperclip.paste()
         #si el texto tiene [] quiere decir que no se encontró la pista
         print(texto)
-        if '[' in texto:
-            print('No se encontró la pista, tal vez deberia reiniciar busqueda}')
-            self.restablecerEtapa()
-        else:    
-            if '19 -26' in texto:
+        #if '[' in texto:
+            #print('No se encontró la pista, tal vez deberia reiniciar busqueda}')
+            #self.restablecerEtapa()
+        #else:    
+        if '19 -26' in texto:
                 pyautogui.write('/travel 24 -28')
                 pyautogui.press('enter')
                 time.sleep(0.5)
@@ -1830,7 +1830,7 @@ class ImageFinderApp:
                 time.sleep(1)
                 self.eliminar_chat()
                 time.sleep(1)
-            if '23 -26' in texto:
+        if '23 -26' in texto:
                 pyautogui.write('/travel 24 -28')
                 pyautogui.press('enter')
                 time.sleep(0.5)
@@ -1842,7 +1842,7 @@ class ImageFinderApp:
                 time.sleep(1)
                 self.eliminar_chat()
                 time.sleep(1)
-            if '20 -26' in texto:
+        if '20 -26' in texto:
                 pyautogui.write('/travel 24 -28')
                 pyautogui.press('enter')
                 time.sleep(0.5)
@@ -1854,7 +1854,7 @@ class ImageFinderApp:
                 time.sleep(1)
                 self.eliminar_chat()
                 time.sleep(1)
-            if '21 -26' in texto:
+        if '21 -26' in texto:
                 pyautogui.write('/travel 24 -28')
                 pyautogui.press('enter')
                 time.sleep(0.5)
@@ -1866,7 +1866,7 @@ class ImageFinderApp:
                 time.sleep(1)
                 self.eliminar_chat()
                 time.sleep(1)
-            if '19 -34' in texto:
+        if '19 -34' in texto:
                 pyautogui.write('/travel 20 -32')
                 pyautogui.press('enter')
                 time.sleep(0.5)
@@ -1879,14 +1879,14 @@ class ImageFinderApp:
                 self.eliminar_chat()
                 time.sleep(1)
             
-            pyautogui.hotkey('ctrl', 'v')
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            self.ha_llegado_destino(ruta_imagen_llegado_destino)
+        pyautogui.hotkey('ctrl', 'v')
+        pyautogui.press('enter')
+        time.sleep(0.5)
+        pyautogui.press('enter')
+        time.sleep(0.5)
+        pyautogui.press('enter')
+        time.sleep(0.5)
+        self.ha_llegado_destino(ruta_imagen_llegado_destino)
 
     def coordEnNav(self, inicio):
         # Ingresa las coordenadas entregadas en el navegador
