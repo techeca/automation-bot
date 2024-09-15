@@ -1503,7 +1503,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista2")
@@ -1516,7 +1516,7 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == "2":
@@ -1535,7 +1535,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista2")
@@ -1549,7 +1549,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista3")
@@ -1562,7 +1562,7 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == "3":
@@ -1581,7 +1581,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista2")
@@ -1595,7 +1595,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista3")
@@ -1609,7 +1609,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista4")
@@ -1622,7 +1622,7 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_4)
             self.pista(texto_hasta_coma)
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == '4':
@@ -1641,7 +1641,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista2")
@@ -1655,7 +1655,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista3")
@@ -1669,7 +1669,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista4")
@@ -1683,7 +1683,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_4)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista5")
@@ -1696,7 +1696,7 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_5)
             self.pista(texto_hasta_coma)
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == "5":
@@ -1727,7 +1727,7 @@ class ImageFinderApp:
             # mueve el personaje según la pista obtenida
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista2")
@@ -1741,7 +1741,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista3")
@@ -1755,7 +1755,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista4")
@@ -1769,7 +1769,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_4)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista5")
@@ -1783,7 +1783,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_5)
             self.pista(texto_hasta_coma)
 
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
 
             print("Pista6")
@@ -1797,7 +1797,7 @@ class ImageFinderApp:
             self.recorte_Imagen(self.area_pista_6)
             self.pista(texto_hasta_coma)
             
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
             
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
