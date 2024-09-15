@@ -553,6 +553,7 @@ class ImageFinderApp:
         self.numero_pista = 0
         self.navegador_actual = ''
         self.inicio_proceso = False
+        self.reset = False
 
         self.load_from_text_file()
 
@@ -1483,7 +1484,7 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
-            if self.etapa_iniciada == False:
+            if self.etapa_iniciada == False or self.reset == True:
                 return
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         if cantPistasTexto == "1":
@@ -1811,72 +1812,73 @@ class ImageFinderApp:
         pyautogui.tripleClick(chatX, chatY)
         time.sleep(2)
         texto = pyperclip.paste()
-        print(texto)
-        if '19 -26' in texto:
-            pyautogui.write('/travel 24 -28')
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-            time.sleep(1)
-            self.eliminar_chat()
-            time.sleep(1)
-        if '23 -26' in texto:
-            pyautogui.write('/travel 24 -28')
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-            time.sleep(1)
-            self.eliminar_chat()
-            time.sleep(1)
-        if '20 -26' in texto:
-            pyautogui.write('/travel 24 -28')
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-            time.sleep(1)
-            self.eliminar_chat()
-            time.sleep(1)
-        if '21 -26' in texto:
-            pyautogui.write('/travel 24 -28')
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-            time.sleep(1)
-            self.eliminar_chat()
-            time.sleep(1)
-        if '19 -34' in texto:
-            pyautogui.write('/travel 20 -32')
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            pyautogui.press('enter')
-            time.sleep(0.5)
-            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
-            time.sleep(1)
-            self.eliminar_chat()
-            time.sleep(1)
         #si el texto tiene [] quiere decir que no se encontró la pista
+        print(texto)
         if '[' in texto:
             print('No se encontró la pista, tal vez deberia reiniciar busqueda}')
             self.restablecerEtapa()
         else:    
+            if '19 -26' in texto:
+                pyautogui.write('/travel 24 -28')
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                time.sleep(1)
+                self.eliminar_chat()
+                time.sleep(1)
+            if '23 -26' in texto:
+                pyautogui.write('/travel 24 -28')
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                time.sleep(1)
+                self.eliminar_chat()
+                time.sleep(1)
+            if '20 -26' in texto:
+                pyautogui.write('/travel 24 -28')
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                time.sleep(1)
+                self.eliminar_chat()
+                time.sleep(1)
+            if '21 -26' in texto:
+                pyautogui.write('/travel 24 -28')
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                time.sleep(1)
+                self.eliminar_chat()
+                time.sleep(1)
+            if '19 -34' in texto:
+                pyautogui.write('/travel 20 -32')
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                time.sleep(1)
+                self.eliminar_chat()
+                time.sleep(1)
+            
             pyautogui.hotkey('ctrl', 'v')
             pyautogui.press('enter')
             time.sleep(0.5)
@@ -1992,8 +1994,8 @@ class ImageFinderApp:
         self.checkPistas()
         #self.numero_pista = 0
         #self.etapa_iniciada = False
+        self.reset = True
         self.save_to_text_file()
-        
 
     # ------------#
     # Save/Load
@@ -3169,6 +3171,7 @@ class ImageFinderApp:
                         self.checkGameCoord()
 
                 while primer_numero < segundo_numero and self.etapa_iniciada == True:  # Mientras la condición sea verdadera
+                    self.reset = False #Para resetear busqueda
                     self.checkPistas()
                     self.verificacionPistas()
                     primer_numero += 1  # Actualiza la condición para evitar un bucle infinito
