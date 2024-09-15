@@ -29,6 +29,7 @@ REEMPLAZOS = {
         "Champiifion": "Champinon",
         "Caiia": "Cana",
         "Cajfia": "Cana",
+        "Cafia": "Cana",
         "mufiecas": "munecas",
         "mufieco": "muneco",
         "coraz6n": "corazon",

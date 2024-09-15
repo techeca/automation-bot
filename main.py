@@ -819,6 +819,12 @@ class ImageFinderApp:
         self.select_area()
         texto_coord_chat = self.search_area
         self.coordChat.config(text=f"{texto_coord_chat}")
+        
+    def configSetPrimeraBanderita(self):
+        self.select_area()
+        #configSetPrimeraBanderita
+        texto = self.search_area
+        self.pistaDL6.config(text=f"{texto}")
 
     def configChat(self):
         self.select_area()
@@ -1477,6 +1483,8 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_1)
             self.pista(texto_hasta_coma)
+            if self.etapa_iniciada == False:
+                return
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         if cantPistasTexto == "1":
             print("Uno '?'")
@@ -1507,6 +1515,8 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_2)
             self.pista(texto_hasta_coma)
+            if self.etapa_iniciada == False:
+                return
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == "2":
             print("Dos '?'")
@@ -1551,6 +1561,8 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_3)
             self.pista(texto_hasta_coma)
+            if self.etapa_iniciada == False:
+                return
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == "3":
             print("Tres '?'")
@@ -1609,6 +1621,8 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_4)
             self.pista(texto_hasta_coma)
+            if self.etapa_iniciada == False:
+                return
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == '4':
             print("Cuatro '?'")
@@ -1681,6 +1695,8 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_5)
             self.pista(texto_hasta_coma)
+            if self.etapa_iniciada == False:
+                return
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
         elif cantPistasTexto == "5":
             print("Cinco '?'")
@@ -1779,6 +1795,10 @@ class ImageFinderApp:
             self.moverEnDireccion(texto_hasta_coma)
             self.recorte_Imagen(self.area_pista_6)
             self.pista(texto_hasta_coma)
+            
+            if self.etapa_iniciada == False:
+                return
+            
             self.etapa_finalizada(ruta_imagen_etapa_finalizada)
 
     def travel(self):
@@ -1969,6 +1989,10 @@ class ImageFinderApp:
             pyautogui.click(bandBriX, bandBriY)
             #self.etapa_iniciada = True
         self.numero_pista = 0
+        self.checkPistas()
+        #self.numero_pista = 0
+        #self.etapa_iniciada = False
+        self.save_to_text_file()
         
 
     # ------------#
