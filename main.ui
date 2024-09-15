@@ -518,7 +518,7 @@
             </child>
             <child>
               <object class="ttk.Label" id="label13">
-                <property name="text" translatable="yes">Pista Tomada:</property>
+                <property name="text" translatable="yes">Búsqueda iniciada:</property>
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="padx">3</property>
@@ -1349,7 +1349,7 @@
             </child>
             <child>
               <object class="ttk.Button" id="button25" named="True">
-                <property name="command" type="command" cbtype="simple">configDireccionLPista6</property>
+                <property name="command" type="command" cbtype="simple">configSetPrimeraBanderita</property>
                 <property name="text" translatable="yes">Select</property>
                 <layout manager="grid">
                   <property name="column">2</property>
