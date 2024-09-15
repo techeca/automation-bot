@@ -80,5 +80,6 @@ REEMPLAZOS = {
         "agujero:": "agujero",
         "osamodas:": "osamodas",
         "Fildn": "Filon",
-        "brochet:": "brocheta"
+        "brochet:": "brocheta",
+        ":": ""
     }
