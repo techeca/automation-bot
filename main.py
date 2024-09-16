@@ -1898,6 +1898,20 @@ class ImageFinderApp:
                 time.sleep(1)
                 self.eliminar_chat()
                 time.sleep(1)
+        
+        #brakmar
+        if '-22 35' in texto:
+            pyautogui.write('/travel -24 39')
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            pyautogui.press('enter')
+            time.sleep(0.5)
+            self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+            time.sleep(1)
+            self.eliminar_chat()
+            
             
         pyautogui.hotkey('ctrl', 'v')
         pyautogui.press('enter')

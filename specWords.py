@@ -82,6 +82,7 @@ REEMPLAZOS = {
         "Fildn": "Filon",
         "brochet:": "brocheta",
         "jalaté": "jalato",
+        "jalat6": "jalato",
         "Candil con craneo ur": "Candil con craneo luminiscente",
         ":": ""
     }
