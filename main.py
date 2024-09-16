@@ -826,6 +826,26 @@ class ImageFinderApp:
         #configSetPrimeraBanderita
         texto = self.search_area
         self.pistaDL6.config(text=f"{texto}")
+        
+    def configSetMerkasako(self):
+        self.select_area()
+        texto = self.search_area
+        self.btnMerkasako.config(text=f"{texto}")
+
+    def configSetZaap(self):
+        self.select_area()
+        texto = self.search_area
+        self.zaapMerkasako.config(text=f"{texto}")
+        
+    def configSetBuscarZaap(self):
+        self.select_area()
+        texto = self.search_area
+        self.buscarZaap.config(text=f"{texto}")
+        
+    def configSetTeleport(self):
+        self.select_area()
+        texto = self.search_area
+        self.teleportMerka.config(text=f"{texto}")
 
     def configChat(self):
         self.select_area()

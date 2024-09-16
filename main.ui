@@ -1144,7 +1144,7 @@
             </child>
             <child>
               <object class="ttk.Button" id="button19" named="True">
-                <property name="command" type="command" cbtype="simple">configDireccionLPista1</property>
+                <property name="command" type="command" cbtype="simple">configSetMerkasako</property>
                 <property name="text" translatable="yes">Select</property>
                 <layout manager="grid">
                   <property name="column">2</property>
@@ -1185,7 +1185,7 @@
             </child>
             <child>
               <object class="ttk.Button" id="button20" named="True">
-                <property name="command" type="command" cbtype="simple">configDireccionLPista2</property>
+                <property name="command" type="command" cbtype="simple">configSetZaap</property>
                 <property name="text" translatable="yes">Select</property>
                 <layout manager="grid">
                   <property name="column">2</property>
@@ -1226,7 +1226,7 @@
             </child>
             <child>
               <object class="ttk.Button" id="button21" named="True">
-                <property name="command" type="command" cbtype="simple">configDireccionLPista3</property>
+                <property name="command" type="command" cbtype="simple">configSetBuscarZaap</property>
                 <property name="text" translatable="yes">Select</property>
                 <layout manager="grid">
                   <property name="column">2</property>
@@ -1267,7 +1267,7 @@
             </child>
             <child>
               <object class="ttk.Button" id="button22" named="True">
-                <property name="command" type="command" cbtype="simple">configDireccionLPista4</property>
+                <property name="command" type="command" cbtype="simple">configSetTeleport</property>
                 <property name="text" translatable="yes">Select</property>
                 <layout manager="grid">
                   <property name="column">2</property>
