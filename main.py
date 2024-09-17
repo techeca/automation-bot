@@ -1530,7 +1530,7 @@ class ImageFinderApp:
         else:
         #pandala    
             if '19 -26' in texto:
-                    pyautogui.write('/travel 24 -28')
+                    pyautogui.write('/travel 25 -28')
                     pyautogui.press('enter')
                     time.sleep(0.5)
                     pyautogui.press('enter')
@@ -1554,7 +1554,7 @@ class ImageFinderApp:
                     self.eliminar_chat()
                     time.sleep(1)
             if '20 -26' in texto:
-                    pyautogui.write('/travel 24 -28')
+                    pyautogui.write('/travel 25 -28')
                     pyautogui.press('enter')
                     time.sleep(0.5)
                     pyautogui.press('enter')
@@ -1566,7 +1566,7 @@ class ImageFinderApp:
                     self.eliminar_chat()
                     time.sleep(1)
             if '21 -26' in texto:
-                    pyautogui.write('/travel 24 -28')
+                    pyautogui.write('/travel 25 -28')
                     pyautogui.press('enter')
                     time.sleep(0.5)
                     pyautogui.press('enter')
