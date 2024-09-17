@@ -12,6 +12,7 @@ REEMPLAZOS = {
         "Champion": "Champinon",
         "Champirién": "Champinon",
         "Champijion": "Champinon",
+        "Champiién": "Champinon",
         "rayado:": "rayado",
         "Champirion": "Champinon",
         "Champifion": "Champinon",

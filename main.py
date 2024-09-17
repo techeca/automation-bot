@@ -1220,42 +1220,42 @@ class ImageFinderApp:
 
         if texto_hasta_coma == "Dirigete hacia el Sur,":
             # funcion para moverse abajo
-            time.sleep(2)
+            #time.sleep(2)
             print(self.moverAbajo['text'])
             texto = self.moverAbajo['text']
             c1, c2 = self.get4CoordFromText(texto)
             pyautogui.tripleClick(c1, c2)
-            time.sleep(5)
+            time.sleep(6)
             self.buscar_y_clickear_perforatroz(
                 texto_hasta_coma, comienzo_perfo_actual)
         elif texto_hasta_coma == "Dirigete hacia el Norte,":
             # funcion para moverse arriba
-            time.sleep(2)
+            #time.sleep(2)
             print(self.moverArriba['text'])
             texto = self.moverArriba['text']
             c1, c2 = self.get4CoordFromText(texto)
             pyautogui.tripleClick(c1, c2)
-            time.sleep(5)
+            time.sleep(6)
             self.buscar_y_clickear_perforatroz(
                 texto_hasta_coma, comienzo_perfo_actual)
         elif texto_hasta_coma == "Dirigete hacia el Oeste,":
             # funcion para moverse izquierda
-            time.sleep(2)
+            #time.sleep(2)
             print(self.moverIzquierda['text'])
             texto = self.moverIzquierda['text']
             c1, c2 = self.get4CoordFromText(texto)
             pyautogui.tripleClick(c1, c2)
-            time.sleep(5)
+            time.sleep(6)
             self.buscar_y_clickear_perforatroz(
                 texto_hasta_coma, comienzo_perfo_actual)
         elif texto_hasta_coma == "Dirigete hacia el Este,":
             # funcion para moverse derecha
-            time.sleep(2)
+            #time.sleep(2)
             print(self.moverDerecha['text'])
             texto = self.moverDerecha['text']
             c1, c2 = self.get4CoordFromText(texto)
             pyautogui.tripleClick(c1, c2)
-            time.sleep(5)
+            time.sleep(6)
             self.buscar_y_clickear_perforatroz(
                 texto_hasta_coma, comienzo_perfo_actual)
 
