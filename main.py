@@ -847,9 +847,9 @@ class ImageFinderApp:
             print("No hay level seleccionado")
 
         self.clickEnImagen(ruta_imagen_salir, 50)
-        time.sleep(1)
+        time.sleep(3)
         self.clickEnImagen(ruta_imagen_salir_puerta, 50)
-        time.sleep(1)
+        time.sleep(3)
 
     def irACoordenadaMasCercana(self, nombre_cercano):
         # recibe nombre de teleport
