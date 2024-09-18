@@ -831,6 +831,7 @@ class ImageFinderApp:
 
     def obtenerBusqueda(self):
         self.clickEnImagen(ruta_imagen_tesoro, 100)
+        time.sleep(0.5)
         levelSeleccionado = self.cboxHuntlvl.get()
         if levelSeleccionado:
             valor_guardado = levelSeleccionado
@@ -845,7 +846,9 @@ class ImageFinderApp:
                 self.clickEnImagen(ruta_imagen_200, 50)
         else:
             print("No hay level seleccionado")
-
+        time.sleep(5)
+        self.etapa_iniciada = True
+        self.save_to_text_file()
         self.clickEnImagen(ruta_imagen_salir, 50)
         time.sleep(3)
         self.clickEnImagen(ruta_imagen_salir_puerta, 50)
