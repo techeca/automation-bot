@@ -202,7 +202,7 @@ class ImageFinderApp:
         self.moverAbajo = self.builder.get_object('lblAbajo')
         self.moverIzquierda = self.builder.get_object('lblIzquierda')
         self.moverDerecha = self.builder.get_object('lblDerecha')
-        #self.pistaD5 = self.builder.get_object('lblPistaD5')
+        self.pistaD5 = self.builder.get_object('lblPistaD5')
         self.chat = self.builder.get_object('lblChat')
         self.btnMerkasako = self.builder.get_object('lblMerkasako')
         self.zaapMerkasako = self.builder.get_object('lblZaapMerkasako')
@@ -518,10 +518,6 @@ class ImageFinderApp:
         self.area_derecha = self.search_area
         self.moverDerecha.config(text=f"{self.area_derecha}")
 
-    def configDireccionPista5(self):
-        self.select_area()
-        self.etapa_iniciada = self.search_area
-        self.pistaD5.config(text=f"{self.etapa_iniciada}")
 
     def configDireccionPista6(self):
         self.select_area()
