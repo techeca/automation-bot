@@ -546,8 +546,8 @@
             </child>
             <child>
               <object class="ttk.Button" id="button9" named="True">
-                <property name="command" type="command" cbtype="simple">configDireccionPista5</property>
-                <property name="text" translatable="yes">Select</property>
+                <property name="command" type="command" cbtype="simple">resetTreasure</property>
+                <property name="text" translatable="yes">Reset</property>
                 <layout manager="grid">
                   <property name="column">2</property>
                   <property name="padx">3</property>
