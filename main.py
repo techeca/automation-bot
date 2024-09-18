@@ -831,8 +831,8 @@ class ImageFinderApp:
 
     def obtenerBusqueda(self):
         self.clickEnImagen(ruta_imagen_tesoro, 300)
-        time.sleep(3)
         pyautogui.click()
+        time.sleep(3)
         levelSeleccionado = self.cboxHuntlvl.get()
         if levelSeleccionado:
             valor_guardado = levelSeleccionado
