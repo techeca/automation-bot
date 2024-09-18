@@ -76,6 +76,7 @@ ruta_imagen_recurso_hierro = './resources/hierro'
 
 # rutas battle
 ruta_imagen_rojo = './treasureHunt/battle/rojo.png'
+ruta_imagen_moob = './treasureHunt/battle/mob'
 
 limite_intentos = 200000000000000000000
 intentos_realizados = 0
@@ -829,7 +830,7 @@ class ImageFinderApp:
 
     def obtenerBusqueda(self):
         self.clickEnImagen(ruta_imagen_tesoro, 300)
-        time.sleep(0.5)
+        time.sleep(3)
         levelSeleccionado = self.cboxHuntlvl.get()
         if levelSeleccionado:
             valor_guardado = levelSeleccionado
@@ -1619,6 +1620,7 @@ class ImageFinderApp:
         # self.click_mas_lejano()
         # time.sleep(2)
         # pyautogui.press('esc')
+        self.checkBattle()
         time.sleep(3)
         pyautogui.press('F1')
         time.sleep(2)
@@ -2855,11 +2857,151 @@ class ImageFinderApp:
     def checkBattle(self):
         self.capturaPantalla()
         time.sleep(1)
-        self.getCantidadImagen(ruta_imagen_rojo)
+        mobX, mobY = self.checkCoordMob(100)
+        cantidad, cuadroLejano = self.getCantidadImagen(ruta_imagen_rojo, mobX, mobY)
+        clX, clY, clAn, clAl = cuadroLejano
+        
+        # Calcular el centro de la imagen
+        centroX = clX + clAn // 2
+        centroY = clY + clAl // 2
+        
+        #click en el cuadro rojo mas lejano al mob
+        pyautogui.click(centroX, centroY)
+        
     #----------------------------#
     #-----------BATTLE-----------#
     #----------------------------#
-    def getCantidadImagen(self, ruta_imagen):
+    def checkImagenEnCaptura(self, ruta_imagen, cantidad):
+        # Seguimiento de los intentos realizados
+        intentos_realizados = 0
+
+        while intentos_realizados < cantidad:
+            try:
+                # Incrementar los intentos realizados
+                intentos_realizados += 1
+
+                # Carga la imagen de referencia y la captura de pantalla
+                imagen_referencia = cv2.imread(ruta_imagen)
+                captura_pantalla = pyautogui.screenshot()
+                captura_pantalla_np = np.array(captura_pantalla)
+                captura_pantalla_cv2 = cv2.cvtColor(
+                    captura_pantalla_np, cv2.COLOR_RGB2BGR)
+
+                # Verifica que las imágenes se hayan cargado correctamente
+                if imagen_referencia is None or captura_pantalla_cv2 is None:
+                    raise ValueError("Error al cargar las imágenes.")
+
+                # Obtén las dimensiones de la imagen de referencia
+                altura, ancho, _ = imagen_referencia.shape
+
+                # Encuentra la posición de la imagen de referencia en la captura de pantalla
+                resultado = cv2.matchTemplate(
+                    captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+                min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+
+                # Define un umbral de confianza (ajusta según tus necesidades)
+                umbral_confianza = float(self.umbral.get())
+                print(f"Valor de coincidencia: {max_val}")
+
+                if max_val >= umbral_confianza:
+                    # Obtiene las coordenadas del centro de la imagen de referencia
+                    centro_x = max_loc[0] + ancho // 2
+                    centro_y = max_loc[1] + altura // 2
+
+                    # Haz clic en el centro de la imagen encontrada
+                    #pyautogui.click(centro_x, centro_y)
+                    #print(f"Clic realizado en ({centro_x}, {centro_y})")
+                    #time.sleep(1)
+                    print(f"Imagen {ruta_imagen} encontrada")
+                    return centro_x, centro_y
+
+                    # Libera la memoria de las imágenes antes de salir
+                    #del imagen_referencia
+                    #del captura_pantalla_cv2
+                    #return  # Salir de la función después de hacer clic exitosamente
+
+                else:
+                    print("Imagen no encontrada, intentando de nuevo...")
+                    # Añadir un pequeño retraso antes de reintentar
+                    time.sleep(1)
+                    return None
+
+
+            except Exception as e:
+                print(f"Error en clickEnImagen: {e}")
+                break  # Salir del bucle si hay un error crítico
+
+        raise RuntimeError(
+            "Límite de intentos alcanzado o error crítico, no se encontró la imagen.")
+    
+    def checkCoordMob(self, cantidad):
+        # Se hace un seguimiento de los intentos realizados
+        intentos_realizados = 0
+
+        # Límite de intentos alcanzado
+        while intentos_realizados < cantidad:
+            
+            # Lista de rutas alternativas de imágenes
+            rutas_alternativas = [
+                "./treasureHunt/battle/1.png",
+                './treasureHunt/battle/2.png',
+                './treasureHunt/battle/3.png',
+                './treasureHunt/battle/4.png'
+            ]
+
+            # Captura la pantalla completa solo una vez
+            x1, y1, x2, y2 = 330, 50, 1580, 900
+            captura_pantalla = pyautogui.screenshot(
+                region=(x1, y1, x2 - x1, y2 - y1))
+            captura_pantalla_np = np.array(captura_pantalla)
+            captura_pantalla_cv2 = cv2.cvtColor(
+                captura_pantalla_np, cv2.COLOR_RGB2BGR)
+
+            time.sleep(3)
+
+            # Iterar sobre las rutas alternativas de las imágenes
+            for ruta_alternativa in rutas_alternativas:
+                imagen_referencia = cv2.imread(ruta_alternativa)
+
+                if imagen_referencia is not None:
+                    # Obtén las dimensiones de la imagen de referencia
+                    altura, ancho, _ = imagen_referencia.shape
+
+                    # Encuentra la posición de la imagen de referencia en la captura de pantalla
+                    resultado = cv2.matchTemplate(
+                        captura_pantalla_cv2, imagen_referencia, cv2.TM_CCOEFF_NORMED)
+                    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+
+                    # Define un umbral de confianza (puedes ajustar según tus necesidades)
+                    umbral_confianza = 0.8
+                    print(f"Confianza: {max_val} en la ruta: {ruta_alternativa}")
+
+                    if max_val >= umbral_confianza:
+                        print(f"Imagen encontrada en la ruta: {ruta_alternativa}")
+
+                        # Realiza el clic en la imagen
+                        #self.clickEnImagen(ruta_imagen_maxBusqueda, 100)
+                        #time.sleep(2)
+                        centro_x = max_loc[0] + ancho // 2
+                        centro_y = max_loc[1] + altura // 2
+                        print(f"Ubicacion de mon: {centro_x}, {centro_y}")
+                        # Llama a la función banderita
+                        #self.banderita(ruta_imagen_banderita)
+                        # self.checkGameCoord()
+                        # Termina el bucle ya que se encontró y clickeó una imagen
+                        return centro_x, centro_y
+                else:
+                    print(f"Error al cargar la imagen de la ruta: {ruta_alternativa}")
+            
+            # Incrementar intentos después de cada intento fallido
+            intentos_realizados += 1
+            print(f"Intentos realizados: {intentos_realizados}/{cantidad}")
+        
+        # Si no se encontró nada tras todos los intentos
+        print("No se encontró ninguna coincidencia tras todos los intentos.")
+        return None, None
+    
+    def getCantidadImagen(self, ruta_imagen, mobX, mobY):
         try:
             # Cargar la imagen de la captura de pantalla
             captura_pantalla = cv2.imread(ruta_imagen_captura)
@@ -2896,13 +3038,28 @@ class ImageFinderApp:
 
             # Contar las ocurrencias que coinciden exactamente en tamaño
             cantidad_ocurrencias = 0
+            coincidencia_mas_lejana = None
+            max_distancia = -1
+
             for (x, y, w_encontrado, h_encontrado) in rectangulos:
                 # Verificar si las dimensiones coinciden con la referencia
                 if w_encontrado == w and h_encontrado == h:
                     cantidad_ocurrencias += 1
+                    
+                    # Calcular la distancia desde mobX, mobY
+                    distancia = calcular_distancia(mobX, mobY, x, y)
+                    
+                    # Si es la distancia más lejana encontrada hasta ahora
+                    if distancia > max_distancia:
+                        max_distancia = distancia
+                        coincidencia_mas_lejana = (x, y, w_encontrado, h_encontrado)
 
-            print(f"Cantidad de {ruta_imagen} (con coincidencia exacta de tamaño): {cantidad_ocurrencias}")
-            return cantidad_ocurrencias
+            if coincidencia_mas_lejana:
+                print(f"Coordenadas más lejanas: {coincidencia_mas_lejana} a distancia: {max_distancia}")
+            else:
+                print(f"No se encontraron coincidencias con el tamaño exacto.")
+
+            return cantidad_ocurrencias, coincidencia_mas_lejana
 
         except Exception as e:
             print(f"Error al procesar las imágenes: {e}")
