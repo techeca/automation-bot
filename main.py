@@ -74,6 +74,9 @@ ruta_imagen_cerrar_busqueda = './treasureHunt/cerrar_busqueda.png'
 ruta_imagen_recurso_trigo = './resources/Trigo.png'
 ruta_imagen_recurso_hierro = './resources/hierro'
 
+# rutas battle
+ruta_imagen_rojo = './treasureHunt/battle/rojo.png'
+
 limite_intentos = 200000000000000000000
 intentos_realizados = 0
 
@@ -164,7 +167,6 @@ def chatBox(ruta_imagen):
             f"No se encontró la imagen, reintentando... Intento {intentos_realizados}")
         # Reintenta la búsqueda sin usar una recursividad infinita
         chatBox(ruta_imagen)
-
 
 class ImageFinderApp:
     def __init__(self, master=None):
@@ -826,29 +828,29 @@ class ImageFinderApp:
         time.sleep(1)
 
     def obtenerBusqueda(self):
-        self.clickEnImagen(ruta_imagen_tesoro, 100)
+        self.clickEnImagen(ruta_imagen_tesoro, 300)
         time.sleep(0.5)
         levelSeleccionado = self.cboxHuntlvl.get()
         if levelSeleccionado:
             valor_guardado = levelSeleccionado
             print(f"Level de treasure hunt seleccionado: {valor_guardado}")
             if valor_guardado == "140":
-                self.clickEnImagen(ruta_imagen_140, 50)
+                self.clickEnImagen(ruta_imagen_140, 300)
             if valor_guardado == "160":
-                self.clickEnImagen(ruta_imagen_160, 50)
+                self.clickEnImagen(ruta_imagen_160, 300)
             if valor_guardado == "180":
-                self.clickEnImagen(ruta_imagen_180, 50)
+                self.clickEnImagen(ruta_imagen_180, 300)
             if valor_guardado == "200":
-                self.clickEnImagen(ruta_imagen_200, 50)
+                self.clickEnImagen(ruta_imagen_200, 300)
         else:
             print("No hay level seleccionado")
         time.sleep(5)
         self.etapa_iniciada = True
         self.save_to_text_file()
-        self.clickEnImagen(ruta_imagen_salir, 50)
-        time.sleep(3)
-        self.clickEnImagen(ruta_imagen_salir_puerta, 50)
-        time.sleep(3)
+        self.clickEnImagen(ruta_imagen_salir, 300)
+        time.sleep(4)
+        self.clickEnImagen(ruta_imagen_salir_puerta, 300)
+        time.sleep(5)
 
     def irACoordenadaMasCercana(self, nombre_cercano):
         # recibe nombre de teleport
@@ -2849,7 +2851,72 @@ class ImageFinderApp:
 
         # Vuelve a programar la tarea para evitar recursión infinita
         threading.Timer(3, self.startTreasureHunt).start()  # Repetir después de 3 segundos
+    
+    def checkBattle(self):
+        self.capturaPantalla()
+        time.sleep(1)
+        self.getCantidadImagen(ruta_imagen_rojo)
+    #----------------------------#
+    #-----------BATTLE-----------#
+    #----------------------------#
+    def getCantidadImagen(self, ruta_imagen):
+        try:
+            # Cargar la imagen de la captura de pantalla
+            captura_pantalla = cv2.imread(ruta_imagen_captura)
+            if captura_pantalla is None:
+                raise ValueError(f"No se pudo cargar la imagen de captura de pantalla desde {ruta_imagen_captura}")
 
+            # Cargar la imagen de referencia (el cuadro rojo)
+            referencia = cv2.imread(ruta_imagen)
+            if referencia is None:
+                raise ValueError(f"No se pudo cargar la imagen de referencia desde {ruta_imagen}")
+
+            # Obtener las dimensiones de la imagen de referencia
+            h, w = referencia.shape[:2]
+
+            # Buscar la imagen de referencia en la captura de pantalla
+            resultado = cv2.matchTemplate(captura_pantalla, referencia, cv2.TM_CCOEFF_NORMED)
+
+            # Definir un umbral de confianza
+            umbral_confianza = 0.8
+            ubicaciones = np.where(resultado >= umbral_confianza)
+
+            # Convertir ubicaciones a una lista de coordenadas
+            ubicaciones = list(zip(*ubicaciones[::-1]))
+
+            if len(ubicaciones) == 0:
+                print(f"No se encontraron coincidencias para {ruta_imagen}.")
+                return 0
+
+            # Crear rectángulos a partir de las ubicaciones para usar groupRectangles
+            rectangulos = [(*pt, w, h) for pt in ubicaciones]
+
+            # Aplicar groupRectangles para eliminar duplicados cercanos
+            rectangulos, _ = cv2.groupRectangles(rectangulos, groupThreshold=1, eps=0.5)
+
+            # Contar las ocurrencias que coinciden exactamente en tamaño
+            cantidad_ocurrencias = 0
+            for (x, y, w_encontrado, h_encontrado) in rectangulos:
+                # Verificar si las dimensiones coinciden con la referencia
+                if w_encontrado == w and h_encontrado == h:
+                    cantidad_ocurrencias += 1
+
+            print(f"Cantidad de {ruta_imagen} (con coincidencia exacta de tamaño): {cantidad_ocurrencias}")
+            return cantidad_ocurrencias
+
+        except Exception as e:
+            print(f"Error al procesar las imágenes: {e}")
+            return 0
+
+        finally:
+            # Liberar recursos para evitar acumulación de memoria
+            captura_pantalla = None
+            referencia = None
+            resultado = None
+            ubicaciones = None
+            rectangulos = None
+            gc.collect()  # Llamar al recolector de basura para limpiar memoria
+            cv2.destroyAllWindows()
 
 if __name__ == "__main__":
     # root = Tk()

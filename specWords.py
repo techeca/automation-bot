@@ -33,6 +33,7 @@ REEMPLAZOS = {
         "Cafia": "Cana",
         "mufiecas": "munecas",
         "mufieco": "muneco",
+        "mufecas": "munecas",
         "coraz6n": "corazon",
         "brochete": "brocheta",
         "plstico": "plastico",
