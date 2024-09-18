@@ -2860,19 +2860,22 @@ class ImageFinderApp:
         threading.Timer(3, self.startTreasureHunt).start()  # Repetir después de 3 segundos
     
     def checkBattle(self):
-        self.capturaPantalla()
-        time.sleep(1)
-        mobX, mobY = self.checkCoordMob(100)
-        cantidad, cuadroLejano = self.getCantidadImagen(ruta_imagen_rojo, mobX, mobY)
-        clX, clY, clAn, clAl = cuadroLejano
-        
-        # Calcular el centro de la imagen
-        centroX = clX + clAn // 2
-        centroY = clY + clAl // 2
-        
-        #click en el cuadro rojo mas lejano al mob
-        pyautogui.click(centroX, centroY)
-        
+        try:
+            self.capturaPantalla()
+            time.sleep(1)
+            mobX, mobY = self.checkCoordMob(100)
+            cantidad, cuadroLejano = self.getCantidadImagen(ruta_imagen_rojo, mobX, mobY)
+            clX, clY, clAn, clAl = cuadroLejano
+            
+            # Calcular el centro de la imagen
+            centroX = clX + clAn // 2
+            centroY = clY + clAl // 2
+            
+            #click en el cuadro rojo mas lejano al mob
+            pyautogui.click(centroX, centroY)
+            
+        except Exception as e:
+            return
     #----------------------------#
     #-----------BATTLE-----------#
     #----------------------------#
