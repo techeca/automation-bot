@@ -269,6 +269,7 @@ class ImageFinderApp:
         self.navegador_actual = ''
         self.inicio_proceso = False
         self.reset = False
+        self.direccionActual = None
 
         self.load_from_text_file()
 
@@ -831,6 +832,7 @@ class ImageFinderApp:
     def obtenerBusqueda(self):
         self.clickEnImagen(ruta_imagen_tesoro, 300)
         time.sleep(3)
+        pyautogui.click()
         levelSeleccionado = self.cboxHuntlvl.get()
         if levelSeleccionado:
             valor_guardado = levelSeleccionado
@@ -845,6 +847,7 @@ class ImageFinderApp:
                 self.clickEnImagen(ruta_imagen_200, 300)
         else:
             print("No hay level seleccionado")
+        pyautogui.click()
         time.sleep(5)
         self.etapa_iniciada = True
         self.save_to_text_file()
@@ -1297,44 +1300,38 @@ class ImageFinderApp:
             cv2.destroyAllWindows()
     
     def moverEnDireccion(self, direccion):
-        global intentos_realizados
-        intentos_realizados += 1
-
-        # Límite de intentos alcanzado
-        if intentos_realizados > limite_intentos:
-            print("Límite de intentos alcanzado. La imagen no se encontró.")
-            return
-
         # Capturamos el texto antes de la coma
         texto_hasta_coma = direccion
-
+        self.direccionActual = texto_hasta_coma
         # Si la dirección es hacia el sur
         if texto_hasta_coma == "Dirigete hacia el Sur,":
-            self.navegacion_flechas(ruta_imagen_flecha_abajo2)
+            #self.navegacion_flechas(ruta_imagen_flecha_abajo2)
+            self.seleccionarDireccionNav('down')
             time.sleep(0.5)
             return texto_hasta_coma
 
         # Si la dirección es hacia el norte
         elif texto_hasta_coma == "Dirigete hacia el Norte,":
-            self.navegacion_flechas(ruta_imagen_flecha_arriba2)
+            #self.navegacion_flechas(ruta_imagen_flecha_arriba2)
+            self.seleccionarDireccionNav('up')
             time.sleep(0.5)
             return texto_hasta_coma
 
             # Si la dirección es hacia el oeste
         elif texto_hasta_coma == "Dirigete hacia el Oeste,":
-            self.navegacion_flechas(ruta_imagen_flecha_izquierda2)
+            #self.navegacion_flechas(ruta_imagen_flecha_izquierda2)
+            self.seleccionarDireccionNav('left')
             time.sleep(0.5)
             return texto_hasta_coma
 
             # Si la dirección es hacia el este
         elif texto_hasta_coma == "Dirigete hacia el Este,":
-            self.navegacion_flechas(ruta_imagen_flecha_derecha2)
+            #self.navegacion_flechas(ruta_imagen_flecha_derecha2)
+            self.seleccionarDireccionNav('right')
             time.sleep(0.5)
             return texto_hasta_coma
 
-        # Si no coincide con ninguna dirección predefinida
-        else:
-            self.moverEnDireccion(direccion)
+        
     
     def navegacion_flechas(self, ruta_imagen):
         # seleccionar la flecha en navegador
@@ -1395,6 +1392,14 @@ class ImageFinderApp:
             cv2.destroyAllWindows()
 
         # Busca la imagen 'Ha llegado a destino' en chat
+
+    #NUEVO en prueba
+    def seleccionarDireccionNav(self, direction):
+        print('click en espacio en blanco (usar ubicacion de reload)')
+        xnavX, xnavY = self.get4CoordFromText(self.reloadNav['text'])
+        pyautogui.click(xnavX, xnavY)
+        pyautogui.press(direction)
+        time.sleep(2)
 
     def pista(self, texto_hasta_coma):
             # Chequeo de pista, si tiene Perforatroz lo busca, si no, lo escribe en el navegador
@@ -1925,7 +1930,7 @@ class ImageFinderApp:
 
         finally:
             # Liberar recursos de OpenCV
-            del imagen_cv2, recorte
+            del imagen_cv2, recorte, imagen
             gc.collect()  # Llamar al recolector de basura para limpiar memoria
             # Asegurarse de que cualquier ventana de OpenCV se cierre correctamente
             cv2.destroyAllWindows()
@@ -2300,11 +2305,11 @@ class ImageFinderApp:
                     # Realiza una serie de operaciones después del clic
                     inicio = self.coordActual['text']
                     self.coordEnNav(inicio)
-                    self.recorte_Imagen(self.area_flecha_1)
+                    #self.recorte_Imagen(self.area_flecha_1)
                     time.sleep(0.5)
-                    texto_hasta_coma = self.detectar_direccion()
+                    #texto_hasta_coma = self.detectar_direccion()
                     time.sleep(0.5)
-                    self.moverEnDireccion(texto_hasta_coma)
+                    self.moverEnDireccion(self.direccionActual)
                     time.sleep(1)
                     # Llamada recursiva solo si la imagen se encuentra
                     self.hintBox(ruta_imagen)
