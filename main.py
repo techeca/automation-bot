@@ -2747,7 +2747,7 @@ class ImageFinderApp:
         limite_busqueda = 100
         contador_busquedas = 0
         #self.etapa_iniciada = True
-        while limite_busqueda <= 100:
+        while contador_busquedas <= limite_busqueda:
             try:
                 self.treasureHunt()
                 contador_busquedas = contador_busquedas + 1
