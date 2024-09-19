@@ -1613,7 +1613,7 @@ class ImageFinderApp:
                 self.eliminar_chat()
                 
             if '-20 39' in texto:
-                pyautogui.write('/travel -22 38')
+                pyautogui.write('/travel -22 37')
                 pyautogui.press('enter')
                 time.sleep(0.5)
                 pyautogui.press('enter')
