@@ -1612,8 +1612,8 @@ class ImageFinderApp:
                 time.sleep(1)
                 self.eliminar_chat()
                 
-            if '-20 39' in texto:
-                pyautogui.write('/travel -22 37')
+            if '-22 32' in texto:
+                pyautogui.write('/travel -24 39')
                 pyautogui.press('enter')
                 time.sleep(0.5)
                 pyautogui.press('enter')
@@ -1624,8 +1624,8 @@ class ImageFinderApp:
                 time.sleep(1)
                 self.eliminar_chat()
                 
-            if '-22 32' in texto:
-                pyautogui.write('/travel -24 39')
+            if '-20 39' in texto:
+                pyautogui.write('/travel -22 37')
                 pyautogui.press('enter')
                 time.sleep(0.5)
                 pyautogui.press('enter')
