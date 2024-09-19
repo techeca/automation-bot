@@ -2751,6 +2751,7 @@ class ImageFinderApp:
             try:
                 self.treasureHunt()
                 contador_busquedas = contador_busquedas + 1
+                print(f"Busquedas realizadas: {contador_busquedas}")
             except Exception as e:
                 print(f"Error durante la busqueda {e}")
 
