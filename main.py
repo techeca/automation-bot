@@ -1487,7 +1487,7 @@ class ImageFinderApp:
             texto = self.moverAbajo['text']
             c1, c2 = self.get4CoordFromText(texto)
             pyautogui.tripleClick(c1, c2)
-            time.sleep(6)
+            time.sleep(7)
             self.buscar_y_clickear_perforatroz(
                 texto_hasta_coma, comienzo_perfo_actual)
         elif texto_hasta_coma == "Dirigete hacia el Norte,":
@@ -1602,6 +1602,18 @@ class ImageFinderApp:
             #brakmar
             if '-22 35' in texto:
                 pyautogui.write('/travel -24 39')
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                time.sleep(1)
+                self.eliminar_chat()
+                
+            if '-20 39' in texto:
+                pyautogui.write('/travel -22 38')
                 pyautogui.press('enter')
                 time.sleep(0.5)
                 pyautogui.press('enter')
@@ -2320,9 +2332,9 @@ class ImageFinderApp:
                     inicio = self.coordActual['text']
                     self.coordEnNav(inicio)
                     #self.recorte_Imagen(self.area_flecha_1)
-                    time.sleep(0.5)
+                    
                     #texto_hasta_coma = self.detectar_direccion()
-                    time.sleep(0.5)
+                    time.sleep(1)
                     self.moverEnDireccion(self.direccionActual)
                     time.sleep(1)
                     # Llamada recursiva solo si la imagen se encuentra
@@ -2886,7 +2898,7 @@ class ImageFinderApp:
         try:
             self.capturaPantalla()
             time.sleep(1)
-            mobX, mobY = self.checkCoordMob(100)
+            mobX, mobY = self.checkCoordMob(10)
             cantidad, cuadroLejano = self.getCantidadImagen(ruta_imagen_rojo, mobX, mobY)
             clX, clY, clAn, clAl = cuadroLejano
             
@@ -2898,6 +2910,7 @@ class ImageFinderApp:
             pyautogui.click(centroX, centroY)
             
         except Exception as e:
+            print(f"Error: {e} no se pudo chequear la batalla")
             return
     #----------------------------#
     #-----------BATTLE-----------#
