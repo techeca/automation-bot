@@ -777,6 +777,7 @@ class ImageFinderApp:
 
             # Realizar OCR en la imagen preprocesada
             salida_actual_texto = self.OCR(ruta_imagen_recortada)
+            print(salida_actual_texto)
 
             # Extraer números de la salida
             salida_actual_texto = re.findall(r'-?\d+', salida_actual_texto)
@@ -1235,6 +1236,7 @@ class ImageFinderApp:
         time.sleep(2)
         pyautogui.write(c2)
         time.sleep(2)
+        self.capturaPantalla()
     
     def detectar_direccion(self):
         # reconoce hacia donde apunta la flecha
@@ -1609,6 +1611,18 @@ class ImageFinderApp:
                 self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
                 time.sleep(1)
                 self.eliminar_chat()
+                
+            if '-22 32' in texto:
+                pyautogui.write('/travel -24 39')
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                time.sleep(1)
+                self.eliminar_chat()
             
             pyautogui.hotkey('ctrl', 'v')
             pyautogui.press('enter')
@@ -1896,8 +1910,8 @@ class ImageFinderApp:
 
     def recorte_Imagen(self, coords):
         # Capturar la pantalla con pyautogui y guardar la captura
-        imagen = pyautogui.screenshot()
-        imagen.save(ruta_imagen_captura)
+        #imagen = pyautogui.screenshot()
+        #imagen.save(ruta_imagen_captura)
 
         # Cargar la imagen guardada con OpenCV
         imagen_cv2 = cv2.imread(ruta_imagen_captura)
@@ -1930,7 +1944,7 @@ class ImageFinderApp:
 
         finally:
             # Liberar recursos de OpenCV
-            del imagen_cv2, recorte, imagen
+            del imagen_cv2, recorte
             gc.collect()  # Llamar al recolector de basura para limpiar memoria
             # Asegurarse de que cualquier ventana de OpenCV se cierre correctamente
             cv2.destroyAllWindows()
@@ -2730,8 +2744,15 @@ class ImageFinderApp:
 
     def startTreasureHunt(self):
         self.inicio_proceso = True
+        limite_busqueda = 100
+        contador_busquedas = 0
         #self.etapa_iniciada = True
-        self.treasureHunt()
+        while limite_busqueda <= 100:
+            try:
+                self.treasureHunt()
+                contador_busquedas = contador_busquedas + 1
+            except Exception as e:
+                print(f"Error durante la busqueda {e}")
 
     def stopTreasureHunt(self):
         self.etapa_iniciada = False
@@ -2746,7 +2767,7 @@ class ImageFinderApp:
                     self.irACofreTesoros()
                     self.obtenerBusqueda()
                     # self.irACoordenadaMasCercana(nombre_cercano)
-
+                self.capturaPantalla()
                 self.checkPistas()      #Cantidad de pistas a realizar
                 self.checkEtapa()       #Etapa actual
                 self.checkGameCoord()   #Coordenada actual in-game    
@@ -2850,14 +2871,15 @@ class ImageFinderApp:
                 print("El programa is dead, vamos a limpiar")
                 print("Limpiando")
                 cv2.destroyAllWindows()
+                self.restablecerEtapa()
 
         finally:
                 # Cerrar ventanas y liberar recursos aquí
                 cv2.destroyAllWindows()
-                self.load_from_text_file()  # Si es necesario restaurar datos
+                #self.load_from_text_file()  # Si es necesario restaurar datos
 
         # Vuelve a programar la tarea para evitar recursión infinita
-        threading.Timer(3, self.startTreasureHunt).start()  # Repetir después de 3 segundos
+        #threading.Timer(3, self.startTreasureHunt).start()  # Repetir después de 3 segundos
     
     def checkBattle(self):
         try:
