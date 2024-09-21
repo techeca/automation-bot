@@ -2049,7 +2049,9 @@ class ImageFinderApp:
             #self.etapa_iniciada = True
         self.numero_pista = 0
         self.capturaPantalla()
+        self.checkEtapa()
         self.checkPistas()
+        self.checkSalida(1)
         #self.numero_pista = 0
         #self.etapa_iniciada = False
         self.reset = True
