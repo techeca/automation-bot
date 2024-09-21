@@ -70,6 +70,7 @@ REEMPLAZOS = {
         "ensanarentada": "ensangrentada",
         "Champifion rayadoee": "Champinon rayado",
         "Créneo": "Craneo",
+        "créneo": "craneo",
         "Craneo de « ocra": "Craneo de ocra",
         "rosade": "rosa de",
         "See": "Rosa negra",

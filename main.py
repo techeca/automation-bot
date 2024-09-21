@@ -438,6 +438,7 @@ class ImageFinderApp:
         self.checkSalida()
 
     def configPistas(self):
+        self.capturaPantalla()
         self.select_area()
         self.area_pistas = self.search_area
         self.checkPistas()
@@ -771,6 +772,7 @@ class ImageFinderApp:
             cv2.destroyAllWindows()  # Cerrar cualquier ventana abierta por OpenCV
 
     def checkSalida(self):
+        self.capturaPantalla()
         try:
             self.recorte_Imagen(self.area_salida)
             time.sleep(2)
@@ -1624,8 +1626,20 @@ class ImageFinderApp:
                 time.sleep(1)
                 self.eliminar_chat()
                 
-            if '-20 39' in texto:
-                pyautogui.write('/travel -22 37')
+            if '-21 39' in texto:
+                pyautogui.write('/travel -24 39')
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                pyautogui.press('enter')
+                time.sleep(0.5)
+                self.clickEnImagen(ruta_imagen_llegado_destino, 1000)
+                time.sleep(1)
+                self.eliminar_chat()
+                
+            if '-22 39' in texto:
+                pyautogui.write('/travel -24 39')
                 pyautogui.press('enter')
                 time.sleep(0.5)
                 pyautogui.press('enter')
@@ -2031,6 +2045,7 @@ class ImageFinderApp:
             pyautogui.click(bandBriX, bandBriY)
             #self.etapa_iniciada = True
         self.numero_pista = 0
+        self.capturaPantalla()
         self.checkPistas()
         #self.numero_pista = 0
         #self.etapa_iniciada = False
@@ -2840,6 +2855,19 @@ class ImageFinderApp:
                             time.sleep(1)
                             self.eliminar_chat()
                             time.sleep(1)
+                        if "('20', '39')" in texto:
+                            pyautogui.write('/travel 22 37')
+                            pyautogui.press('enter')
+                            time.sleep(0.5)
+                            pyautogui.press('enter')
+                            time.sleep(0.5)
+                            pyautogui.press('enter')
+                            time.sleep(0.5)
+                            self.clickEnImagen(
+                                ruta_imagen_llegado_destino, 1000)
+                            time.sleep(1)
+                            self.eliminar_chat()
+                            time.sleep(1)
 
                         pyautogui.tripleClick(chatX, chatY)
                         time.sleep(1)
@@ -2857,6 +2885,7 @@ class ImageFinderApp:
                         self.checkGameCoord()
 
                 while primer_numero < segundo_numero and self.etapa_iniciada:  # Mientras la condición sea verdadera
+                    self.capturaPantalla()
                     self.reset = False #Para resetear busqueda
                     self.checkPistas()
                     self.verificacionPistas()
