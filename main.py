@@ -428,11 +428,13 @@ class ImageFinderApp:
         self.checkGameCoord()
 
     def configEtapaActual(self):
+        self.capturaPantalla()
         self.select_area()
         self.area_etapa_actual = self.search_area
         self.checkEtapa()
 
     def configSalida(self):
+        self.capturaPantalla()
         self.select_area()
         self.area_salida = self.search_area
         self.checkSalida()
@@ -1404,6 +1406,7 @@ class ImageFinderApp:
         pyautogui.click(xnavX, xnavY)
         pyautogui.press(direction)
         time.sleep(2)
+        #chequear si aparecio el captcha
 
     def pista(self, texto_hasta_coma):
             # Chequeo de pista, si tiene Perforatroz lo busca, si no, lo escribe en el navegador
@@ -2333,15 +2336,16 @@ class ImageFinderApp:
                     cnac2_x = max_loc2[0] + ancho2 // 2
                     nav2_y = max_loc2[1] + altura2 // 2
                     pyautogui.click(cnac2_x, nav2_y)
-                    time.sleep(1)
+                    pyautogui.write('F5')
+                    time.sleep(2)
 
                     # Alterna entre navegadores si es necesario
-                    if self.navegador_actual == ruta_imagen_navegador1:
-                        self.clickEnImagen(ruta_imagen_navegador2, 100)
-                        self.navegador_actual = ruta_imagen_navegador2
-                    else:
-                        self.clickEnImagen(ruta_imagen_navegador1, 100)
-                        self.navegador_actual = ruta_imagen_navegador1
+                    #if self.navegador_actual == ruta_imagen_navegador1:
+                    #    self.clickEnImagen(ruta_imagen_navegador2, 100)
+                    #    self.navegador_actual = ruta_imagen_navegador2
+                    #else:
+                    #    self.clickEnImagen(ruta_imagen_navegador1, 100)
+                    #    self.navegador_actual = ruta_imagen_navegador1
 
                     # Realiza una serie de operaciones después del clic
                     inicio = self.coordActual['text']
